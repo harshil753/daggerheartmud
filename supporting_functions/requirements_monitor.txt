@@ -1,0 +1,18 @@
+# Requirements for Gemini Usage Monitor
+# Install with: pip install -r requirements_monitor.txt
+
+# Core dependencies
+google-cloud-monitoring>=2.15.0
+google-auth>=2.17.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+
+# Data processing
+pandas>=1.5.0
+requests>=2.28.0
+
+# Optional: for better date/time handling
+python-dateutil>=2.8.0
+
+# Optional: for enhanced CSV handling
+openpyxl>=3.0.0

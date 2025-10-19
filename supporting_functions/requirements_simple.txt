@@ -1,0 +1,10 @@
+# Simple requirements for Gemini Usage Monitor
+# Install with: pip install -r requirements_simple.txt
+
+# Core dependencies
+google-generativeai>=0.3.0
+requests>=2.28.0
+pandas>=1.5.0
+
+# Optional: for better date/time handling
+python-dateutil>=2.8.0
