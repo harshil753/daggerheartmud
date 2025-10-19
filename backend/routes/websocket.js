@@ -242,6 +242,15 @@ class WebSocketHandler {
    */
   async handleCombatStart(socket, gameState) {
     try {
+      // Check if character exists
+      if (!gameState.character) {
+        socket.emit('command_response', {
+          success: false,
+          message: 'You need to create a character first before starting combat.'
+        });
+        return;
+      }
+
       // Create combat encounter
       const participants = [gameState.character];
       const combat = await this.combatManager.startCombat(

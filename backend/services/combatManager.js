@@ -21,12 +21,18 @@ class CombatManager {
       id: combatId,
       campaignId,
       sessionId,
-      participants: participants.filter(p => p !== null).map(p => ({
-        ...p,
-        currentHP: p.hit_points_current || 0,
-        currentStress: p.stress_current || 0,
-        statusEffects: []
-      })),
+      participants: participants.filter(p => p !== null && p !== undefined).map(p => {
+        if (!p) {
+          console.error('Null participant found in combat:', p);
+          return null;
+        }
+        return {
+          ...p,
+          currentHP: p.hit_points_current || 0,
+          currentStress: p.stress_current || 0,
+          statusEffects: []
+        };
+      }).filter(p => p !== null),
       initiativeOrder,
       currentTurnIndex: 0,
       roundNumber: 1,

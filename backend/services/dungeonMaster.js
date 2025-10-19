@@ -143,7 +143,7 @@ class DungeonMaster {
       'save': `The player wants to create a save point. Confirm the save and note the current progress.`
     };
 
-    return instructions[command] || `The player executed command: ${command} with args: ${args.join(' ')}. Respond appropriately as the DM.`;
+    return instructions[command] || `The player executed command: ${command} with args: ${Array.isArray(args) ? args.join(' ') : args || ''}. Respond appropriately as the DM.`;
   }
 
   /**
