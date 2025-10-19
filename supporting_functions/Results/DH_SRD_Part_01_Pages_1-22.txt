@@ -1,0 +1,1969 @@
+======================================================================
+DAGGERHEART SYSTEM REFERENCE DOCUMENT (SRD)
+Part 1 of 1
+Pages: 1-22
+======================================================================
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 10
+RALLY 
+Once per session, describe how you rally the party and give 
+yourself and each of your allies a Rally Die. At level 1, your Rally Die 
+is a d6. A PC can spend their Rally Die to roll it, adding the result 
+to their action roll, reaction roll, damage roll, or to clear a number 
+of Stress equal to the result. At the end of each session, clear all 
+unspent Rally Dice. 
+At level 5, your Rally Die increases to a  d8.BARD
+grace & CODEX
+Make a Scene: Spend 3 Hope  to temporarily  Distract  a target within 
+Close range, giving them a −2 penalty to their Difficulty.
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYWhat made you realize we were going to be such good friends?
+What do I do that annoys you?
+Why do you grab my hand at night? You’ve always looked up to another bard.  
+Who are they, and why do you idolize them?You were in love once. Who did you adore, and how did they hurt you?Who from your community taught you to have such 
+confidence in yourself? CHARACTER DESCRIPTION
+Choose one (or more) from each line,  
+or write your own description.
+Clothes that are:  extravagant, fancy, loud, 
+oversized, ragged, sleek, wild
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like: a barkeep, a magician,  
+a ringmaster, a rock star, a swashbucklerTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR  
+a Minor Stamina Potion
+AND EITHER: 
+a romance novel OR  
+a letter never opened
+THEN DECIDE WHAT YOU CARRY  
+YOUR SPELLS IN:
+songbook, journal, etc.SUGGESTED TRAITS
+0 Agility, −1 Strength, +1 Finesse,   
+0 Instinct, +2 Presence, +1 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Rapier - Presence Melee - d8 phy - One-Handed
+Quick:  When you make an attack, you can mark a Stress to 
+target another creature within range.
+SUGGESTED SECONDARY WEAPON 
+Small Dagger - Finesse Melee - d8 phy - One-Handed  
+Paired: +2 to primary weapon damage to targets within 
+Melee range
+SUGGESTED ARMOR 
+Gambeson Armor - Thresholds 5/11 - Score 3
+Flexible: +1 to EvasionBARDAs a bard, you know how to get people to talk, bring attention to yourself,  
+and use words or music to influence the world around you.
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 10
+Evolution: Spend 3 Hope  to transform into Beastform without 
+marking a Stress. When you do, choose one trait to raise by +1 until 
+you drop out of that Beastform.
+BEASTFORM 
+Mark a Stress  to magically transform into a creature of your tier or 
+lower from the Beastform list. You can drop out of this form at any 
+time. While transformed, you can’t use weapons or cast spells from 
+domain cards, but you can still use other features or abilities you 
+have access to. Spells you cast before you transform stay active and 
+last for their normal duration, and you can talk and communicate as 
+normal. Additionally, you gain the Beastform’s features, add their 
+Evasion bonus to your Evasion, and use the trait specified in their 
+statistics for your attack. While you’re in a Beastform, your armor 
+becomes part of your body and you mark Armor Slots as usual; when 
+you drop out of a Beastform, those marked Armor Slots remain 
+marked. If you mark your last Hit Point, you automatically drop out of 
+this form.
+WILDTOUCH
+You can perform harmless, subtle effects that involve nature—such as 
+causing a flower to rapidly grow, summoning a slight gust of wind, or 
+starting a campfire—at will.DRUID
+sage & ARCANA
+
+AGILE SCOUT 
+(Fox, Mouse, Weasel, etc.)
+Agility +1 | Evasion +2  
+Melee Agility d4 phy
+Gain advantage on: deceive, locate, sneak
+Agile:  Your movement is silent, and you can 
+spend a Hope  to move up to Far range without 
+rolling.
+Fragile:  When you take Major or greater damage, 
+you drop out of Beastform.
+HOUSEHOLD FRIEND
+(Cat, Dog, Rabbit, etc.)
+Instinct +1 | Evasion +2  
+Melee Instinct d6 phy
+Gain advantage on:  climb, locate, protect
+Companion:  When you Help an Ally, you can roll a 
+d8 as your advantage die.
+Fragile:  When you take Major or greater damage, 
+you drop out of Beastform.NIMBLE GRAZER
+(Deer, Gazelle, Goat, etc.)
+Agility +1 | Evasion +3  
+Melee Agility d6 phy
+Gain advantage on:  leap, sneak, sprint
+Elusive Prey:  When an attack roll against you 
+would succeed, you can mark a Stress  and roll  
+a d4. Add the result to your Evasion against this 
+attack.
+Fragile:  When you take Major or greater damage, 
+you drop out of Beastform.
+PACK PREDATOR 
+(Coyote, Hyena, Wolf, etc.)
+Strength +2 | Evasion +1  
+Melee Strength d8+2 phy
+Gain advantage on:  attack, sprint, track
+Hobbling Strike:  When you succeed on an attack 
+against a target within Melee range, you can 
+mark a Stress  to make the target temporarily 
+Vulnerable .
+Pack Hunting:  When you succeed on an attack 
+against the same target as an ally who acts 
+immediately before you, add a d8 to your damage 
+roll.AQUATIC SCOUT 
+(Eel, Fish, Octopus, etc.)
+Agility +1 | Evasion +2  
+Melee Agility d4 phy
+Gain advantage on:  navigate, sneak, swim
+Aquatic:  You can breathe and move naturally 
+underwater.
+Fragile:  When you take Major or greater damage, 
+you drop out of Beastform.
+STALKING ARACHNID
+(Tarantula, Wolf Spider, etc.)
+Finesse +1 | Evasion +2  
+Melee Finesse d6+1 phy
+Gain advantage on:  attack, climb, sneak
+Venomous Bite:  When you succeed on an attack 
+against a target within Melee range, the target 
+becomes temporarily Poisoned . A Poisoned  
+creature takes 1d10  direct physical damage each 
+time they act. 
+Webslinger:  You can create a strong web material 
+useful for both adventuring and battle. The web is 
+resilient enough to support one creature. You can 
+temporarily Restrain  a target within Close range 
+by succeeding on a Finesse Roll against them.
+TIER 2
+ARMORED SENTRY
+(Armadillo, Pangolin, Turtle, etc.)
+Strength +1 | Evasion +1  
+Melee Strength d8+2 phy
+Gain advantage on:  dig, locate, protect
+Armored Shell:  Your hardened exterior gives 
+you resistance to physical damage. Additionally, 
+mark an Armor Slot  to retract into your shell. 
+While in your shell, physical damage is reduced 
+by a number equal to your Armor Score (after 
+applying resistance), but you can’t perform other 
+actions without leaving this form.
+Cannonball:  Mark a Stress  to allow an ally to 
+throw or launch you at an adversary. To do so, the 
+ally makes an attack roll using Agility or Strength 
+(their choice) against a target within Close range. 
+On a success, the adversary takes d12+2  physical 
+damage using the thrower’s Proficiency. You can 
+spend a Hope  to target an additional adversary 
+within Very Close range of the first. The second 
+target takes half the damage dealt to the first 
+target.
+POWERFUL BEAST
+(Bear, Bull, Moose, etc.)
+Strength +1 | Evasion +3  
+Melee Strength d10+4 phy
+Gain advantage on:  navigate, protect, scare
+Rampage:  When you roll a 1 on a damage die, you 
+can roll a d10 and add the result to the damage 
+roll. Additionally, before you make an attack roll, 
+you can mark a Stress  to gain a +1 bonus to your 
+Proficiency for that attack.
+Thick Hide:  You gain a +2 bonus to your damage 
+thresholds.MIGHTY STRIDER
+(Camel, Horse, Zebra, etc.)
+Agility +1 | Evasion +2  
+Melee Agility d8+1 phy
+Gain advantage on:  leap, navigate, sprint
+Carrier:  You can carry up to two willing allies with 
+you when you move.
+Trample:  Mark a Stress  to move up to Close 
+range in a straight line and make an attack 
+against all targets within Melee range of the 
+line. Targets you succeed against take d8+1  
+physical damage using your Proficiency and are 
+temporarily Vulnerable .
+STRIKING SERPENT
+(Cobra, Rattlesnake, Viper, etc.)
+Finesse +1 | Evasion +2  
+Very Close Finesse d8+4 phy
+Gain advantage on:  climb, deceive, sprint
+Venomous Strike:  Make an attack against any 
+number of targets within Very Close range. On 
+a success, a target is temporarily Poisoned . A 
+Poisoned creature takes 1d10  physical direct 
+damage each time they act. 
+Warning Hiss:  Mark a Stress  to force any number 
+of targets within Melee range to move back to 
+Very Close range.POUNCING PREDATOR
+(Cheetah, Lion, Panther, etc.)
+Instinct +1 | Evasion +3  
+Melee Instinct d8+6 phy
+Gain advantage on:  attack, climb, sneak
+Fleet:  Spend a Hope  to move up to Far range 
+without rolling.   
+Takedown:  Mark a Stress  to move into Melee 
+range of a target and make an attack roll against 
+them. On a success, you gain a +2 bonus to your 
+Proficiency for this attack and the target must 
+mark a Stress.
+WINGED BEAST
+(Hawk, Owl, Raven, etc.) 
+Finesse +1 | Evasion +3  
+Melee Finesse d4+2 phy
+Gain advantage on:  deceive, locate, scare
+Bird’s-Eye View:  You can fly at will. Once per 
+rest while you are airborne, you can ask the GM 
+a question about the scene below you without 
+needing to roll. The first time a character 
+makes a roll to act on this information, they gain 
+advantage on the roll.
+Hollow Bones:  You gain a −2 penalty to your 
+damage thresholds.TIER 1
+Daggerheart © Darrington Press 2025DRUID
+beastform
+
+TIER 3
+GREAT PREDATOR
+(Dire Wolf, Velociraptor,  
+Sabertooth Tiger, etc.)
+Strength +2 | Evasion +2  
+Melee Strength d12+8 phy
+Gain advantage on:  attack, sneak, sprint
+Carrier:  You can carry up to two willing allies with 
+you when you move.
+Vicious Maul:  When you succeed on an attack 
+against a target, you can spend a Hope  to make 
+them temporarily Vulnerable  and gain a +1 bonus 
+to your Proficiency for this attack.
+MIGHTY LIZARD
+(Alligator, Crocodile, Gila Monster, etc.)
+Instinct +2 | Evasion +1  
+Melee Instinct d10+7 phy
+Gain advantage on:  attack, sneak, track
+Physical Defense:  You gain a +3 bonus to your 
+damage thresholds.
+Snapping Strike:  When you succeed on an attack 
+against a target within Melee range, you can 
+spend a Hope  to clamp that opponent in your 
+jaws, making them temporarily Restrained  and 
+Vulnerable.GREAT WINGED BEAST
+(Giant Eagle, Falcon, etc.)
+Finesse +2 | Evasion +3  
+Melee Finesse d8+6 phy
+Gain advantage on:  deceive, distract, locate
+Bird’s-Eye View:  You can fly at will. Once per 
+rest while you are airborne, you can ask the GM 
+a question about the scene below you without 
+needing to roll. The first time a character makes a 
+roll to act on this information, they gain advantage 
+on the roll.
+Carrier:  You can carry up to two willing allies with 
+you when you move.
+AQUATIC PREDATOR
+(Dolphin, Orca, Shark etc.)
+Agility +2 | Evasion +4  
+Melee Agility d10+6 phy
+Gain advantage on:  attack, swim, track
+Aquatic:  You can breathe and move naturally 
+underwater.
+Vicious Maul:  When you succeed on an attack 
+against a target, you can spend a Hope  to make 
+them temporarily Vulnerable  and gain a +1 bonus 
+to your Proficiency for this attack.LEGENDARY BEAST
+(Upgraded Tier 1 Options) 
+Evolved:  Pick a Tier 1 Beastform option and 
+become a larger, more powerful version of that 
+creature. While you’re in this form, you retain all 
+traits and features from the original form and gain 
+the following bonuses: 
+• A +6 bonus to damage rolls
+• A +1 bonus to the trait used  
+by this form
+• A +2 bonus to Evasion
+LEGENDARY HYBRID
+(Griffon, Sphinx, etc.)
+Strength +2 | Evasion +3  
+Melee Strength d10+8
+Hybrid Features:  To transform into this creature, 
+mark an additional Stress . Choose any two 
+Beastform options from Tiers 1–2. Choose a total 
+of four advantages and two features from those 
+options.DRUID
+beastform
+TIER 4
+MASSIVE BEHEMOTH
+(Elephant, Mammoth, Rhinoceros, etc.)
+Strength +3 | Evasion +1  
+Melee Strength d12+12 phy
+Gain advantage on:  locate, protect, scare, 
+sprint
+Carrier:  You can carry up to four willing allies with 
+you when you move.
+Demolish:  Spend a Hope  to move up to Far range 
+in a straight line and make an attack against all 
+targets within Melee range of the line. Targets you 
+succeed against take d8+10  physical damage 
+using your Proficiency and are temporarily 
+Vulnerable .
+Undaunted:  You gain a +2 bonus to all your 
+damage thresholds.
+TERRIBLE LIZARD
+(Brachiosaurus, Tyrannosaurus, etc.)
+Strength +3 | Evasion +2  
+Melee Strength d12+10 phy
+Gain advantage on:  attack, deceive, scare, 
+track
+Devastating Strikes:  When you deal Severe 
+damage to a target within Melee range, you can 
+mark a Stress  to force them to mark an additional 
+Hit Point.
+Massive Stride:  You can move up to Far range 
+without rolling. You ignore rough terrain (at the 
+GM’s discretion) due to your size.MYTHIC AERIAL HUNTER
+(Dragon, Pterodactyl, Roc, Wyvern, etc.)
+Finesse +3 | Evasion +4  
+Melee Finesse d10+11 phy
+Gain advantage on:  attack, deceive, locate, 
+navigate
+Carrier:  You can carry up to three willing allies 
+with you when you move.
+Deadly Raptor:  You can fly at will and move up to 
+Far range as part of your action. When you move 
+in a straight line into Melee range of a target from 
+at least Close range and make an attack against 
+that target in the same action, you can reroll all 
+damage dice that rolled a result lower than your 
+Proficiency.
+EPIC AQUATIC BEAST
+(Giant Squid, Whale, etc.)
+Agility +3 | Evasion +3  
+Melee Agility d10+10 phy
+Gain advantage on:  locate, protect, scare, track
+Ocean Master:  You can breathe and move 
+naturally underwater. When you succeed on an 
+attack against a target within Melee range, you 
+can temporarily Restrain  them.
+Unyielding:  When you would mark an Armor Slot, 
+roll a d6. On a result of 5 or higher, reduce the 
+severity by one threshold without marking an 
+Armor Slot.MYTHIC BEAST
+(Upgraded Tier 1 or Tier 2 Options) 
+Evolved:  Pick a Tier 1 or Tier 2 Beastform option 
+and become a larger, more powerful version of 
+that creature. While you’re in this form, you retain 
+all traits and features from the original form and 
+gain the the following bonuses:
+• A +9 bonus to damage rolls
+• A +2 bonus to the trait used by this form
+• A +3 bonus to Evasion
+• Your damage die increases by one size 
+(d6 becomes d8, d8 becomes d10, etc.)
+MYTHIC HYBRID
+(Chimera, Cockatrice, Manticore, etc.)
+Strength +3 | Evasion +2   
+Strength Melee d12+10 phy
+Hybrid Features:  To transform into this creature, 
+mark 2 additional Stress . Choose any three 
+Beastform options from Tiers 1–3. Choose a total 
+of five advantages and three features from those 
+options.
+Daggerheart © Darrington Press 2025
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+What affectionate nickname have you given me?What animal do I say you remind me of?What did you confide in me that makes me leap into 
+danger for you every time?
+Who has been trying to hunt you down? What do they want from you?Who was the first wild animal you bonded with? Why did your bond end?Why was the community you grew up in so reliant on 
+nature and its creatures?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are:  camouflaged, grown, loose, 
+natural, patchwork, regal, scraps
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of:  ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like:  a firecracker, a fox, a guide,  
+a hippie, a witchTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR  
+a Minor Stamina Potion
+AND EITHER: 
+a small bag of rocks and bones OR  
+a strange pendant found in the dirtDRUIDAs a druid, you are a force of nature, preserving the balance of life and  
+death by channeling the wilds themselves through you.
+SUGGESTED TRAITS
++1 Agility, 0 Strength, +1 Finesse,   
++2 Instinct, −1 Presence, 0 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Shortstaff - Instinct Close - d8+1 mag - One-Handed
+SUGGESTED SECONDARY WEAPON 
+Round Shield - Strength Melee - d4 phy - One-Handed
+Protective:  +1 to Armor Score
+SUGGESTED ARMOR 
+Leather Armor - Thresholds 6/13 - Score 3  
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 9
+Frontline Tank: Spend 3 Hope  to clear 2 Armor Slots.
+UNSTOPPABLE 
+Once per long rest, you can become Unstoppable . 
+You gain an Unstoppable Die. At level 1, your 
+Unstoppable Die is a  d4. Place it on this sheet 
+in the space provided, starting with the 1 value 
+facing up. After you make a damage roll that 
+deals 1 or more Hit Points to a target, increase the 
+Unstoppable Die value by one. When the die’s value 
+would exceed its maximum value or when the scene  
+ends, remove the die and drop out of Unstoppable . At  
+level 5, your Unstoppable Die increases to a  d6. 
+ While Unstoppable , you gain the following benefits:
+• You reduce the severity of physical damage by one threshold 
+(Severe to Major, Major to Minor, Minor to None).
+• You add the current value of the Unstoppable Die to your 
+damage roll.
+• You can’t be Restrained  or Vulnerable .GUARDIAN
+valor & blade
+
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+What lie have you told me about yourself that I absolutely believe?What small gift did you give me that you notice I always 
+carry with me?How did I save your life the first time we met?
+You consider an aspect of yourself to be a weakness. 
+What is it, and how has it affected you?You’ve been tasked with protecting something important and delivering 
+it somewhere dangerous. What is it, and where does it need to go?Who from your community did you fail to protect, 
+and why do you still think of them?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are: casual, intricate, loose, 
+padded, royal, tactical, weathered
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like:  a captain, a caretaker,  
+an elephant, a general, a wrestlerTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+ and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR 
+a Minor Stamina Potion
+AND EITHER: 
+a totem from your mentor OR  
+a secret keyGUARDIANAs a guardian, you run into danger to protect your party,  
+keeping watch over those who might not survive without you there.
+SUGGESTED TRAITS
++1 Agility, +2 Strength, −1 Finesse,   
+0 Instinct, +1 Presence, 0 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Battleaxe - Strength Melee - d10+3 phy - Two-Handed
+SUGGESTED ARMOR 
+Chainmail Armor - Thresholds 7/15 - Score 4  
+Heavy: −1 to Evasion
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 12
+RANGER’S FOCUS 
+Spend a Hope and make an attack against a target. On a 
+success, deal your attack’s normal damage and temporarily 
+make the attack’s target your Focus . Until this feature ends or 
+you make a different creature your Focus , you gain the following 
+benefits against your Focus:
+• You know precisely what direction they are in.
+• When you deal damage to them, they must mark a Stress.
+• When you fail an attack against them, you can end your 
+Ranger’s Focus feature to reroll your Duality Dice. 
+ RANGER
+bone & sage
+Hold Them Off: Spend 3 Hope  when you succeed on an attack 
+with a weapon to use that same roll against two additional 
+adversaries within range of the attack.
+
+Intelligent:  Your companion gains a permanent +1 bonus to a 
+Companion Experience of your choice.
+Light in the Dark:           
+                                                                                                                         
+Creature Comfort:  Once per rest, when you take time during 
+a quiet moment to give your companion love and attention, 
+you can gain a Hope or you can both clear a Stress.
+Armored:  When your companion takes damage, you can 
+mark one of your Armor Slots  instead of marking one of 
+their Stress.
+Vicious:  Increase your companion’s damage dice or range  
+by one step (d6 to d8, Close to Far, etc.).
+Resilient: Your companion gains an additional Stress slot.
+Bonded:  When you mark your last Hit Point, your companion 
+rushes to your side to comfort you. Roll a number of d6s 
+equal to the unmarked Stress slots they have and mark 
+them. If any roll a 6, your companion helps you up. Clear your 
+last Hit Point and return to the scene.
+Aware:  Your companion gains a permanent +2 bonus to  
+their Evasion.Attack & damage
+d6
+When you command your companion to attack, 
+they gain any benefits that would normally only 
+apply to you (such as the effects of “Ranger’s 
+Focus”). On a success, their damage roll uses 
+your Proficiency and their damage die. TRAINING
+When your companion would take any amount 
+of damage, they mark a Stress. When they 
+mark their last Stress, they drop out of the 
+scene (by hiding, fleeing, or a similar action). 
+They remain unavailable until the start of 
+your next long rest, where they return with 
+1 Stress cleared.
+When you choose a downtime move that 
+clears Stress on yourself, your companion 
+clears an equal number of Stress.When your character levels up, choose one available option 
+for your companion from the following list and mark it here.
+stress
+stress:
+evasion
+Start at 10
+Use this as an additional 
+Hope slot your character 
+can mark. d8 d10 d12
+Work with the GM to decide what kind of animal you have as your companion. Give them a name and draw or 
+attach a picture of them in the space above. Then create two Experiences for your companion based on their 
+training and the history you have together. Finally, describe their method of dealing damage (their standard 
+attack) and record it in the “Attack & Damage” section. Their damage starts at d6 and their range starts at Melee.COMPANION NAME
+Make a Spellcast Roll  to connect with your companion and command them to take action. Spend a Hope  to 
+add an applicable Companion Experience to the roll.  On a success with Hope, if your next action builds on their 
+success, you gain advantage on the roll.Example Companion Experiences
+Bold Distraction, Expert Climber, 
+Fetch, Friendly, Guardian of the 
+Forest, Horrifying, Intimidating, 
+Loyal Until the End, Navigation, 
+Nimble, Nobody Left Behind,  
+On High Alert, Protective,  
+Royal Companion, Scout,  
+Service Animal, Trusted Mount, 
+Vigilant, We Always Find Them,  
+You Can’t Hit What You Can’t Find
+Standard Attack RangeStart with +2 in two Experiences. Whenever you gain a new Experience, 
+your companion also gains one. All new Experiences start at +2.companion ExperienceRANGER
+companion
+Daggerheart © Darrington Press 2025
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+What friendly competition do we have?
+Why do you act differently when we’re alone than 
+when others are around?
+What threat have you asked me to watch for, and 
+why are you worried about it?You’ve traveled many dangerous lands, but what 
+is the one place you refuse to go?Your first kill almost killed you, too. What was it, and what 
+part of you was never the same after that event?A terrible creature hurt your community, and you’ve vowed to 
+hunt them down. What are they, and what unique trail or sign do 
+they leave behind?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are: flowing, muted, natural, 
+stained, tactical, tight, woven
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like:  a child, a ghost, a survivalist,  
+a teacher, a watchdogTAKE: 
+a torch, 50 feet of rope, basic supplies, 
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR 
+a Minor Stamina Potion
+AND EITHER: 
+a trophy from your first kill OR  
+a seemingly broken compassRANGERAs a ranger, your keen eyes and graceful haste make you  
+indespensible when tracking down enemies and navigating the wilds.
+SUGGESTED TRAITS
++2 Agility, 0 Strength, +1 Finesse,   
++1 Instinct, −1 Presence, 0 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Shortbow - Agility Far - d6+3 phy - Two-Handed
+SUGGESTED ARMOR 
+Leather Armor - Thresholds 6/13 - Score 3  
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 12
+CLOAKED 
+Any time you would be Hidden , you are instead Cloaked . In addition 
+to the benefits of the Hidden  condition, while Cloaked  you remain 
+unseen if you are stationary when an adversary moves to where 
+they would normally see you. After you make an attack or end a 
+move within line of sight of an adversary, you are no longer Cloaked .
+SNEAK ATTACK
+When you succeed on an attack while Cloaked  or while an ally is 
+within Melee range of your target, add a number of  d6s  equal to 
+your tier to your damage roll. 
+Level 1 is Tier 1  
+Levels 2–4 are Tier 2  
+Levels 5–7 are Tier 3  
+Levels 8–10 are Tier 4ROGUE
+midnight & grace
+Rogue’s Dodge: Spend 3 Hope  to gain a +2 bonus to your 
+Evasion until the next time an attack succeeds against you. 
+Otherwise, this bonus lasts until your next rest.
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+What did I recently convince you to do that got us both in trouble?
+What have I discovered about your past that I 
+hold secret from the others?
+Who do you know from my past, and how have they 
+influenced your feelings about me?Who from your past were you most sad to say goodbye to?You used to have a different life, but you’ve tried to leave it behind.  
+Who from your past is still chasing you?What did you get caught doing that got you exiled from your 
+home community?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are: clean, dark, inconspicuous, 
+leather, scary, tactical, tight
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like:  a bandit, a con artist, a gambler,  
+a mob boss, a pirateTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR 
+a Minor Stamina Potion
+AND EITHER: 
+a set of forgery tools OR  
+a grappling hookROGUEAs a rogue, you have experience fighting with your blade as well as your wit,  
+preferring to move quickly and fight quietly.
+SUGGESTED TRAITS
++1 Agility, −1 Strength, +2 Finesse,   
+0 Instinct, +1 Presence, 0 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Dagger - Finesse Melee - d8+1 phy - One-Handed
+SUGGESTED SECONDARY WEAPON 
+Small Dagger - Finesse Melee - d8 phy - One-Handed  
+Paired: +2 to primary weapon damage to targets within 
+Melee range
+SUGGESTED ARMOR: 
+Gambeson Armor - Thresholds 5/11 - Score 3  
+Flexible: +1 to Evasion
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 9
+PRAYER DICE 
+At the beginning of each session, 
+roll a number of d4s equal to your 
+subclass’s Spellcast trait and place 
+them on this sheet in the space 
+provided. These are your Prayer 
+Dice. You can spend any number 
+of Prayer Dice to aid yourself or 
+an ally within Far range. You can 
+use a spent die’s value to reduce 
+incoming damage, add to a roll’s 
+result after the roll is made, or 
+gain Hope equal to the result. At 
+the end of each session, clear all 
+unspent Prayer Dice.SERAPH
+splendor & valor
+Life Support:  Spend 3 Hope  to clear  
+a Hit Point on an ally within Close range.
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+What promise did you make me agree to, should you die on 
+the battlefield?
+Why do you ask me so many questions about my god?
+You’ve told me to protect one member of our party above  
+all others, even yourself. Who are they and why?In what strange or unique way do you communicate with your god?How did your appearance change after taking your oath?Which god did you devote yourself to? What incredible feat did they 
+perform for you in a moment of desperation?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are: glowing, rippling, ornate, tight, 
+modest, strange, natural
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like:  an angel, a doctor, an evangelist,  
+a monk, a priestTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR  
+a Minor Stamina Potion
+AND EITHER: 
+a bundle of offerings OR 
+a sigil of your godSERAPHAs a seraph, you’ve taken a vow to a god who helps you channel  
+sacred arcane power to keep your party on their feet.
+SUGGESTED TRAITS
+0 Agility, +2 Strength, 0 Finesse,   
++1 Instinct, +1 Presence, −1 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Hallowed Axe - Strength Melee - d8+1  mag -  
+One-Handed
+SUGGESTED SECONDARY WEAPON 
+Round Shield - Strength Melee - d4 phy - One-Handed  
+Protective:  +1 to Armor Score
+SUGGESTED ARMOR: 
+Chainmail Armor - Thresholds 7/15 - Score 4  
+Heavy: −1 to Evasion
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 10
+ARCANE SENSE 
+You can sense the presence of magical people and objects within 
+Close range.
+MINOR ILLUSION
+Make a Spellcast Roll (10) . On a success, you create a minor visual 
+illusion no larger than yourself within Close range. This illusion is 
+convincing to anyone at Close range or farther.
+CHANNEL RAW POWER
+Once per long rest, you can place a domain card from your loadout 
+into your vault and choose to either:
+• Gain Hope equal to the level of the card.
+• Enhance a spell that deals damage, gaining a bonus to your 
+damage roll equal to twice the level of the card.SORCERER
+ARCANA & Midnight
+Volatile Magic: Spend 3 Hope  to reroll any number of  
+your damage dice on an attack that deals magic damage.
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+Why do you trust me so deeply?
+What did I do that makes you cautious around me?
+Why do we keep our shared past a secret? You have a deep fear you hide from everyone. 
+What is it, and why does it scare you?What mentor taught you to control your untamed magic, and 
+why are they no longer able to guide you?What did you do that made the people in your community wary of you?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are: always moving, flamboyant, 
+inconspicuous, layered, ornate, tight
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow,  
+fine sand, obsidian, rose, sapphire, wisteria
+Attitude like:  a celebrity, a commander,  
+a politician, a prankster, a wolf in sheep’s clothingTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR 
+a Minor Stamina Potion
+AND EITHER: 
+a whispering orb OR 
+a family heirloomSORCERERAs a sorcerer, you were born with innate magical power,  
+and you’ve learned how to wield that power to get what you want.
+SUGGESTED TRAITS
+0 Agility, −1 Strength, +1 Finesse,   
++2 Instinct, +1 Presence, 0 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Dualstaff - Instinct Far - d6+3 mag - Two-Handed
+SUGGESTED ARMOR 
+Gambeson Armor - Thresholds 5/11 - Score 3
+Flexible:  +1 to Evasion  
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 11
+ATTACK OF OPPORTUNITY
+When an adversary within Melee range attempts to leave that 
+range, make a reaction roll using a trait of your choice against their 
+Difficulty. Choose one effect on a success, or two if you critically 
+succeed:
+• They can’t move from where they are.
+• You deal damage to them equal to your primary weapon’s 
+damage.
+• You move with them.
+COMBAT TRAINING
+You ignore burden when equipping weapons. When you deal 
+physical damage, you gain a bonus to your damage roll equal to 
+your level.WARRIOR
+blade & bone
+No Mercy: Spend 3 Hope  to gain a +1 bonus  
+to your attack rolls until your next rest. 
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4:  LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3:  LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+We knew each other long before this party came together. How?
+What mundane task do you usually help me with off the battlefield?
+What fear am I helping you overcome? What legendary place have you always wanted to visit, 
+and why is it so special?Somebody defeated you in battle years ago and left you to die. 
+Who was it, and how did they betray you?Who taught you to fight, and why did they stay behind when you 
+left home?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are: bold, patched, reinforced, 
+royal, sleek, sparing, weathered
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like:  a bull, a dedicated soldier,  
+a gladiator, a hero, a hired handTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR 
+a Minor Stamina Potion
+AND EITHER: 
+the drawing of a lover OR 
+a sharpening stoneWARRIORAs a warrior, you run into battle without hestation or caution,  
+knowing you can strike down whatever enemy stands in your path.
+SUGGESTED TRAITS
++2 Agility, +1 Strength, 0 Finesse,   
++1 Instinct, −1 Presence, 0 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Longsword - Agility Melee - d8+3 phy - Two-Handed
+SUGGESTED ARMOR 
+Chainmail Armor - Thresholds 7/ 15 - Score 4  
+Heavy:  −1 to Evasion
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+    Permanently gain a +1 bonus to two 
+Experiences.
+    Choose an additional domain card of your 
+level or lower from a domain you have 
+access to.
+    Permanently gain a +1 bonus to your Evasion.
+   Take an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+  Increase your Proficiency by +1.
+  Multiclass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+    Gain a +1 bonus to two unmarked character 
+traits and mark them.
+    Permanently gain one Hit Point slot.
+    Permanently gain one Stress slot.
+   Permanently gain a +1 bonus to two 
+Experiences.
+  Choose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+   Permanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYStart at 11
+Not This Time: Spend 3 Hope  to force an adversary within 
+Far range to reroll an attack or damage roll.
+PRESTIDIGITATION 
+You can perform harmless, subtle magical 
+effects at will. For example, you can change 
+an object’s color, create a smell, light a candle, 
+cause a tiny object to float, illuminate a room, or 
+repair a small object.
+STRANGE PATTERNS
+Choose a number between 1 and 12. When  
+you roll that number on a Duality Die, gain a 
+Hope or clear a Stress. You can change this 
+number when you take a long rest.WIZARD
+Codex & splendor
+
+Ask your fellow players one of the following questions for  
+their character to answer, or create your own questions.Answer any of the following background questions.  
+You can also create your own questions.
+TIER 4: LEVELS 8–10
+ At level 8, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Then work with the GM to generate two starting Experiences for your character.
+Tier 3: LEVELS 5–7
+ At level 5, gain an additional 
+Experience at +2 and clear all marks 
+on character traits. Then gain a 
++1 bonus to your Proficiency.Tier 2: LEVELS 2–4
+At level 2, gain an additional  
+Experience at +2 and gain a  
++1 bonus to your Proficiency.background questions connectionsCharacter guide
+INVENTORYCHARACTER DESCRIPTION
+What favor have I asked of you that you’re not sure you can fulfill?
+What weird hobby or strange fascination do we both share?
+What secret about yourself have you entrusted only to me? You have a powerful rival. Who are they, and why are you so 
+determined to defeat them?You’ve spent your life searching for a book or object of great significance. What is it, and why is it so important to you?What responsibilities did your community once count on you for? How did you let them down?Choose one (or more) from each line,  
+or write your own description.
+Clothes that are: beautiful, clean, common, flowing, layered, patchwork, tight 
+Eyes like: carnations, earth, endless ocean, fire, 
+ivy, lilacs, night, seafoam, winter
+Body that’s: broad, carved, curvy, lanky, rotund, 
+short, stocky, tall, thin, tiny, toned
+Skin the color of: ashes, clover, falling snow, fine 
+sand, obsidian, rose, sapphire, wisteria
+Attitude like:  an eccentric, a librarian, a lit fuse, 
+a philosopher, a professorTAKE: 
+a torch, 50 feet of rope, basic supplies,  
+and a handful of gold
+THEN CHOOSE BETWEEN: 
+a Minor Health Potion OR  
+a Minor Stamina Potion
+AND EITHER: 
+a book you’re trying to translate OR   
+a tiny, harmless elemental pet
+THEN DECIDE WHAT YOU CARRY  
+YOUR SPELLS IN:
+large tomes, tarot cards, etc.WIZARDAs a wizard, you’ve become familiar with the arcane through the  
+relentless study of grimoires and other tools of magic.
+SUGGESTED TRAITS
+−1 Agility, 0 Strength, 0 Finesse,
++1 Instinct, +1 Presence, +2 Knowledge
+SUGGESTED PRIMARY WEAPON 
+Greatstaff - Knowledge Very Far - d6 mag -  
+Two-Handed  
+Powerful: On a successful attack, roll an additional damage 
+die and discard the lowest result.
+SUGGESTED ARMOR 
+Leather Armor - Thresholds 6/13 - Score 3
+Daggerheart © Darrington Press 2025
+Choose two options from the list below or any from 
+the previous tier and mark them.
+ G ain a +1 bonus to two unmarked character 
+traits and mark them.
+  P ermanently gain one Hit Point slot.
+  P ermanently gain one Stress slot.
+   P ermanently gain a +1 bonus to two 
+Experiences.
+   C hoose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 7). 
+   P ermanently gain a +1 bonus to your Evasion.
+  T ake an upgraded subclass card. Then cross 
+out the multiclass option for this tier.
+ Increase your Proficiency by +1.
+ M ulticlass: Choose an additional class for  
+your character, then cross out an unused 
+“Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below or any from 
+the previous tier and mark them.
+ G ain a +1 bonus to two unmarked character 
+traits and mark them.
+  P ermanently gain one Hit Point slot.
+  P ermanently gain one Stress slot.
+   P ermanently gain a +1 bonus to two 
+Experiences.
+   C hoose an additional domain card of your 
+level or lower from a domain you have access to.
+   Permanently gain a +1 bonus to your Evasion.
+  T ake an upgraded subclass card. Then 
+cross out the multiclass option for this tier.
+ Increase your Proficiency by +1.
+ M ulticlass: Choose an additional class for  
+your character, then cross out an unused “Take an upgraded subclass card” and the 
+other multiclass option on this sheet. 
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. Choose two options from the list below and  
+mark them.
+ G ain a +1 bonus to two unmarked character 
+traits and mark them.
+  P ermanently gain one Hit Point slot.
+  P ermanently gain one Stress slot.
+  P ermanently gain a +1 bonus to two 
+Experiences.
+ C hoose an additional domain card of your 
+level or lower from a domain you have 
+access to (up to level 4).
+  P ermanently gain a +1 bonus to your Evasion.
+Update your level and adjust your damage 
+thresholds accordingly. Take an additional domain 
+card of your level or lower from a domain you  
+have access to. 
+
+strength agility FINESSE Instinct knowledge presence
+Sprint
+Leap
+ManeuverLift
+Smash
+GrappleControl
+Hide
+TinkerPerceive
+Sense
+NavigateCharm
+Perform
+DeceiveRecall
+Analyze
+Comprehend
+hope
+experience
+active armorDAMAGE & HEAL TH
+class feature
+Daggerheart © Darrington Press 2025BAGS HANDFULS CHESTgoldINVENTORY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weapon
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEinventory weaponNAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEPRIMARY
+NAME
+FEATURETRAIT & RANGE DAMAGE DICE & TYPEsecondary
+NAME
+FEATUREBASE THRESHOLDS BASE SCOREMark 1 HP Mark 2 HP Mark 3 HP
+STRESShpMINOR
+Damagemajor
+Damagesevere
+Damage
+Spend a Hope to use an experience or help an ally .name
+heritagepronouns
+Class & Subclass
+armor evasionlevel
+PROFICIENCYactive weapons
+Add your current level to your damage thresholds.
+PRIMARY SECONDARY
+PRIMARY SECONDARYHOPE FEATUREDAGGERHEART
+CHARACTER SHEET
+
+======================================================================
+End of Part 1 | Pages 1-22
+======================================================================

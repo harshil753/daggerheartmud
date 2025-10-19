@@ -1,0 +1,755 @@
+======================================================================
+DAGGERHEART SYSTEM REFERENCE DOCUMENT (SRD)
+Part 1 of 1
+Pages: 1-17
+======================================================================
+
+File: Daggerheart-Pad-GameSheets.indd | Output Date: 12/18/24 - 11:21Action Rolls
+Call for an action roll when a character takes an action where the outcome is 
+in question and the success or failure is interesting to the story. 
+1. Pick a character trait.
+2. Decide on a Diffi   culty.
+3. Establish the stakes of the roll with the player.
+4. Assign advantage or disadvantage if applicable.
+5. Tell the player to roll the Duality Dice.
+6. Resolve the situation based on the result of their roll.
+ACTION ROLL RESULTS
+• Critical Success:  They get what they wanted and a little extra. They gain a
+Hope and clear a Stress.
+• Success with Hope: They get what they wanted and they gain a Hope.
+• Success with Fear:  They get what they want, but it comes with a
+consequence. You gain a Fear.
+• Failure with Hope: They probably don’t get what they want and there are 
+consequences, but they gain a Hope.
+• Failure with Fear: They don’t get what they wanted and things go very badly.You gain a Fear. 
+character traits
+• AGILITY
+Sprint, Leap, Maneuver
+• STRENGTH
+Lift, Smash, Grapple
+• FINESSE
+Control, Hide, Tinker• INSTINCT
+Perceive, Sense, Navigate
+• PRESENCE
+Charm, Perform, Deceive
+• KNOWLEDGE
+Recall, Analyze, Comprehend
+Difficulty
+VERY
+EASYEASY AVERAGE HARDVERY
+HARDNEARLY
+IMPOSSIBLE5 30 25 20 15 10
+Hope & Fear
+On a roll with Hope, the player gains a Hope. 
+They can spend Hope to:
+• Help an Ally
+• Utilize an Experience
+• Initiate a Tag Team Roll
+• Activate a Hope Feature
+On a roll with Fear, you gain a Fear. You can spend a Fear to:
+• Interrupt the players to make a move.
+• Make an additional GM move.
+• Spotlight an additional adversary during a battle.
+• Use an adversary’s Fear feature.
+• Use an environment’s Fear feature.
+• Add an adversary’s Experience to a roll.
+Spotlighting Adversaries
+When you spotlight an adversary, you might have them:
+• Move within Close range and make a weapon attack
+• Move within Close range and use an adversary action
+• End a temporary condition or eff  ect
+• Sprint somewhere else on the battleﬁ  eldGM MOVES
+Make a move whenever:  
+• They roll with Fear on an action roll.
+• They fail an action roll.
+• They do something that would have consequences.
+• They give you a golden opportunity.
+• They look to you for what happens next.GM Principles: Begin and end with the ﬁ  ction - Collaborate at all times, especially during conﬂ  ict - Fill the world with life, wonder, and 
+danger - Ask questions and incorporate the answers - Make every roll important - Play to ﬁ  nd out what happens - Hold on gently
+GM Best Practices: Cultivate a curious table - Gain your players’ trust - Keep the story moving forward - Cut to the action - Help the 
+players use the game - Create a meta conversation - Tell them what they would know - Ground the world in motive - Bring the game’s mechanics to life - Reframe rather than reject - Work in moments and montages 
+Example GM MOves
+• Show how the world reacts. 
+“The kick shatters the door. Light 
+spills in from the barracks as a half-dozen sleepy soldiers stumble to their feet, looking worried.”
+• Ask a question and build on the answer.
+“How is it that you notice the 
+assassin lurking in the treetops?”
+• Make an NPC act in accordance 
+with their motive.
+“The Jagged Knife Bandit snips 
+the gold purse off the merchant’s hip and attempts to escape.”
+• Lean on the character’s goalsto drive them to action.
+“The relic you’ve been trying to 
+recover for your people ﬂ  oats ominously in the center of the altar, surrounded by cultists preparing to drain its power.”
+• Signal an imminent off-screen threat.
+“You hear the crashing of 
+falling trees and shattered branches as thundering stepsapproach. What do you do?”
+• Reveal an unwelcome truth or unexpected danger.
+“He reaches into his cloak and 
+produces the Orb of Vengeanceas you realize that he was the necromancer the entire time.”
+• Force the group to split up.
+“The elementals are scattering—two
+heading for the town, three bearing down on the mill. What do you do?”
+• Make a PC mark Stress as a 
+consequence for their actions.
+“You can pull the baron to safety 
+if you mark a Stress. Otherwise you can only get yourself out of the way. What do you do?”• Make a move the 
+characters don’t see.
+“You brace for the alarm... 
+but the door clicks open and everything seems ﬁ  ne... for now.”
+• Show the collateral damage.
+“The Minotaur Wrecker barrels into 
+the street, shattering a vegetable cart, sending cabbages ﬂ  ying and knocking the merchant into the wall.”
+• Clear a temporary condition or effect.
+“The guard cuts through the vines
+that are holding her legs in place. She looks around to ﬁ  nd her next target and raises her sword.”
+• Shift the environment.
+“As soon as you cross, the 
+ancient rope bridge snaps,leaving you stranded.”
+• Spotlight an adversary.
+“As the Skeleton Dredge shambles
+forward to strike you, you see the two others on their ﬂ  ank turn their attention toward you as well.”
+• Capture someone or something important.
+“The thief slides past you and
+jumps into the cart, grabbing the idol from the seat and stufﬁ  ng it into their pouch.”
+• Use a PC’s backstory against them.
+“Your mentor sighs, drawing 
+their blade. ‘I wish it didn’t come to this, child. But you still don’t understand what sacriﬁ  ces are required to maintain the peace.’”
+• Take away an opportunity permanently.
+“The door slams shut, cutting 
+you off from the vault as the temple continues to collapse. You’ll need to ﬁ  nd another exit ifyou want to make it out alive.”
+Daggerheart © Darrington Press 2025GM GUIDE
+
+File: Daggerheart-Pad-GameSheets.indd | Output Date: 12/18/24 - 11:21Abbot, Advani, Agoston, Baptiste, Belgarde, 
+Blossom, Chance, Covault, Dawn, Dennison, 
+Drayer, Emrick, Foley, Fury, Grove, Hartley, 
+Humﬂ  eet, Hyland, Ikeda, Jones, Jordon, Kaan, 
+Knoth, Lagrange, Lockamy, Lyon, Marche, 
+Merrell, Newland, Novak, Orwick, Overholt, 
+Pray, Rathbone, Rose, Seagrave, Spurlock, 
+Thorn, Tringle, Vasquez, Warren, Worth, YorkFAMIL Y NAMES
+Alucard, Ambrose, Ash, Bellamy, Calder, 
+Calypso, Chartreuse, Clover, Dahlia, Darrow, 
+Deacon, Elowen, Emrys, Fable, Fiorella, Flynn, 
+Gatlin, Gerard, Hadron, Harlow, Indigo, Isla, 
+Jaden, Kai, Kismet, Leo, Mika, Moon, Nyx, 
+Orna, Phaedra, Quill, Rani, Raphael, Reza, 
+Roux, Saff  ron, Sierra, Skye, Talon, Thea, Triton, 
+Vala, Velo, Wisteria, Yanelle, Zaharafirst names
+Alvyon, Bloomfare, Bonecross, Branishar, 
+Cloud Isles, Davesh Pass, End of Journeys, 
+Fearhold, Ir’thandir, Mountains of Creation, 
+Nocturne, Revenance, Shattered Peaks, South 
+Choir, Sunbearer’s Crescent, Watcher’s Ravine, 
+Wilting Valley, Xuriaregion names
+Balking Tide, Black Willow, Crow’s Nest, Dire 
+Reach, Figero, Fool’s Gold, Golden Goose, 
+Hearthbreak, Hollow Keep, Idle Fiend, Kross, 
+Limping Liar, Mettler’s Make, Nero’s Compass, 
+Netherwell, Parting Gift, Quiet Magnitude, 
+Roaming Way, Salute, Wicked SmileBackgrounds like:  
+Bodyguard, Con Artist, 
+Merchant, Noble, Pirate
+Characteristics like:  
+Aff  able, Intimidating, 
+Sticky Fingers, Survivor 
+Specialties like:  
+Healer, Inventor, Navigator, 
+Swashbuckler
+Skills like:  
+Barter, Quick Hands, 
+Repair, Tracker
+Phrases like:  
+Catch Me If You Can, Hold 
+the Line, Nature’s Friend, 
+This Is Not a NegotiationPLACE NAMESExperiencesCHARACTER CREATION
+Daggerheart © Darrington Press 2025CHOOSE A CLASS
+Your class represents the kind of 
+character you’ll be playing and gives 
+you access to certain abilities and spells 
+during the game. Take the character 
+sheet speciﬁ  c to this class.
+Each class has a number of subclasses to 
+choose from that help deﬁ  ne what kind of 
+focus you’d like your character to have. 
+Take the foundation card for your chosen 
+subclass.
+CHOOSE A HERITAGE
+Your character’s heritage is made up of 
+both an ancestry and a community card. 
+These two cards establish your character’s 
+physical appearance and the environment 
+they grew up in. 
+ASSIGN CHARACTER TRAITS
+Distribute the values −1, 0, 0, +1, +1, +2  
+across your character traits. When rolling, 
+you’ll add the value of that character trait 
+to the roll. 
+RECORD CHARACTER INFORMATION
+Next, record your starting Evasion. 
+Additionally, gain 2 Hope to start the 
+game.CHOOSE STARTING EQUIPMENT
+Decide which weapons you want to start 
+the game with and record their details 
+in the appropriate spaces in the “Active 
+Weapons” section. CHOOSE SMOR
+Next, take one of the available options for 
+starting armor and record its details in the 
+appropriate spaces. Your armor comes 
+with its own damage thresholds and base 
+armor score. Record this alongside your 
+selection under “Active Armor.” Add your 
+thresholds to your level and record those 
+numbers under the “Damage & Health” 
+section. Also record the Base Armor Score, 
+plus modiﬁ  ers from any features, in the 
+large shield labeled “Armor” at the top of 
+the sheet.
+The starting inventory for your class 
+is listed on your character guide. 
+Record those items in the “Inventory” 
+section of your character sheet.
+CREATE YOUR BACKGROUND
+Make description choices from the 
+available options on your character guide 
+(or create your own). This will help you 
+start to build out your character’s look and 
+attitude. 
+Then use the background questions on 
+your character guide as a jumping-off   point 
+to build out your character’s history (or 
+create your own questions).
+Finally, name your character and choose 
+which pronouns they use. CREATE YOUR EXPERIENCES
+Use all the choices and backstory 
+you’ve made about your character 
+so far to generate their starting two 
+Experiences, a set of narrative words 
+or phrases that represent what they’ve 
+learned or become on their journey so far. 
+Assign both a modiﬁ  er of +2.
+CHOOSE DOMAIN DECK CARDS
+Each class is made up of two diff  erent 
+domains, which are listed below the class 
+name on the character sheet. Choose two 
+cards total from the level 1 cards in those 
+domains. You can share these decks with 
+other players. If you do, make sure to 
+talk with them about which cards they’re 
+interested in. ANSWERND QUESTIONS
+CREATE CONNECTIONS
+Ask any of the Connection questions 
+on your character guide to the other 
+players at the table (or generate your own 
+questions). Use this as an opportunity to 
+also discuss how your characters all met, 
+what brought them together, and why 
+they’ve decided to travel as a party.1
+2
+3
+465 7
+8
+9
+
+
+File: Daggerheart-Pad-GameSheets.indd | Output Date: 12/18/24 - 11:21DOWNTIMEACTION ROLLS
+Downtime represents moments of respite within the perilous journey the characters are on together. It’s 
+not only an opportunity to recover and prepare for what lies ahead, but also a time to share more quiet, 
+intimate scenes that help to build or showcase the relationships characters have with one another.Level 1  Tier 1 Levels 2 –4  Tier 2 Levels 5 –7  Tier 3 Levels 8 –10  Tier 4ACTION ROLL RESULTS
+• On a critical success , you get what you want and 
+a little extra. You gain a Hope and clear a Stress.
+• On a success with Hope , you pull it off   well and 
+get what you want. You gain a Hope.
+• On a success with Fear , you get what you want, 
+but it comes with a cost or consequence. You 
+might get attacked , get limited information, attract 
+danger, or face another complication. The GM gains 
+a Fear.
+• On a failure with Hope , things don’t go to plan. 
+You probably don’t get what you want and there are 
+consequences, but you gain a Hope.
+• On a failure with Fear , things go very badly. You 
+probably don’t get what you want, and a major 
+consequence or complication occurs because of it.  
+The GM gains a Fear.
+DAMAGE ROLLS
+After a successful attack, roll a number of your 
+weapon’s damage dice equal to your Proﬁ  ciency and 
+add them together.
+If your attack roll critically succeeds, your attack 
+deals extra damage! Start with the highest possible 
+value the damage dice can roll, and then make a 
+damage roll as usual, adding it to that value.
+Reaction rolls
+Reaction rolls work similarly to action rolls, except 
+they don’t generate Hope, Fear, or additional GM 
+moves.
+USING ARMOR
+Your Armor Score represents how many Armor Slots 
+you have available. When you take damage, you 
+can mark an Armor Slot to reduce the severity by 
+one threshold. You can only mark 1 Armor Slot per 
+incoming attack.QUICK REFERENCE
+Advantage:  Add a d6 advantage die to your roll.
+Disadvantage: Subtract a  d6 disadvantage die from 
+your roll.
+Help an Ally: Spend a Hope and roll a d6 advantage 
+die to add to an ally’s roll. If the ally has gained 
+advantage on a roll from multiple sources, they only 
+add the highest result to their roll.
+Group Action: Nominate a leader of the action. All 
+other participants in the group action roll make a 
+reaction roll using whichever traits they and the 
+GM decide best ﬁ  t (they don’t need to use the same 
+traits). The leader then makes an action roll. Their 
+action roll gains a +1 bonus for each reaction roll that 
+succeeds and a −1 penalty for each reaction roll that 
+fails. 
+Tag Team Roll: Once per session, each player can 
+choose to spend 3 Hope  and initiate a Tag Team 
+Roll between their character and another PC. When 
+you do, work with the other character’s player to 
+describe how you combine your actions in a unique 
+and exciting way. You both make separate action 
+rolls, but before resolving the roll’s outcome, choose 
+one of the rolls to apply for both of your results. On a 
+roll with Hope, all PCs involved gain a Hope. On a roll 
+with Fear, the GM gains a Fear for each PC involved. 
+If you succeed on a Tag Team Roll attack, you both 
+roll damage, then add it together to determine the 
+damage dealt.
+Vulnerable: When a creature has the Vulnerable  
+condition, all rolls against them have advantage.
+Restrained: When a creature has the Restrained  
+condition, they can’t move, but they can still take 
+actions from their current position.
+Hidden: While you’re out of sight from all foes and 
+they don’t know where you are, you gain the Hidden  
+condition. While you’re Hidden , any rolls against you 
+have disadvantage. 
+Direct Damage: Armor Slots can’t be marked to 
+reduce this damage.Critical Success! 
+If the Hope and Fear Die both
+land on the same number, 
+it’s a critical success.
+SHORT REST
+Each player can swap any domain cards in their loadout for cards 
+in their vault, then choose two of the following moves (or choose 
+the same move twice). The GM gains 1d4 Fear.
+• Tend to Wounds
+Describe how you hastily patch yourself up, then clear a number 
+of Hit Points equal to 1d4 + your tier. You can do this to an ally 
+instead.
+• Clear Stress
+Describe how you blow off   steam or pull yourself together, then 
+clear a number of Stress equal to 1d4 + your tier.
+• Repair Armor
+Describe how you quickly repair your armor, then clear a number 
+of Armor Slots equal to 1d4 + your tier. You can do this to an 
+ally’s armor instead.
+• Prepare
+Describe how you prepare yourself for the path ahead, then gain 
+a Hope. If you choose to Prepare with one or more members of 
+your party, you each gain 2 Hope.LONG REST
+Each player can swap any domain cards in their loadout for cards in their vault, then choose 
+two of the following moves (or choose the same move twice). The GM gains an amount of 
+Fear equal to the number of PCs + 1d4 and can advance a long-term countdown.
+• Tend to All Wounds
+Describe how you patch yourself up, then clear all Hit Points. 
+You can do this to an ally instead.
+• Clear All Stress
+Describe how you blow off   steam or pull yourself together, then clear all Stress.
+• Repair All Armor
+Describe how you spend time repairing your armor, then clear all Armor Slots. 
+You can do this to an ally’s armor instead.
+• Prepare
+Describe how you prepare for the next day’s adventure, then gain a Hope. If you choose to 
+Prepare with one or more members of your party, you each gain 2 Hope.
+• Work on a Project
+Establish or continue work on a project. The GM might ask for a 
+roll to determine how much to tick down the progress countdown.PLA Y GUIDE
+12 6
+6 6Roll your Duality Dice and add them
+together along with your modiﬁ  ers.Decide which modiﬁ  ers apply. 
+Spend a Hope to add an Experience.Describe what you want to do and work 
+with the GM to determine whether a roll is 
+necessary to accomplish it. If it is...
+Agility +1, Thief +2 
+Tell the GM the result and which
+Duality Die rolled higher.“21 with Fear!”
+12 6
+6 6
+Daggerheart © Darrington Press 2025
+
+File: Daggerheart-Pad-GameSheets.indd | Output Date: 12/18/24 - 11:21Daggerheart © Darrington Press 2025This section denotes your class. Each class is made up of 
+two domains. You choose your abilities and spells from 
+these domains.This section gives you a place to record your name, 
+pronouns, heritage (the combination of your community 
+and ancestry), and subclass. There is also a space to 
+record your level . 
+This is where you record your Hope. You spend Hope to 
+use an Experience (details below), Help an Ally, use a 
+Hope Feature, or initiate a Tag Team Roll. When you 
+Help an Ally, you explain how you’re aiding them and roll 
+a d6 advantage die they add to their action roll total. 
+You start with 2 Hope marked.
+Your class’s unique Hope Feature is in this section as well.
+This is where you keep track of your gold during a 
+campaign. If you would mark your tenth handful, you 
+instead mark a bag and erase all your handfuls. If you 
+would mark your tenth bag, you instead mark a chest 
+and erase your bags. You start with one handful of 
+gold.Your  inventory is where you store items and consumables.  
+Each class starts with a unique class feature that sets 
+them apart from other classes. Make sure to read through 
+them before you begin playing.
+This is where you store weapons you want to carry but 
+not have active. While a weapon is in your inventory, you 
+can’t beneﬁ  t from its feature.
+SLIDE THIS SIDE OUT TO THE RIGHT 
+OF YOUR CHARACTER SHEET.SLIDE THIS SIDE OUT TO THE LEFT 
+OF YOUR CHARACTER SHEET.Experience represents your character’s particular 
+specializations your character has. These are narrative 
+tags that you create to reﬂ  ect what your character is 
+skilled in. When they apply to the scene, you can spend a 
+Hope before the action roll to add an Experience’s value 
+as a modiﬁ  er. You earn more Experiences throughout a 
+campaign.This is the section for your armor. Along with a name, 
+armor has base thresholds that contribute to your 
+damage thresholds, and a base score that contributes 
+to your Armor Score. The armor’s feature describes its 
+special abilities or the requirements to use it.Evasion represents your ability to avoid an attack. The 
+GM rolls against this number when determining if an 
+adversary hits you. If you do get hit, you can choose to 
+mark an Armor Slot (the small empty shields to the right 
+of the large “Armor” shield) to reduce the severity of the 
+incoming damage by one threshold. You have a number 
+of available slots equal to your Armor Score (the number 
+in the large “Armor” shield).This area contains your six character traits. You use 
+these as your primary modiﬁ  ers on action rolls. The 
+descriptions beneath each trait remind you how to use 
+them.
+The two smaller boxes are your damage thresholds. 
+These come from your armor, and you always add your 
+level to their value. When you take damage, compare it to 
+the numbers here. If the incoming damage is Minor, you 
+mark a Hit Point. If it is Major, you mark 2 Hit Points. If 
+it is Severe , you mark 3 Hit Points. If you ever need to 
+mark Stress and can’t, mark a Hit Point. If you ever mark 
+your last Hit Point, you must make a death move.This is the section for your active weapons. Along with 
+a name, weapons have an associated trait that you roll 
+when using them for an attack. They also have a range 
+(Melee, Very Close, Close, Far, or Very Far). The GM tells 
+you what range a target is at relative to your character. 
+Damage dice are the kind of dice you roll when you 
+make a successful attack, and the damage type is either 
+physical or magic. Proﬁ  ciency tells you how many 
+damage dice you roll. A weapon’s feature describes its 
+special abilities or the requirements to use it. 
+Weapons are either one-handed or two-handed. Fill in 
+the appropriate number of hands based on the weapons 
+you take.character sheet sidecar
+
+File: Daggerheart-Pad-GameSheets.indd | Output Date: 12/18/24 - 11:21EQUIPMENT
+starting Primary weapons  — Physical
+starting Primary weapons  — magic
+starting secondary weapons
+Starting Armor
+Daggerheart © Darrington Press 2025Name Trait Range Damage Burden Feature
+Broadsword Agility Melee d/eight.tnum phy One/hyphen.tabHanded Reliable: +/one.tnum to attack rolls
+Longsword Agility Melee d/eight.tnum+/three.tnum phy Two/hyphen.tabHanded —
+Battleaxe Strength Melee d/one.tnum/zero.tnum+/three.tnum phy Two/hyphen.tabHanded —
+Greatsword Strength Melee d/one.tnum/zero.tnum+/three.tnum phy Two/hyphen.tabHandedMassive: −/one.tnum to Evasion; on a successful attack/comma.tab roll an additional damage 
+die and discard the lowest result/period.tab
+Mace Strength Melee d/eight.tnum+/one.tnum phy One/hyphen.tabHanded —
+Warhammer Strength Melee d/one.tnum/two.tnum+/three.tnum phy Two/hyphen.tabHanded Heavy: −/one.tnum to Evasion
+Dagger Finesse Melee d/eight.tnum+/one.tnum phy One/hyphen.tabHanded —
+Quarterstaff Instinct Melee d/one.tnum/zero.tnum+/three.tnum phy Two/hyphen.tabHanded —
+Cutlass Presence Melee d/eight.tnum+/one.tnum phy One/hyphen.tabHanded —
+Rapier Presence Melee d/eight.tnum phy One/hyphen.tabHandedQuick: When you make an attack/comma.tab you can mark a Stress to target another 
+creature within range/period.tab
+Halberd Strength Very Close d/one.tnum/zero.tnum+/two.tnum phy Two/hyphen.tabHanded Cumbersome: −/one.tnum to Finesse
+Spear Finesse Very Close d/one.tnum/zero.tnum+/two.tnum phy Two/hyphen.tabHanded Cumbersome: −/one.tnum to Finesse
+Shortbow Agility Far d/six.tnum+/three.tnum phy Two/hyphen.tabHanded —
+Crossbow Finesse Far d/six.tnum+/one.tnum phy One/hyphen.tabHanded —
+Longbow Agility Very Far d/eight.tnum+/three.tnum phy Two/hyphen.tabHanded Cumbersome: −/one.tnum to Finesse
+  
+Name Trait Range Damage Burden Feature
+Arcane Gauntlets Strength Melee d/one.tnum/zero.tnum+/three.tnum mag Two/hyphen.tabHanded —
+Hallowed Axe Strength Melee d/eight.tnum+/one.tnum mag One/hyphen.tabHanded —
+Glowing Rings Agility Very Close d/one.tnum/zero.tnum+/one.tnum mag Two/hyphen.tabHanded —
+Hand Runes Instinct Very Close d/one.tnum/zero.tnum mag One/hyphen.tabHanded —
+Returning Blade Finesse Close d/eight.tnum mag One/hyphen.tabHandedReturning: When this weapon is thrown within its range/comma.tab it appears 
+in your hand immediately after the attack/period.tab
+Shortstaff Instinct Close d/eight.tnum+/one.tnum mag One/hyphen.tabHanded —
+Dualstaff Instinct Far d/six.tnum+/three.tnum mag Two/hyphen.tabHanded —
+Scepter Presence Far d/six.tnum mag Two/hyphen.tabHandedVersatile: This weapon can also be used with these statistics—
+Presence/comma.tab Melee/comma.tab d/eight.tnum/period.tab
+Wand Knowledge Far d/six.tnum+/one.tnum mag One/hyphen.tabHanded —
+Greatstaff Knowledge Very Far d/six.tnum mag Two/hyphen.tabHandedPowerful: On a successful attack/comma.tab roll an additional damage die 
+and discard the lowest result/period.tab
+  
+Name Trait Range Damage Burden Feature
+Shortsword Agility Melee d/eight.tnum phy One/hyphen.tabHanded Paired: +/two.tnum to primary weapon damage to targets within Melee range
+Round Shield Strength Melee d/four.tnum phy One/hyphen.tabHanded Protective: +/one.tnum to Armor Score
+Tower Shield Strength Melee d/six.tnum phy One/hyphen.tabHanded Barrier: +/two.tnum to Armor Score; −/one.tnum to Evasion
+Small Dagger Finesse Melee d/eight.tnum phy One/hyphen.tabHanded Paired: +/two.tnum to primary weapon damage to targets within Melee range
+Whip Presence Very Close d/six.tnum phy One/hyphen.tabHandedStartling: Mark a Stress to crack the whip and force all adversaries 
+within Melee range back to Close range/period.tab
+Grappler Finesse Close d/six.tnum phy One/hyphen.tabHandedHooked: On a successful attack/comma.tab you can pull the target into Melee 
+range/period.tab
+Hand Crossbow Finesse Far d/six.tnum+/one.tnum phy One/hyphen.tabHanded —
+Name Base Thresholds Base Score Feature
+Gambeson Armor /five.tnum / /one.tnum/one.tnum /three.tnum Flexible: +/one.tnum to Evasion
+Leather Armor /six.tnum / /one.tnum/three.tnum /three.tnum —
+Chainmail Armor /seven.tnum / /one.tnum/five.tnum /four.tnum Heavy: −/one.tnum to Evasion
+Full Plate Armor /eight.tnum / /one.tnum/seven.tnum /four.tnum Very Heavy: −/two.tnum to Evasion; −/one.tnum to Agility
+
+Daggerheart © Darrington Press 2025FEATURE
+FEATUREANCESTRY:
+DOMAIN TYPE RECALL
+FEATUREDomain Card:
+DOMAIN TYPE RECALL
+FEATUREDomain Card:
+DOMAIN TYPE RECALL
+FEATUREDomain Card:
+DOMAIN TYPE RECALL
+FEATUREDomain Card:
+DOMAIN TYPE RECALL
+FEATUREDomain Card:FEATURECOMMUNITY:
+FOUNDATION SPECIALIZATION MASTERY
+CLASS
+FEATURESPELLCAST TRAITSubclass:FOUNDATION SPECIALIZATION MASTERY
+CLASS
+FEATURESPELLCAST TRAITSubclass:FOUNDATION SPECIALIZATION MASTERY
+CLASS
+FEATURESPELLCAST TRAITSubclass:
+
+Daggerheart © Darrington Press 2025DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+DOMAIN TYPE RECALL
+FEATUREDOMAIN card:
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025notesDOMAINDAGGERHEART
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).When you multiclass, take one of that class’s foundation cards 
+and place it in your loadout. Then choose one domain to expand 
+into and record it below.
+multiclass FEature
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass FEature
+PRESTIDIGITATION 
+You can perform harmless, subtle magical effects at will. 
+For example, you can change an object’s color, create a 
+smell, light a candle, cause a tiny object to float, illuminate 
+a room, or repair a small object.
+STRANGE PATTERNS
+Choose a number between 1 and 12. When  
+you roll that number on a Duality Die, gain a 
+Hope or clear a Stress. You can change this 
+number when you take a long rest.splendor CodexWIZARD
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).When you multiclass, take one of the wizard foundation cards 
+and place in your loadout. Then choose one domain to expand 
+into.
+NOTES
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass Feature
+ATTACK OF OPPORTUNITY
+When an adversary within Melee range attempts to leave that 
+range, make a reaction roll using a trait of your choice against 
+their Difficulty. Choose one effect on a success, or two if you 
+critically succeed:
+• They can’t move from where they are.
+• You deal damage to them equal to your primary weapon’s 
+damage.
+• You move with them.
+COMBAT TRAINING
+You ignore burden when equipping weapons. When you deal 
+physical damage, you gain a bonus to your damage roll equal to 
+your level.bone bladeWARRIOR
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).When you multiclass, take one of the warrior foundation cards 
+and place in your loadout. Then choose one domain to expand 
+into.
+NOTES
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass FEature
+ARCANE SENSE 
+You can sense the presence of magical people and objects within 
+Close range.
+MINOR ILLUSION
+Make a Spellcast Roll (10) . On a success, you create a minor 
+visual illusion no larger than yourself within Close range. This 
+illusion is convincing to anyone at Close range or farther.
+CHANNEL RAW POWER
+Once per long rest, you can place a domain card from your 
+loadout into your vault and choose to either:
+• Gain Hope equal to the level of the card.
+• Enhance a spell that deals damage, gaining a bonus to your 
+damage roll equal to twice the level of the card.midnight ArcanaSORCERER
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).When you multiclass, take one of the sorcerer foundation cards 
+and place in your loadout. Then choose one domain to expand 
+into.
+NOTES
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass Feature
+PRAYER DICE 
+At the beginning of each session, roll a number of  d4s equal to 
+your subclass’s Spellcast trait and place them on this sheet in the 
+space provided. These are your Prayer Dice. You can spend any 
+number of Prayer Dice to aid yourself or an ally within Far range. 
+You can use a spent die’s value to reduce incoming damage, add 
+to a roll’s result after the roll is made, or gain Hope equal to the 
+result. At the end of each session, clear all unspent Prayer Dice.valor splendorSERAPH
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).
+When you multiclass, take one of the seraph foundation cards 
+and place in your loadout. Then choose one domain to expand 
+into.
+NOTES
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass FEature
+CLOAKED 
+Any time you would be Hidden , you are instead Cloaked . In 
+addition to the benefits of the Hidden  condition, while Cloaked  you 
+remain unseen if you are stationary when an adversary moves to 
+where they would normally see you. After you make an attack or 
+end a move within line of sight of an adversary, you are no longer 
+Cloaked .
+SNEAK ATTACK 
+When you succeed on an attack while Cloaked  or while an ally is 
+within Melee range of your target, add a number of d6s equal to 
+your tier to your damage roll. 
+Level 1 is Tier 1  
+Levels 2 –4 are Tier 2  
+Levels 5 –7 are Tier 3  
+Levels 8 –10 are Tier 4grace midnightROGUE
+When you multiclass, take one of the rogue foundation cards and 
+place in your loadout. Then choose one domain to expand into.
+NOTESWhen leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass FeatureWhen you multiclass, take one of the ranger foundation cards 
+and place in your loadout. Then choose one domain to expand 
+into.
+RANGER’S FOCUS  
+Spend a Hope  and make an attack against a target. On a 
+success, deal your attack’s normal damage and temporarily 
+make the attack’s target your Focus . Until this feature ends or 
+you make a different creature your Focus , you gain the following 
+benefits against your Focus:
+• You know precisely what direction they are in.
+• When you deal damage to them, they must mark a Stress.
+• When you fail an attack against them, you can end your 
+Ranger’s Focus feature to reroll your Duality Dice. sage BoneRANGER
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).
+NOTES
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass FEature
+UNSTOPPABLE 
+Once per long rest, you can become Unstoppable . 
+You gain an Unstoppable Die. At level 5, your 
+Unstoppable Die is a  d6. Place it on this sheet 
+in the space provided, starting with the 1 value 
+facing up. After you make a damage roll that 
+deals 1 or more Hit Points to a target, increase 
+the Unstoppable Die value by one. When the die’s 
+value would exceed its maximum value or when 
+the scene ends, remove the die and drop out of 
+Unstoppable . 
+While Unstoppable , you gain the following benefits:
+• You reduce the severity of physical damage by 
+one threshold (Severe to Major, Major to Minor, 
+Minor to None).
+• You add the current value of the Unstoppable Die 
+to your damage roll.
+• You can’t be Restrained  or Vulnerable.blade valorGUARDIAN
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).
+When you multiclass, take one of the guardian foundation cards 
+and place in your loadout. Then choose one domain to expand 
+into.
+NOTES
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025multiclass FEature
+BEASTFORM
+Mark a Stress  to magically transform into a creature of your tier or 
+lower from the Beastform list. You can drop out of this form at any 
+time. While transformed, you can’t use weapons or cast spells from 
+domain cards, but you can still use other features or abilities you 
+have access to. Spells you cast before you transform stay active and 
+last for their normal duration, and you can talk and communicate as 
+normal. Additionally, you gain the Beastform’s features, add their 
+Evasion bonus to your Evasion, and use the trait specified in their 
+statistics for your attack. While you’re in a Beastform, your armor 
+becomes part of your body and you mark Armor Slots as usual; when 
+you drop out of a Beastform, those marked Armor Slots remain 
+marked. If you mark your last Hit Point, you automatically drop out 
+of this form.
+WILDTOUCH
+You can perform harmless, subtle effects that involve nature—such 
+as causing a flower to rapidly grow, summoning a slight gust of wind, 
+or starting a campfire—at will.Arcana sagemulticlassDRUID
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).When you multiclass, take one of the druid foundation cards and 
+place in your loadout. Then choose one domain to expand into.
+NOTES
+
+character sheet
+multiclass Sheet
+Daggerheart © Darrington Press 2025codex
+multiclass Feature
+RALLY 
+Once per session, describe how you rally the party and give 
+yourself and each of your allies a Rally Die. At level 5, your Rally 
+Die is a  d8. A PC can spend their Rally Die to roll it, adding the 
+result to their action roll, reaction roll, damage roll, or to clear a 
+number of Stress equal to the result. At the end of each session, 
+clear all unspent Rally Dice. graceWhen you multiclass, take one of the bard foundation cards 
+and place in your loadout. Then choose one domain to 
+expand into.
+NOTESBARD
+When leveling up, you can take domain cards from this 
+domain at half your level or lower (rounded up).
+
+======================================================================
+End of Part 1 | Pages 1-17
+======================================================================

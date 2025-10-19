@@ -1,0 +1,2873 @@
+[
+    {
+        "type": "primary_weapon",
+        "name": "Aantari Bow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+11 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "consumable",
+        "name": "Acidpaste",
+        "description": "This paste eats away walls and other surfaces in bright flashes."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Arcane Gauntlets",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+9 mag",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Arcane-Frame Wheelchair",
+        "properties": {
+            "Range": "Far",
+            "Damage": "d6+6 mag",
+            "Burden": "One-Handed",
+            "Tier": 3,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Battleaxe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Broadsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+6 phy",
+            "Burden": "One-Handed",
+            "Tier": 3,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Advanced Chainmail Armor",
+        "properties": {
+            "Base_Score": 6,
+            "Tier": 3,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+7 phy",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Advanced Cutlass",
+        "description": "Trait: Presence; Range: Melee; Damage: d8+7 phy; Burden: One-Handed This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+7 phy",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Dualstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d6+9 mag",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Advanced Full Plate Armor",
+        "properties": {
+            "Base_Score": 6,
+            "Tier": 3,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Advanced Gambeson Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Glowing Rings",
+        "properties": {
+            "Trait": "Agility",
+            "Damage": "d10+8 mag",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Advanced Grappler",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Close",
+            "Damage": "d6+4 phy",
+            "Burden": "One-Handed",
+            "Tier": 3,
+            "Feature": {
+                "Feature_Name": "Hooked",
+                "Effect": "On a successful attack, you can pull the target into Melee range."
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Greatstaff",
+        "properties": {
+            "Range": "Very Far",
+            "Damage": "d6+6 mag",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Greatsword",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Halberd",
+        "properties": {
+            "Trait": "Strength",
+            "Damage": "d10+8 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Hallowed Axe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d8+7 mag",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Advanced Hand Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+5 phy",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Advanced Hand Runes",
+        "description": "Trait: Instinct; Range: Very Close; Damage: d10+6 mag; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Heavy-Frame Wheelchair",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Advanced Leather Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Light-Frame Wheelchair",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+6 phy",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Longbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Very Far",
+            "Damage": "d8+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Longsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d10+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Advanced Mace",
+        "description": "Trait: Strength; Range: Melee; Damage: d8+7 phy; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Quarterstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Melee",
+            "Damage": "d10+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Advanced Rapier",
+        "description": "Trait: Presence; Range: Melee; Damage: d8+6 phy; Burden: One-Handed Feature: Quick: When you make an attack, you can mark a Stress to target another creature within range."
+    },
+    {
+        "type": "item",
+        "name": "Advanced Returning Blade",
+        "description": "ADVANCED RETURNING BLADE Advanced Returning Blade ADVANCED RETURNING BLADE"
+    },
+    {
+        "type": "item",
+        "name": "Advanced Round Shield",
+        "description": "ADVANCED ROUND SHIELD Advanced Round Shield ADVANCED ROUND SHIELD"
+    },
+    {
+        "type": "item",
+        "name": "Advanced Scepter",
+        "description": "Trait: Presence; Range: Far; Damage: d6+6 mag; Burden: Two-Handed Feature: Versatile: This weapon can also be used with these statistics—Presence, Melee, d8+4."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Shortbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Far",
+            "Damage": "d6+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Shortstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Close",
+            "Damage": "d8+7 mag",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Shortsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+4 phy",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Small Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+4 phy",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Spear",
+        "properties": {
+            "Trait": "Finesse",
+            "Damage": "d8+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Advanced Tower Shield",
+        "description": "ADVANCED TOWER SHIELD Advanced Tower Shield ADVANCED TOWER SHIELD"
+    },
+    {
+        "type": "item",
+        "name": "Advanced Wand",
+        "description": "Trait: Knowledge; Range: Far; Damage: d6+7 mag; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Advanced Warhammer",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Advanced Whip",
+        "description": "Trait: Presence; Range: Very Close; Damage: d6+4 phy; Burden: One-Handed Feature: Startling: Mark a Stress to crack the whip and force all adversaries within Melee range back to Close range."
+    },
+    {
+        "type": "item",
+        "name": "Airblade Charm",
+        "description": "You can attach this charm to a weapon with a Melee range. Three times per rest, you can activate the charm and attack a target within Close range."
+    },
+    {
+        "type": "item",
+        "name": "Alistair’s Torch",
+        "description": "You can light this magic torch at will. The flame’s light fills a much larger space than it should, enough to illuminate a cave bright as day. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Arcane Cloak",
+        "description": "A creature with a Spellcast trait wearing this cloak can adjust its color, texture, and size at will. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Arcane Gauntlets",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+3 mag",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Arcane Prism",
+        "description": "Position this prism in a location of your choosing and activate it. All allies within Close range of it gain a +1 bonus to their Spellcast Rolls. While activated, the prism can’t be moved. Once the prism is deactivated, it can’t be activated again until your next long rest."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Arcane-Frame Wheelchair",
+        "properties": {
+            "Range": "Far",
+            "Burden": "One-Handed",
+            "Tier": 1,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Armor Stitcher",
+        "properties": {}
+    },
+    {
+        "type": "consumable",
+        "name": "Attune Potion",
+        "description": "You gain a +1 bonus to your next Instinct Roll."
+    },
+    {
+        "type": "item",
+        "name": "Attune Relic",
+        "description": "You gain a +1 bonus to your Instinct. You can only carry one relic."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Axe of Fortunis",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+8 mag",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Bag of Ficklesand",
+        "description": "You can convince this small bag of sand to be much heavier or lighter with a successful Presence Roll (10). Additionally, on a successful Finesse Roll (10), you can blow a bit of sand into a target’s face to make them temporarily Vulnerable."
+    },
+    {
+        "type": "armor",
+        "name": "Baking Tray Breastplate",
+        "properties": {}
+    },
+    {
+        "type": "item",
+        "name": "Barrel Lid Shield",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Battleaxe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Bellamoi Fine Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Belt of Unity",
+        "description": "Once per session, you can spend 5 Hope to lead a Tag Team Roll with three PCs instead of two."
+    },
+    {
+        "type": "item",
+        "name": "Black Powder Revolver",
+        "description": "BLACK POWDER REVOLVER Black Powder Revolver BLACK POWDER REVOLVER"
+    },
+    {
+        "type": "item",
+        "name": "Bladed Whip",
+        "description": "Trait: Agility; Range: Very Close; Damage: d8+3 phy; Burden: One-Handed Feature: Quick: When you make an attack, you can mark a Stress to target another creature within range."
+    },
+    {
+        "type": "armor",
+        "name": "Bladefare Armor",
+        "properties": {
+            "Base_Score": 6,
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Blessed Anlace",
+        "description": "Trait: Instinct; Range: Melee; Damage: d10+6 mag; Burden: One-Handed Feature: Healing: During downtime, automatically clear a Hit Point."
+    },
+    {
+        "type": "item",
+        "name": "Blessed Branch",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Blinding Orb",
+        "description": "You can activate this orb to create a flash of bright light. All targets within Close range become Vulnerable until they mark HP."
+    },
+    {
+        "type": "item",
+        "name": "Blood of the Yorgi",
+        "description": "You can drink this blood to disappear from where you are and immediately reappear at a point you can see within Very Far range."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Bloodstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d20+7 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Bloodstone",
+        "description": "You can attach this stone to a weapon that doesn’t already have a feature. The weapon gains the following feature. Brutal: When you roll the maximum value on a damage die, roll an additional damage die."
+    },
+    {
+        "type": "item",
+        "name": "Blunderbuss",
+        "description": "Trait: Finesse; Range: Close; Damage: d8+6 phy; Burden: Two-Handed Feature: Reloading: After you make an attack, roll a d6. On a result of 1, you must mark a Stress to reload this weapon before you can fire it again."
+    },
+    {
+        "type": "consumable",
+        "name": "Bolster Potion",
+        "description": "You gain a +1 bonus to your next Strength Roll."
+    },
+    {
+        "type": "item",
+        "name": "Bolster Relic",
+        "description": "You gain a +1 bonus to your Strength. You can only carry one relic."
+    },
+    {
+        "type": "item",
+        "name": "Bonding Honey",
+        "description": "This honey can be used to glue two objects together permanently."
+    },
+    {
+        "type": "item",
+        "name": "Box of Many Goods",
+        "description": "Once per long rest, you can open this small box and roll a d12. On a result of 1–6, it’s empty. On a result of 7–10, it contains one random common consumable. On a result of 11–12, it contains two random common consumables."
+    },
+    {
+        "type": "item",
+        "name": "Braveshield",
+        "description": "Trait: Agility; Range: Melee; Damage: d4+6 phy; Burden: One-Handed Feature: Sheltering: When you mark an Armor Slot, it reduces damage for you and all allies within Melee range of you who took the same damage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Bravesword",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+7 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Bridge Seed",
+        "description": "Thick vines grow from your location to a point of your choice within Far range, allowing you to climb up or across them. The vines dissipate on your next short rest."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Broadsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Burden": "One-Handed",
+            "Tier": 1,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Buckler",
+        "description": "Trait: Agility; Range: Melee; Damage: d4+4 phy; Burden: One-Handed Deflecting: When you are attacked, you can mark an Armor Slot to gain a bonus to your Evasion equal to your available Armor Slots against the attack."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Butcher’s Axe",
+        "properties": {}
+    },
+    {
+        "type": "item",
+        "name": "Calming Pendant",
+        "description": "When you would mark your last Stress, roll a d6. On a result of 5 or higher, don’t mark it."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Casting Sword",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+4 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Chainmail Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 1,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Channeling Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Channelstone",
+        "description": "You can use this stone to take a spell or grimoire from your vault, use it once, and return it to your vault."
+    },
+    {
+        "type": "item",
+        "name": "Charging Quiver",
+        "description": "When you succeed on an attack with an arrow stored in this quiver, gain a bonus to the damage roll equal to your current tier."
+    },
+    {
+        "type": "consumable",
+        "name": "Charm Potion",
+        "description": "You gain a +1 bonus to your next Presence Roll."
+    },
+    {
+        "type": "item",
+        "name": "Charm Relic",
+        "description": "You gain a +1 bonus to your Presence. You can only carry one relic."
+    },
+    {
+        "type": "item",
+        "name": "Circle of the Void",
+        "description": "Mark a Stress to create a void that extends up to Far range. No magic can be cast inside the void, and creatures within the void are immune to magic damage."
+    },
+    {
+        "type": "item",
+        "name": "Clay Companion",
+        "description": "When you sculpt this ball of clay into a clay animal companion, it behaves as that animal. For example, a clay spider can spin clay webs, while a clay bird can fly. The clay companion retains memory and identity across different shapes, but they can adopt new mannerisms with each form."
+    },
+    {
+        "type": "item",
+        "name": "Cleaver",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Companion Case",
+        "description": "This case can fit a small animal companion. While the companion is inside, the animal and case are immune to all damage and harmful effects."
+    },
+    {
+        "type": "consumable",
+        "name": "Control Potion",
+        "description": "You gain a +1 bonus to your next Finesse Roll."
+    },
+    {
+        "type": "item",
+        "name": "Control Relic",
+        "description": "You gain a +1 bonus to your Finesse. You can only carry one relic."
+    },
+    {
+        "type": "item",
+        "name": "Cooking Knife",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Corrector Sprite",
+        "description": "This tiny sprite sits in the curve of your ear canal and whispers helpful advice during combat. Once per short rest, you can gain advantage on an attack roll."
+    },
+    {
+        "type": "item",
+        "name": "Crop Scythe",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+1 phy",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Curved Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+9 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Cutlass",
+        "description": "Trait: Presence; Range: Melee; Damage: d8+1 phy; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+1 phy",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Death Tea",
+        "description": "After you drink this tea, you instantly kill your target when you critically succeed on an attack. If you don’t critically succeed on an attack before your next long rest, you die."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Devouring Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+4 mag",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Double Flail",
+        "description": "Trait: Agility; Range: Very Close; Damage: d10+8 phy; Burden: Two-Handed Feature: Powerful: On a successful attack, roll an additional damage die and discard the lowest result."
+    },
+    {
+        "type": "item",
+        "name": "Dragonbloom Tea",
+        "description": "You can drink this tea to unleash a fiery breath attack. Make an Instinct Roll against all adversaries in front of you within Close range. Targets you succeed against take d20 physical damage using your Proficiency."
+    },
+    {
+        "type": "armor",
+        "name": "Dragonscale Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Dripfang Poison",
+        "description": "A creature who consumes this poison takes 8d10 direct magic damage."
+    },
+    {
+        "type": "item",
+        "name": "Dual Flask",
+        "description": "This flask can hold two different liquids. You can swap between them by flipping a small switch on the flask’s side."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Dual-Ended Sword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d10+9 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Dualstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d6+3 mag",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Dunamis Silkchain",
+        "description": "Base Thresholds: 13 / 36; Base Score: 7 Feature: Timeslowing: Mark an Armor Slot to roll a d4 and add its result as a bonus to your Evasion against an incoming attack."
+    },
+    {
+        "type": "item",
+        "name": "Dynamite",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Ego Blade",
+        "description": "Trait: Agility; Range: Melee; Damage: d12+4 mag; Burden: One-Handed Feature: Pompous: You must have a Presence of 0 or lower to use this weapon."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Elder Bow",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d6+4 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Elundrian Chain Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Elusive Amulet",
+        "description": "Once per long rest, you can activate this amulet to become Hidden until you move. While Hidden in this way, you remain unseen even if an adversary moves to where they would normally see you."
+    },
+    {
+        "type": "armor",
+        "name": "Emberwoven Armor",
+        "properties": {
+            "Base_Score": 6,
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Empty Chest",
+        "description": "This magical chest appears empty. When you speak a specific trigger word or action and open the chest, you can see the items stored within it."
+    },
+    {
+        "type": "item",
+        "name": "Enchanted Boomerang",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Enchanted Broomstick",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Enchanted Forge Lighter",
+        "description": "ENCHANTED FORGE LIGHTER Enchanted Forge Lighter CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Enchanted Hammer",
+        "properties": {}
+    },
+    {
+        "type": "item",
+        "name": "Enchanted Kite",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Enchanted Mop",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Enchanted Scissors",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "consumable",
+        "name": "Enlighten Potion",
+        "description": "You gain a +1 bonus to your next Knowledge Roll."
+    },
+    {
+        "type": "item",
+        "name": "Enlighten Relic",
+        "description": "You gain a +1 bonus to your Knowledge. You can only carry one relic."
+    },
+    {
+        "type": "consumable",
+        "name": "Exploding Potions",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Extended Polearm",
+        "description": "Trait: Finesse; Range: Very Close; Damage: d8+10 phy; Burden: Two-Handed Feature: Long: This weapon’s attack targets all adversaries in a line within range."
+    },
+    {
+        "type": "item",
+        "name": "Feast of Xuria",
+        "description": "You can eat this meal to clear all HP and Stress and gain 1d4 Hope."
+    },
+    {
+        "type": "item",
+        "name": "Featherbone",
+        "description": "You can use this bone to control your falling speed for a number of minutes equal to your level."
+    },
+    {
+        "type": "item",
+        "name": "Festival Whip",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Finehair Bow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Very Far",
+            "Damage": "d6+5 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Fire Jar",
+        "description": "You can pour out the strange liquid contents of this jar to instantly produce fire. The contents regenerate when you take a long rest."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Firestaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d6+7 mag",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Firework Launcher",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Fishing Rod",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Flare Launcher",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Flickerfly Blade",
+        "description": "Trait: Agility; Range: Melee; Damage: d8+5 phy; Burden: One-Handed Feature: Sharpwing: Gain a bonus to your damage rolls equal to your Agility."
+    },
+    {
+        "type": "item",
+        "name": "Flickerfly Pendant",
+        "description": "While you carry this pendant, your weapons with a Melee range that deal physical damage have a gossamer sheen and can attack targets within Very Close range."
+    },
+    {
+        "type": "item",
+        "name": "Floating Bladeshards",
+        "description": "Trait: Instinct; Range: Close; Damage: d8+9 mag; Burden: One-Handed Feature: Powerful: On a successful attack, roll an additional damage die and discard the lowest result."
+    },
+    {
+        "type": "item",
+        "name": "Forge Poker",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "armor",
+        "name": "Full Fortified Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 4
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Full Plate Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 1,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Fusion Gloves",
+        "description": "Trait: Knowledge; Range: Very Far; Damage: d6+9 mag; Burden: Two-Handed Feature: Bonded: Gain a bonus to your damage rolls equal to your level."
+    },
+    {
+        "type": "armor",
+        "name": "Gambeson Armor",
+        "properties": {
+            "Base_Score": 3,
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Gecko Gloves",
+        "description": "You can climb up vertical surfaces and across ceilings."
+    },
+    {
+        "type": "item",
+        "name": "Gem of Alacrity",
+        "description": "You can attach this gem to a weapon, allowing you to use your Agility when making an attack with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Gem of Audacity",
+        "description": "You can attach this gem to a weapon, allowing you to use your Presence when making an attack with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Gem of Insight",
+        "description": "You can attach this gem to a weapon, allowing you to use your Instinct when making an attack with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Gem of Might",
+        "description": "You can attach this gem to a weapon, allowing you to use your Strength when making an attack with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Gem of Precision",
+        "description": "You can attach this gem to a weapon, allowing you to use your Finesse when making an attack with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Gem of Sagacity",
+        "description": "You can attach this gem to a weapon, allowing you to use your Knowledge when making an attack with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Ghostblade",
+        "description": "Trait: Presence; Range: Melee; Damage: d10+7 phy or mag; Burden: One-Handed Feature: Otherworldly: On a successful attack, you can deal physical or magic damage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Gilded Bow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+7 mag",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Gilded Falchion",
+        "description": "Trait: Strength; Range: Melee; Damage: d10+4 phy; Burden: One-Handed Feature: Powerful: On a successful attack, roll an additional damage die and discard the lowest result."
+    },
+    {
+        "type": "item",
+        "name": "Gill Salve",
+        "description": "You can apply this salve to your neck to breathe underwater for a number of minutes equal to your level."
+    },
+    {
+        "type": "item",
+        "name": "Glamour Stone",
+        "description": "Activate this pebble-sized stone to memorize the appearance of someone you can see. Spend a Hope to magically recreate this guise on yourself as an illusion."
+    },
+    {
+        "type": "item",
+        "name": "Glider",
+        "description": "While falling, you can mark a Stress to deploy this small parachute and glide safely to the ground."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Glowing Rings",
+        "properties": {
+            "Trait": "Agility",
+            "Damage": "d10+2 mag",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Grappler",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Close",
+            "Burden": "One-Handed",
+            "Tier": 1,
+            "Feature": {
+                "Feature_Name": "Hooked",
+                "Effect": "On a successful attack, you can pull the target into Melee range."
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Greatbow",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Far",
+            "Damage": "d6+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Greatstaff",
+        "properties": {
+            "Range": "Very Far",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Greatstone",
+        "description": "You can attach this stone to a weapon that doesn’t already have a feature. The weapon gains the following feature. Powerful: On a successful attack, roll an additional damage die and discard the lowest result."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Greatsword",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Grindletooth Venom",
+        "description": "You can apply this venom to a weapon that deals physical damage to add a d6 to your next damage roll with that weapon."
+    },
+    {
+        "type": "consumable",
+        "name": "Growing Potion",
+        "description": "You can drink this potion to double your size until you choose to drop this form or your next rest. While in this form, you have a +2 bonus to Strength and a +1 bonus to your Proficiency."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Halberd",
+        "properties": {
+            "Trait": "Strength",
+            "Damage": "d10+2 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Hallowed Axe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d8+1 mag",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Hammer of Exota",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Melee",
+            "Damage": "d8+6 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Hammer of Wrath",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+7 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Hand Cannon",
+        "description": "Trait: Finesse; Range: Very Far; Damage: d6+12 phy; Burden: One-Handed Feature: Reloading: After you make an attack, roll a d6. On a 1, you must mark a Stress to reload this weapon before you can fire it again."
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Hand Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+1 phy",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Hand Runes",
+        "description": "Trait: Instinct; Range: Very Close; Damage: d10 mag; Burden: One-Handed"
+    },
+    {
+        "type": "item",
+        "name": "Hand Sling",
+        "description": "Trait: Finesse; Range: Very Far; Damage: d6+4 phy; Burden: One-Handed Feature: Versatile: This weapon can also be used with these statistics—Finesse, Close, d8+4."
+    },
+    {
+        "type": "armor",
+        "name": "Harrowbone Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "consumable",
+        "name": "Health Potion",
+        "description": ""
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Heavy-Frame Wheelchair",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Homing Compasses",
+        "description": "These two compasses point toward each other no matter how far apart they are."
+    },
+    {
+        "type": "item",
+        "name": "Honing Relic",
+        "description": "You gain a +1 bonus to an Experience of your choice. You can only carry one relic."
+    },
+    {
+        "type": "item",
+        "name": "Hopehold Flare",
+        "description": "When you use this flare, allies within Close range roll a d6 when they spend a Hope. On a result of 6, they gain the effect of that Hope without spending it. The flare lasts until the end of the scene."
+    },
+    {
+        "type": "item",
+        "name": "Hopekeeper Locket",
+        "description": "During a long rest, if you have 6 Hope, you can spend a Hope to imbue this locket with your bountiful resolve. When you have 0 Hope, you can use the locket to immediately gain a Hope. The locket must be re-imbued before it can be used this way again."
+    },
+    {
+        "type": "item",
+        "name": "Hotspot",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Ilmari’s Rifle",
+        "description": "Trait: Finesse; Range: Very Far; Damage: d6+6 mag; Burden: One-Handed Feature: Reloading: After you make an attack, roll a d6. On a result of 1, you must mark a Stress to reload this weapon before you can fire it again."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Impact Gauntlet",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+11 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Arcane Gauntlets",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+6 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Arcane Shard",
+        "description": "IMPROVED ARCANE SHARD Improved Arcane Shard IMPROVED ARCANE SHARD"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Arcane-Frame Wheelchair",
+        "properties": {
+            "Range": "Far",
+            "Damage": "d6+3 mag",
+            "Burden": "One-Handed",
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Battleaxe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Broadsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+3 phy",
+            "Burden": "One-Handed",
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Improved Chainmail Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+4 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Cutlass",
+        "description": "Trait: Presence; Range: Melee; Damage: d8+4 phy; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+4 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Dualstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d6+6 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Improved Full Plate Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Improved Gambeson Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Glowing Rings",
+        "properties": {
+            "Trait": "Agility",
+            "Damage": "d10+5 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Improved Grappler",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Close",
+            "Damage": "d6+2 phy",
+            "Burden": "One-Handed",
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Hooked",
+                "Effect": "On a successful attack, you can pull the target into Melee range."
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Greatstaff",
+        "properties": {
+            "Range": "Very Far",
+            "Damage": "d6+3 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Greatsword",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Grindletooth Venom",
+        "description": "IMPROVED GRINDLETOOTH VENOM Improved Grindletooth Venom IMPROVED GRINDLETOOTH VENOM"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Halberd",
+        "properties": {
+            "Trait": "Strength",
+            "Damage": "d10+5 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Hallowed Axe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d8+4 mag",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Improved Hand Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+3 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Hand Runes",
+        "description": "Trait: Instinct; Range: Very Close; Damage: d10+3 mag; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Heavy-Frame Wheelchair",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Improved Leather Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Light-Frame Wheelchair",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+3 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Longbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Very Far",
+            "Damage": "d8+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Longsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d10+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Mace",
+        "description": "Trait: Strength; Range: Melee; Damage: d8+4 phy; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Quarterstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Melee",
+            "Damage": "d10+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Rapier",
+        "description": "Trait: Presence; Range: Melee; Damage: d8+3 phy; Burden: One-Handed Feature: Quick: When you make an attack, you can mark a Stress to target another creature within range."
+    },
+    {
+        "type": "item",
+        "name": "Improved Returning Blade",
+        "description": "IMPROVED RETURNING BLADE Improved Returning Blade IMPROVED RETURNING BLADE"
+    },
+    {
+        "type": "item",
+        "name": "Improved Round Shield",
+        "description": "IMPROVED ROUND SHIELD Improved Round Shield IMPROVED ROUND SHIELD"
+    },
+    {
+        "type": "item",
+        "name": "Improved Scepter",
+        "description": "Trait: Presence; Range: Far; Damage: d6+3 mag; Burden: Two-Handed Feature: Versatile: This weapon can also be used with these statistics—Presence, Melee, d8+3."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Shortbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Far",
+            "Damage": "d6+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Shortstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Close",
+            "Damage": "d8+4 mag",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Shortsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+2 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Small Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+2 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Spear",
+        "properties": {
+            "Trait": "Finesse",
+            "Damage": "d8+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Tower Shield",
+        "description": "IMPROVED TOWER SHIELD Improved Tower Shield IMPROVED TOWER SHIELD"
+    },
+    {
+        "type": "item",
+        "name": "Improved Wand",
+        "description": "Trait: Knowledge; Range: Far; Damage: d6+4 mag; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Improved Warhammer",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+6 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Improved Whip",
+        "description": "Trait: Presence; Range: Very Close; Damage: d6+2 phy; Burden: One-Handed Feature: Startling: Mark a Stress to crack the whip and force all adversaries within Melee range back to Close range."
+    },
+    {
+        "type": "item",
+        "name": "Infinite Bag",
+        "description": "When you store items in this bag, they are kept in a pocket dimension that never runs out of space. You can retrieve an item at any time."
+    },
+    {
+        "type": "item",
+        "name": "Iron Skillet",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "armor",
+        "name": "Irontree Breastplate Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Jar of Lost Voices",
+        "description": "You can open this jar to release a deafening echo of voices for a number of minutes equal to your Instinct. Creatures within Far range unprepared for the sound take 6d8 magic damage."
+    },
+    {
+        "type": "item",
+        "name": "Jumping Root",
+        "description": "Eat this root to leap up to Far range once without needing to roll."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Keeper’s Staff",
+        "properties": {
+            "Range": "Far",
+            "Damage": "d6+4 mag",
+            "Burden": "Two-Handed",
+            "Tier": 2,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Knowledge Stone",
+        "description": "If you die while holding this stone, an ally can take a card from your loadout to place in their loadout or vault. After they take this knowledge, the stone crumbles."
+    },
+    {
+        "type": "item",
+        "name": "Knuckle Blades",
+        "description": "Trait: Strength; Range: Melee; Damage: d10+6 phy; Burden: Two-Handed Feature: Brutal: When you roll the maximum value on a damage die, roll an additional damage die."
+    },
+    {
+        "type": "item",
+        "name": "Knuckle Claws",
+        "description": "Trait: Strength; Range: Melee; Damage: d6+8 phy; Burden: One-Handed Feature: Doubled Up: When you make an attack with your primary weapon, you can deal damage to another target within Melee range."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Labrys Axe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+7 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Lakestrider Boots",
+        "description": "You can walk on the surface of water as if it were soft ground."
+    },
+    {
+        "type": "item",
+        "name": "Large Fork",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Lasso",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Leather Apron",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "armor",
+        "name": "Leather Armor",
+        "properties": {
+            "Base_Score": 3,
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Arcane Gauntlets",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+12 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Arcane-Frame Wheelchair",
+        "properties": {
+            "Range": "Far",
+            "Damage": "d6+9 mag",
+            "Burden": "One-Handed",
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Battleaxe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Broadsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+9 phy",
+            "Burden": "One-Handed",
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Legendary Chainmail Armor",
+        "properties": {
+            "Base_Score": 7,
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+10 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Legendary Cutlass",
+        "description": "Trait: Presence; Range: Melee; Damage: d8+10 phy; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+10 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Dualstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d8+12 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Legendary Full Plate Armor",
+        "properties": {
+            "Base_Score": 7,
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Legendary Gambeson Armor",
+        "properties": {
+            "Base_Score": 6,
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Glowing Rings",
+        "properties": {
+            "Trait": "Agility",
+            "Damage": "d10+11 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Legendary Grappler",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Close",
+            "Damage": "d6+6 phy",
+            "Burden": "One-Handed",
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Hooked",
+                "Effect": "On a successful attack, you can pull the target into Melee range."
+            }
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Greatstaff",
+        "properties": {
+            "Range": "Very Far",
+            "Damage": "d6+9 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Greatsword",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Halberd",
+        "properties": {
+            "Trait": "Strength",
+            "Damage": "d10+11 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Hallowed Axe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d8+10 mag",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "secondary_weapon",
+        "name": "Legendary Hand Crossbow",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Far",
+            "Damage": "d6+7 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Legendary Hand Runes",
+        "description": "Trait: Instinct; Range: Very Close; Damage: d10+9 mag; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Heavy-Frame Wheelchair",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Legendary Leather Armor",
+        "properties": {
+            "Base_Score": 6,
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Light-Frame Wheelchair",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+9 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Longbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Very Far",
+            "Damage": "d8+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Longsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d10+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Legendary Mace",
+        "description": "Trait: Strength; Range: Melee; Damage: d8+10 phy; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Quarterstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Melee",
+            "Damage": "d10+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Legendary Rapier",
+        "description": "Trait: Presence; Range: Melee; Damage: d8+9 phy; Burden: One-Handed Feature: Quick: When you make an attack, you can mark a Stress to target another creature within range."
+    },
+    {
+        "type": "item",
+        "name": "Legendary Returning Blade",
+        "description": "LEGENDARY RETURNING BLADE Legendary Returning Blade LEGENDARY RETURNING BLADE"
+    },
+    {
+        "type": "item",
+        "name": "Legendary Round Shield",
+        "description": "LEGENDARY ROUND SHIELD Legendary Round Shield LEGENDARY ROUND SHIELD"
+    },
+    {
+        "type": "item",
+        "name": "Legendary Scepter",
+        "description": "Trait: Presence; Range: Far; Damage: d6+9 mag; Burden: Two-Handed Feature: Versatile: This weapon can also be used with these statistics—Presence, Melee, d8+6."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Shortbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Far",
+            "Damage": "d6+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Shortstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Close",
+            "Damage": "d8+10 mag",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Shortsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d8+6 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Small Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+6 phy",
+            "Burden": "One-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Spear",
+        "properties": {
+            "Trait": "Finesse",
+            "Damage": "d8+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Legendary Tower Shield",
+        "description": "LEGENDARY TOWER SHIELD Legendary Tower Shield LEGENDARY TOWER SHIELD"
+    },
+    {
+        "type": "item",
+        "name": "Legendary Wand",
+        "description": "Trait: Knowledge; Range: Far; Damage: d6+10 mag; Burden: One-Handed"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Legendary Warhammer",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+12 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Heavy",
+                "Effect": "−1 to Evasion"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Legendary Whip",
+        "description": "Trait: Presence; Range: Very Close; Damage: d6+6 phy; Burden: One-Handed Feature: Startling: Mark a Stress to crack the whip and force all adversaries within Melee range back to Close range."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Light-Frame Wheelchair",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Longbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Very Far",
+            "Damage": "d8+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Longsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Damage": "d10+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Lorekeeper",
+        "description": "You can store the name and details of up to three hostile creatures inside this book. You gain a +1 bonus to action rolls against those creatures."
+    },
+    {
+        "type": "item",
+        "name": "Mace",
+        "description": "Trait: Strength; Range: Melee; Damage: d8+1 phy; Burden: One-Handed"
+    },
+    {
+        "type": "item",
+        "name": "Mage Orb",
+        "description": "Trait: Knowledge; Range: Far; Damage: d6+7 mag; Burden: One-Handed Feature: Powerful: On a successful attack, roll an additional damage die and discard the lowest result."
+    },
+    {
+        "type": "item",
+        "name": "Magus Revolver",
+        "description": "Trait: Finesse; Range: Very Far; Damage: d6+13 mag; Burden: One-Handed Feature: Reloading: After you make an attack, roll a d6. On a result of 1, you must mark a Stress to reload this weapon before you can fire it again."
+    },
+    {
+        "type": "item",
+        "name": "Major Arcane Shard",
+        "description": "You can make a Finesse Roll to throw this shard at a group of adversaries within Far range. Targets you succeed against take 4d20 magic damage."
+    },
+    {
+        "type": "consumable",
+        "name": "Major Attune Potion",
+        "description": "You gain a +1 bonus to your Instinct until your next rest."
+    },
+    {
+        "type": "consumable",
+        "name": "Major Bolster Potion",
+        "description": "You gain a +1 bonus to your Strength until your next rest."
+    },
+    {
+        "type": "consumable",
+        "name": "Major Charm Potion",
+        "description": "You gain a +1 bonus to your Presence until your next rest."
+    },
+    {
+        "type": "consumable",
+        "name": "Major Control Potion",
+        "description": "You gain a +1 bonus to your Finesse until your next rest."
+    },
+    {
+        "type": "consumable",
+        "name": "Major Enlighten Potion",
+        "description": "MAJOR ENLIGHTEN POTION Major Enlighten Potion MAJOR ENLIGHTEN POTION"
+    },
+    {
+        "type": "consumable",
+        "name": "Major Health Potion",
+        "description": ""
+    },
+    {
+        "type": "consumable",
+        "name": "Major Stamina Potion",
+        "description": ""
+    },
+    {
+        "type": "consumable",
+        "name": "Major Stride Potion",
+        "description": "You gain a +1 bonus to your Agility until your next rest. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Manacles",
+        "description": "This pair of locking cuffs comes with a key."
+    },
+    {
+        "type": "item",
+        "name": "Meridian Cutlass",
+        "description": "Trait: Presence; Range: Melee; Damage: d10+5 phy; Burden: One-Handed Feature: Dueling: When there are no other creatures within Close range of the target, gain advantage on your attack roll against them."
+    },
+    {
+        "type": "item",
+        "name": "Midas Scythe",
+        "description": "Trait: Knowledge; Range: Melee; Damage: d10+9 mag; Burden: Two-Handed Feature: Greedy: Spend a handful of gold to gain a +1 bonus to your Proficiency on a damage roll."
+    },
+    {
+        "type": "consumable",
+        "name": "Minor Health Potion",
+        "description": ""
+    },
+    {
+        "type": "consumable",
+        "name": "Minor Health Potion Recipe",
+        "description": "MINOR HEALTH POTION RECIPE Minor Health Potion Recipe MINOR HEALTH POTION RECIPE"
+    },
+    {
+        "type": "consumable",
+        "name": "Minor Stamina Potion",
+        "description": ""
+    },
+    {
+        "type": "consumable",
+        "name": "Minor Stamina Potion Recipe",
+        "description": "MINOR STAMINA POTION RECIPE Minor Stamina Potion Recipe MINOR STAMINA POTION RECIPE"
+    },
+    {
+        "type": "item",
+        "name": "Mirror of Marigold",
+        "description": "When you take damage, you can spend a Hope to negate that damage, after which the mirror shatters."
+    },
+    {
+        "type": "item",
+        "name": "Monett’s Cloak",
+        "description": "Base Thresholds: 16 / 39; Base Score: 6 Feature: Magic: You can’t mark an Armor Slot to reduce physical damage."
+    },
+    {
+        "type": "item",
+        "name": "Morphing Clay",
+        "description": "You can spend a Hope to use this clay, altering your face enough to make you unrecognizable until your next rest."
+    },
+    {
+        "type": "item",
+        "name": "Mythic Dust",
+        "description": "You can apply this dust to a weapon that deals magic damage to add a d12 to your next damage roll with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Mythic Dust Recipe",
+        "description": "As a downtime move, you can use a handful of fine gold dust to craft Mythic Dust."
+    },
+    {
+        "type": "item",
+        "name": "Network Tether",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Ogre Musk",
+        "description": "You can use this musk to prevent anyone from tracking you by mundane or magical means until your next rest."
+    },
+    {
+        "type": "item",
+        "name": "Paragon’s Chain",
+        "description": "As a downtime move, you can meditate on an ideal or principle you hold dear and focus your will into this chain. Once per long rest, you can spend a Hope to roll a d20 as your Hope Die for rolls that directly align with that principle."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Paring Knife",
+        "properties": {}
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Parrying Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d6+2 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Phoenix Feather",
+        "description": "If you have at least one Phoenix Feather on you when you fall unconscious, you gain a +1 bonus to the roll you make to determine whether you gain a scar."
+    },
+    {
+        "type": "item",
+        "name": "Piercing Arrows",
+        "description": "Three times per rest when you succeed on an attack with one of these arrows, you can add your Proficiency to the damage roll."
+    },
+    {
+        "type": "item",
+        "name": "Piper Whistle",
+        "description": "This handcrafted whistle has a distinctive sound. When you blow this whistle, its piercing tone can be heard within a 1-mile radius."
+    },
+    {
+        "type": "item",
+        "name": "Pitchfork",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Portal Seed",
+        "description": "You can plant this seed in the ground to grow a portal in that spot. The portal is ready to use in 24 hours. You can use this portal to travel to any other location where you planted a portal seed. A portal can be destroyed by dealing any amount of magic damage to it."
+    },
+    {
+        "type": "consumable",
+        "name": "Potion of Stability",
+        "description": "You can drink this potion to choose one additional downtime move."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Powered Gauntlet",
+        "properties": {
+            "Range": "Close",
+            "Damage": "d6+4 phy",
+            "Burden": "One-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Premium Bedroll",
+        "description": "During downtime, you automatically clear a Stress."
+    },
+    {
+        "type": "item",
+        "name": "Primer Shard",
+        "description": "Trait: Instinct; Range: Very Close; Damage: d4 phy; Burden: One-Handed Feature: Locked On: On a successful attack, your next attack against the same target with your primary weapon automatically succeeds."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Quarterstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Melee",
+            "Damage": "d10+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Quilted Clothing",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "item",
+        "name": "Rapier",
+        "description": "Trait: Presence; Range: Melee; Damage: d8 phy; Burden: One-Handed Feature: Quick: When you make an attack, you can mark a Stress to target another creature within range."
+    },
+    {
+        "type": "item",
+        "name": "Redthorn Saliva",
+        "description": "You can apply this saliva to a weapon that deals physical damage to add a d12 to your next damage roll with that weapon."
+    },
+    {
+        "type": "item",
+        "name": "Replication Parchment",
+        "description": "REPLICATION PARCHMENT Replication Parchment REPLICATION PARCHMENT"
+    },
+    {
+        "type": "item",
+        "name": "Retractable Saber",
+        "description": "Trait: Presence; Range: Melee; Damage: d10+7 phy; Burden: One-Handed Feature: Retractable: The blade can be hidden in the hilt to avoid detection. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Returning Axe",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Close",
+            "Damage": "d6+4 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Returning Blade",
+        "description": "Trait: Finesse; Range: Close; Damage: d8 mag; Burden: One-Handed Feature: Returning: When this weapon is thrown within its range, it appears in your hand immediately after the attack."
+    },
+    {
+        "type": "item",
+        "name": "Revolver",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Ricochet Axes",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Far",
+            "Damage": "d6+11 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Rifle",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Ring of Resistance",
+        "properties": {}
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Ring of Silence",
+        "properties": {}
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Ring of Unbreakable Resolve",
+        "properties": {}
+    },
+    {
+        "type": "item",
+        "name": "Rolling Pin",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART."
+    },
+    {
+        "type": "armor",
+        "name": "Rosewild Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Round Shield",
+        "description": "Trait: Strength; Range: Melee; Damage: d4 phy; Burden: One-Handed Feature: Protective: +1 to Armor Score This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Runes of Fortification",
+        "description": "RUNES OF FORTIFICATION Runes of Fortification RUNES OF FORTIFICATION"
+    },
+    {
+        "type": "item",
+        "name": "Runes of Ruination",
+        "description": "Trait: Knowledge; Range: Very Close; Damage: d20+4 mag; Burden: One-Handed Feature: Painful: Each time you make a successful attack, you must mark a Stress. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "armor",
+        "name": "Runetan Floating Armor",
+        "properties": {
+            "Base_Score": 4,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Savior Chainmail",
+        "properties": {
+            "Base_Score": 8,
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Scepter",
+        "description": "Trait: Presence; Range: Far; Damage: d6 mag; Burden: Two-Handed Feature: Versatile: This weapon can also be used with these statistics—Presence, Melee, d8. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Scepter of Elias",
+        "description": "Trait: Presence; Range: Far; Damage: d6+3 mag; Burden: One-Handed Feature: Invigorating: On a successful attack, roll a d4. On a result of 4, clear a Stress. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Shard of Memory",
+        "description": "Once per long rest, you can spend 2 Hope to recall a domain card from your vault instead of paying its Recall Cost. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Sharpened Rake",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Shortbow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Far",
+            "Damage": "d6+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Shortstaff",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Close",
+            "Damage": "d8+1 mag",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Shortsword",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Melee",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Shotgun",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "consumable",
+        "name": "Shrinking Potion",
+        "description": "You can drink this potion to halve your size until you choose to drop this form or your next rest. While in this form, you have a +2 bonus to Agility and a −1 penalty to your Proficiency. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Sickle",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Siphoning Gauntlets",
+        "properties": {
+            "Range": "Melee",
+            "Damage": "d10+9 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Skeleton Key",
+        "description": "When you use this key to open a locked door, you gain advantage on the Finesse Roll. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Sledge Axe",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d12+13 phy",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Sledgehammer",
+        "properties": {}
+    },
+    {
+        "type": "item",
+        "name": "Sleeping Sap",
+        "description": "You can drink this potion to fall asleep for a full night’s rest. You clear all Stress upon waking. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Slingshot",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Small Dagger",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Burden": "One-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "item",
+        "name": "Small Revolver",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Snap Powder",
+        "description": "Mark a Stress and clear a HP. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Sparkling Staff",
+        "properties": {}
+    },
+    {
+        "type": "item",
+        "name": "Speaking Orbs",
+        "description": "This pair of orbs allows any creatures holding them to communicate with each other across any distance. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Spear",
+        "properties": {
+            "Trait": "Finesse",
+            "Damage": "d8+3 phy",
+            "Burden": "Two-Handed",
+            "Tier": 1
+        }
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Spiked Bow",
+        "properties": {
+            "Trait": "Agility",
+            "Range": "Very Far",
+            "Damage": "d6+7 phy",
+            "Burden": "Two-Handed",
+            "Tier": 3
+        }
+    },
+    {
+        "type": "armor",
+        "name": "Spiked Plate Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 3
+        }
+    },
+    {
+        "type": "item",
+        "name": "Spiked Shield",
+        "description": "Trait: Strength; Range: Melee; Damage: d6+2 phy; Burden: One-Handed Feature: Double Duty: +1 to Armor Score; +1 to primary weapon damage within Melee range This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "consumable",
+        "name": "Stamina Potion",
+        "description": "This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Stardrop",
+        "description": "You can use this stardrop to summon a hailstorm of comets that deals 8d20 physical damage to all targets within Very Far range. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Steelforged Halberd",
+        "properties": {
+            "Trait": "Strength",
+            "Damage": "d8+4 phy",
+            "Burden": "Two-Handed",
+            "Tier": 2
+        }
+    },
+    {
+        "type": "consumable",
+        "name": "Stride Potion",
+        "description": "You gain a +1 bonus to your next Agility Roll. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Stride Relic",
+        "description": "You gain a +1 bonus to your Agility. You can only carry one relic. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Sun Tree Sap",
+        "description": "Consume this sap to roll a d6. On a result of 5–6, clear 2 HP. On a result of 2–4, clear 3 Stress. On a result of 1, see through the veil of death and return changed, gaining one scar. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Suspended Rod",
+        "description": "This flat rod is inscribed with runes. When you activate the rod, it is immediately suspended in place. Until the rod is deactivated, it can’t move, doesn’t abide by the rules of gravity, and remains in place. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Sweet Moss",
+        "description": "You can consume this moss during a rest to clear 1d10 HP or 1d10 Stress. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Swinging Ropeblade",
+        "description": "Trait: Presence; Range: Close; Damage: d8+9 phy; Burden: Two-Handed Feature: Grappling: On a successful attack, you can spend a Hope to Restrain the target or pull them into Melee range with you. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Sword of Light & Flame",
+        "properties": {
+            "Trait": "Strength",
+            "Range": "Melee",
+            "Damage": "d10+11 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4
+        }
+    },
+    {
+        "type": "item",
+        "name": "Table Shield",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Talon Blades",
+        "description": "Trait: Finesse; Range: Close; Damage: d10+7 phy; Burden: Two-Handed Feature: Brutal: When you roll the maximum value on a damage die, roll an additional damage die. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Thistlebow",
+        "properties": {
+            "Trait": "Instinct",
+            "Range": "Far",
+            "Damage": "d6+13 mag",
+            "Burden": "Two-Handed",
+            "Tier": 4,
+            "Feature": {
+                "Feature_Name": "Reliable",
+                "Effect": "+1 to attack rolls"
+            }
+        }
+    },
+    {
+        "type": "item",
+        "name": "Tower Shield",
+        "description": "Trait: Strength; Range: Melee; Damage: d6 phy; Burden: One-Handed Feature: Barrier: +2 to Armor Score; −1 to Evasion This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "item",
+        "name": "Towline Hook",
+        "description": "CREATE AN ACCOUNT OR SIGN IN TO EXPLORE THE WORLD OF DAGGERHEART. This service utilizes reCAPTCHA. Google's Privacy Policy and Terms of Service apply to that usage."
+    },
+    {
+        "type": "armor",
+        "name": "Tree Bark Armor",
+        "properties": {}
+    },
+    {
+        "type": "armor",
+        "name": "Tyris Soft Armor",
+        "properties": {
+            "Base_Score": 5,
+            "Tier": 2
+        }
+    },
+    {
+        "type": "item",
+        "name": "Unstable Arcane Shard",
+        "description": "UNSTABLE ARCANE SHARD Unstable Arcane Shard UNSTABLE ARCANE SHARD"
+    },
+    {
+        "type": "primary_weapon",
+        "name": "Urok Broadsword",
+        "properties": {
+            "Trait": "Finesse",
+            "Range": "Melee",
+            "Damage": "d8+3 phy",
+            "Burden": "One-Handed",
+            "Tier": 2
+        }
+    }
+]
