@@ -15,7 +15,7 @@ interface GameSessionProps {
 
 export default function GameSession({ 
   isGuest = false, 
-  onLogout,
+  onLogout = () => {},
   totalChapters = 10 
 }: GameSessionProps) {
   const [gameState, setGameState] = useState<any>(null);
