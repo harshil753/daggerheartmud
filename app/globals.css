@@ -24,3 +24,818 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Terminal Styling */
+.terminal-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.terminal {
+  width: 100%;
+  height: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.terminal-status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+}
+
+.status-indicator {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-indicator.connected {
+  background: #00ff00;
+  color: #000;
+}
+
+.status-indicator.disconnected {
+  background: #ff0000;
+  color: #fff;
+}
+
+/* Game Session Styling */
+.game-session {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #2a2a2a;
+  border-bottom: 1px solid #333;
+}
+
+.game-title h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.game-status {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.guest-badge {
+  background: #ff6b35;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.connection-status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.connection-status.connected {
+  background: #00ff00;
+  color: #000;
+}
+
+.connection-status.disconnected {
+  background: #ff0000;
+  color: #fff;
+}
+
+.game-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.panel-button {
+  padding: 0.5rem 1rem;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.panel-button:hover {
+  background: #444;
+}
+
+.panel-button.active {
+  background: #007acc;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  background: #ff4444;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logout-button:hover {
+  background: #ff6666;
+}
+
+.game-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.game-panels {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.terminal-panel {
+  flex: 1;
+  padding: 1rem;
+  background: #0a0a0a;
+}
+
+.inventory-panel {
+  flex: 1;
+  padding: 1rem;
+  background: #1a1a1a;
+  overflow-y: auto;
+}
+
+.stats-panel {
+  flex: 1;
+  padding: 1rem;
+  background: #1a1a1a;
+  overflow-y: auto;
+}
+
+.game-sidebar {
+  width: 300px;
+  background: #2a2a2a;
+  border-left: 1px solid #333;
+  overflow-y: auto;
+}
+
+.game-footer {
+  padding: 0.5rem 1rem;
+  background: #2a2a2a;
+  border-top: 1px solid #333;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Game Controls Styling */
+.game-controls {
+  padding: 1rem;
+}
+
+.controls-section h3,
+.character-stats h3,
+.help-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dice-button,
+.save-button,
+.rest-button {
+  padding: 0.75rem;
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.dice-button:hover,
+.save-button:hover,
+.rest-button:hover {
+  background: #005a99;
+}
+
+.dice-result {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.dice-label {
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.dice-value {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.dice-value.positive {
+  color: #00ff00;
+}
+
+.dice-value.negative {
+  color: #ff0000;
+}
+
+.character-stats {
+  margin-bottom: 1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #333;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.stat-value {
+  font-weight: bold;
+  color: #fff;
+}
+
+.help-section {
+  margin-top: 1rem;
+}
+
+.help-commands {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.command-item {
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.command-item code {
+  background: #333;
+  padding: 0.125rem 0.25rem;
+  border-radius: 2px;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+}
+
+/* Inventory Panel Styling */
+.inventory-panel {
+  padding: 1rem;
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.inventory-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.item-count {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.equipped-items {
+  margin-bottom: 1.5rem;
+}
+
+.equipped-items h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.equipment-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.equipment-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.slot-label {
+  font-size: 0.875rem;
+  color: #ccc;
+  min-width: 120px;
+}
+
+.slot-item {
+  flex: 1;
+  font-weight: bold;
+  color: #fff;
+}
+
+.unequip-button {
+  padding: 0.25rem 0.5rem;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.unequip-button:hover {
+  background: #ff6666;
+}
+
+.inventory-items h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.empty-inventory {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.inventory-item {
+  padding: 0.75rem;
+  background: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.inventory-item:hover {
+  background: #444;
+}
+
+.inventory-item.selected {
+  background: #007acc;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item-name {
+  font-weight: bold;
+  color: #fff;
+}
+
+.item-type {
+  font-size: 0.875rem;
+  color: #888;
+  text-transform: capitalize;
+}
+
+.item-quantity {
+  font-size: 0.875rem;
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.item-details {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #555;
+}
+
+.item-description {
+  font-size: 0.875rem;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.item-properties {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.property {
+  font-size: 0.75rem;
+  color: #888;
+  font-family: 'Courier New', monospace;
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.equip-button,
+.use-button {
+  padding: 0.25rem 0.5rem;
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.equip-button:hover,
+.use-button:hover {
+  background: #005a99;
+}
+
+/* Stats Panel Styling */
+.stats-panel {
+  padding: 1rem;
+}
+
+.no-character {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.character-header {
+  margin-bottom: 1.5rem;
+}
+
+.character-header h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.character-basics {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.ancestry,
+.class,
+.level {
+  padding: 0.25rem 0.5rem;
+  background: #333;
+  border-radius: 2px;
+}
+
+.health-section,
+.traits-section,
+.equipment-section,
+.campaign-section,
+.combat-section {
+  margin-bottom: 1.5rem;
+}
+
+.health-section h4,
+.traits-section h4,
+.equipment-section h4,
+.campaign-section h4,
+.combat-section h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.health-bar,
+.stress-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.health-label,
+.stress-label {
+  font-size: 0.875rem;
+  color: #ccc;
+  min-width: 60px;
+}
+
+.health-value,
+.stress-value {
+  font-weight: bold;
+  color: #fff;
+}
+
+.health-percentage,
+.stress-percentage {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.tokens {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.hope-tokens,
+.fear-tokens {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.token-label {
+  color: #ccc;
+}
+
+.token-value {
+  font-weight: bold;
+  color: #fff;
+}
+
+.traits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.trait-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.trait-name {
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.trait-value {
+  font-weight: bold;
+  color: #fff;
+}
+
+.equipment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.equipment-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.equipment-label {
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.equipment-value {
+  font-weight: bold;
+  color: #fff;
+}
+
+.campaign-info {
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.campaign-title {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.campaign-progress {
+  font-size: 0.875rem;
+  color: #ccc;
+  margin-bottom: 0.25rem;
+}
+
+.campaign-length {
+  font-size: 0.875rem;
+  color: #888;
+  text-transform: capitalize;
+}
+
+.combat-info {
+  padding: 0.5rem;
+  background: #ff4444;
+  border-radius: 4px;
+}
+
+.combat-status {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.combat-round {
+  font-size: 0.875rem;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.combat-initiative {
+  font-size: 0.875rem;
+  color: #fff;
+}
+
+/* Guest Session Styling */
+.guest-session-container {
+  padding: 1rem;
+  background: #2a2a2a;
+  border-bottom: 1px solid #333;
+}
+
+.guest-session {
+  padding: 1rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.guest-header h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.session-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.guest-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: #ff6b35;
+  border-radius: 4px;
+}
+
+.warning-icon {
+  font-size: 1.25rem;
+}
+
+.warning-text {
+  font-size: 0.875rem;
+  color: #fff;
+}
+
+.guest-actions {
+  margin-top: 1rem;
+}
+
+.end-session-button {
+  padding: 0.5rem 1rem;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.end-session-button:hover {
+  background: #ff6666;
+}
+
+.guest-session-setup {
+  padding: 1rem;
+  background: #333;
+  border-radius: 4px;
+}
+
+.guest-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.guest-info p {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.guest-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #ccc;
+}
+
+.feature-icon {
+  font-size: 1rem;
+}
+
+.start-guest-button {
+  padding: 0.75rem 1.5rem;
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.start-guest-button:hover:not(:disabled) {
+  background: #005a99;
+}
+
+.start-guest-button:disabled {
+  background: #666;
+  cursor: not-allowed;
+}

@@ -1,31 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GameSession from './components/GameSession';
-import GuestModeModal from './components/GuestModeModal';
 
 type GameMode = 'login' | 'guest' | 'playing';
 
 export default function Home() {
   const [gameMode, setGameMode] = useState<GameMode>('login');
-  const [showGuestModal, setShowGuestModal] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
+
+  useEffect(() => {
+    // Check for existing guest session
+    const guestSession = sessionStorage.getItem('daggerheart_guest_game');
+    if (guestSession) {
+      setGameMode('playing');
+      setIsGuest(true);
+    }
+  }, []);
 
   const handleGuestMode = () => {
-    setShowGuestModal(true);
-  };
-
-  const confirmGuestMode = () => {
+    setIsGuest(true);
     setGameMode('playing');
-    setShowGuestModal(false);
   };
 
   const handleLogin = () => {
     // TODO: Implement actual login functionality
+    setIsGuest(false);
     setGameMode('playing');
   };
 
   const handleLogout = () => {
     setGameMode('login');
+    setIsGuest(false);
     // Clear guest session data
     sessionStorage.removeItem('daggerheart_guest_game');
   };
@@ -33,7 +39,7 @@ export default function Home() {
   if (gameMode === 'playing') {
     return (
       <GameSession 
-        isGuest={gameMode === 'playing' && sessionStorage.getItem('daggerheart_guest_game') !== null}
+        isGuest={isGuest}
         onLogout={handleLogout}
         totalChapters={10}
       />
@@ -89,12 +95,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <GuestModeModal
-        isOpen={showGuestModal}
-        onClose={() => setShowGuestModal(false)}
-        onConfirm={confirmGuestMode}
-      />
     </div>
   );
 }
