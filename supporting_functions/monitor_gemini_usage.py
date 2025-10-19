@@ -362,12 +362,15 @@ def main():
     print(f"🔑 API Key: {'*' * 10 if api_key else 'NOT FOUND'}")
     print(f"🔐 Credentials: {credentials_path if credentials_path else 'NOT SET'}")
     
-    # Check for Google Cloud credentials file
+    # Check for Google Cloud credentials - try multiple methods
+    credentials_found = False
+    
     if credentials_path:
         # Convert relative path to absolute path
         if not os.path.isabs(credentials_path):
-            # If it's a relative path, make it relative to the current working directory
-            credentials_path = os.path.join(os.getcwd(), credentials_path)
+            # If it's a relative path, make it relative to the project root (not current working directory)
+            project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            credentials_path = os.path.join(project_root, credentials_path)
         
         # Normalize the path to handle any .. or . components
         credentials_path = os.path.normpath(credentials_path)
@@ -376,6 +379,7 @@ def main():
             print(f"✅ Google Cloud credentials file found: {credentials_path}")
             # Set the environment variable to the absolute path for Google Cloud libraries
             os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+            credentials_found = True
         else:
             print(f"⚠️  Credentials file not found at: {credentials_path}")
             print(f"   Looking for: {os.path.abspath(credentials_path)}")
@@ -384,16 +388,79 @@ def main():
     else:
         print("⚠️  GOOGLE_APPLICATION_CREDENTIALS not set in .env file")
     
+    # Try alternative authentication methods
+    if not credentials_found:
+        print("🔄 Trying alternative authentication methods...")
+        
+        # Check if we have service account key as environment variables
+        service_account_email = os.getenv('GOOGLE_SERVICE_ACCOUNT_EMAIL')
+        private_key = os.getenv('GOOGLE_PRIVATE_KEY')
+        
+        if service_account_email and private_key:
+            print("✅ Found service account credentials in environment variables")
+            # Create temporary credentials file
+            temp_credentials = {
+                "type": "service_account",
+                "project_id": project_id,
+                "private_key_id": os.getenv('GOOGLE_PRIVATE_KEY_ID', ''),
+                "private_key": private_key,
+                "client_email": service_account_email,
+                "client_id": os.getenv('GOOGLE_CLIENT_ID', ''),
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                "universe_domain": "googleapis.com"
+            }
+            
+            # Create temporary credentials file
+            import tempfile
+            temp_file = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
+            json.dump(temp_credentials, temp_file)
+            temp_file.close()
+            
+            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.name
+            credentials_found = True
+            print(f"✅ Created temporary credentials file: {temp_file.name}")
+        else:
+            print("⚠️  No service account credentials found in environment variables")
+            print("💡 You can set these environment variables instead of using a JSON file:")
+            print("   GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com")
+            print("   GOOGLE_PRIVATE_KEY=your-private-key")
+            print("   GOOGLE_PRIVATE_KEY_ID=your-private-key-id")
+            print("   GOOGLE_CLIENT_ID=your-client-id")
+    
     if not project_id or not api_key:
         print("❌ Project ID and API Key are required!")
         print("💡 Make sure your backend/.env file contains:")
         print("   GOOGLE_CLOUD_PROJECT=your_actual_project_id")
         print("   GEMINI_API_KEY=your_gemini_api_key_here")
-        print("   GOOGLE_APPLICATION_CREDENTIALS=../supporting_functions/credentials/gemini-monitoring-key.json")
-        print("\n📝 Example .env file format:")
-        print("   GOOGLE_CLOUD_PROJECT=daggerheartmud")
-        print("   GEMINI_API_KEY=your_actual_api_key")
-        print("   GOOGLE_APPLICATION_CREDENTIALS=../supporting_functions/credentials/gemini-monitoring-key.json")
+        print("\n📝 For Google Cloud authentication, you have two options:")
+        print("\n   Option 1: Use a credentials JSON file")
+        print("   GOOGLE_APPLICATION_CREDENTIALS=path/to/your/credentials.json")
+        print("\n   Option 2: Use environment variables (recommended for security)")
+        print("   GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com")
+        print("   GOOGLE_PRIVATE_KEY=your-private-key")
+        print("   GOOGLE_PRIVATE_KEY_ID=your-private-key-id")
+        print("   GOOGLE_CLIENT_ID=your-client-id")
+        sys.exit(1)
+    
+    # Check if we have valid credentials before proceeding
+    if not credentials_found:
+        print("❌ No valid Google Cloud credentials found!")
+        print("\n💡 To fix this, you need to set up authentication:")
+        print("\n   Method 1: Create a service account and download the JSON key")
+        print("   1. Go to Google Cloud Console > IAM & Admin > Service Accounts")
+        print("   2. Create a new service account with 'Monitoring Viewer' role")
+        print("   3. Download the JSON key file")
+        print("   4. Set GOOGLE_APPLICATION_CREDENTIALS=path/to/your/key.json in backend/.env")
+        print("\n   Method 2: Use environment variables (more secure)")
+        print("   1. Create a service account as above")
+        print("   2. Extract the values from the JSON key file")
+        print("   3. Set these environment variables in backend/.env:")
+        print("      GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com")
+        print("      GOOGLE_PRIVATE_KEY=your-private-key")
+        print("      GOOGLE_PRIVATE_KEY_ID=your-private-key-id")
+        print("      GOOGLE_CLIENT_ID=your-client-id")
         sys.exit(1)
     
     # Create monitor instance
