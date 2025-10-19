@@ -1,4 +1,4 @@
-const { model } = require('../config/gemini');
+const { model, imageModel } = require('../config/gemini');
 const { getFullContext } = require('../utils/geminiContext');
 
 /**
@@ -233,6 +233,36 @@ class DungeonMaster {
     } catch (error) {
       console.error('Campaign generation error:', error);
       return { error: 'Failed to generate campaign' };
+    }
+  }
+
+  /**
+   * Generate image based on description
+   */
+  async generateImage(imageDescription, imageType = 'ITEM') {
+    try {
+      const prompt = `Create a fantasy ${imageType.toLowerCase()} image: ${imageDescription}. ` +
+        `Style: Detailed fantasy artwork, suitable for a tabletop RPG game. ` +
+        `Quality: High resolution, professional illustration style.`;
+
+      const result = await imageModel.generateContent(prompt);
+      const response = await result.response;
+      
+      // Return the generated image data
+      return {
+        success: true,
+        imageData: response.text(), // This will contain the image generation result
+        type: imageType,
+        description: imageDescription
+      };
+    } catch (error) {
+      console.error('Image generation error:', error);
+      return {
+        success: false,
+        error: 'Failed to generate image',
+        type: imageType,
+        description: imageDescription
+      };
     }
   }
 }

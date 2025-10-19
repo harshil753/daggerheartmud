@@ -8,8 +8,10 @@ if (!apiKey) {
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(apiKey);
+
+// Dungeon Master model for text generation
 const model = genAI.getGenerativeModel({ 
-  model: "gemini-2.0-flash-exp",
+  model: "gemini-2.5-flash",
   generationConfig: {
     temperature: 0.8,
     topK: 40,
@@ -18,4 +20,15 @@ const model = genAI.getGenerativeModel({
   }
 });
 
-module.exports = { genAI, model };
+// Image generation model for visual content
+const imageModel = genAI.getGenerativeModel({ 
+  model: "gemini-2.5-flash-image",
+  generationConfig: {
+    temperature: 0.7,
+    topK: 32,
+    topP: 0.9,
+    maxOutputTokens: 1024,
+  }
+});
+
+module.exports = { genAI, model, imageModel };
