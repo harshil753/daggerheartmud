@@ -125,7 +125,6 @@ class DungeonMaster {
     }
 
     // Add conversation history for context
-    const history = gameState.aiContext?.conversationHistory || [];
     if (history.length > 0) {
       prompt += `RECENT CONVERSATION:\n`;
       history.slice(-10).forEach(entry => {
