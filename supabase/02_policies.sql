@@ -1,5 +1,5 @@
 -- Row-Level Security (RLS) Policies for Daggerheart MUD
--- Configured for guest mode and authenticated users
+-- Run this AFTER 01_setup.sql
 
 -- Enable RLS on all tables
 ALTER TABLE characters ENABLE ROW LEVEL SECURITY;
@@ -204,6 +204,3 @@ CREATE POLICY "Guests can create temporary characters" ON characters
 
 CREATE POLICY "Guests can create temporary campaigns" ON campaigns
     FOR INSERT WITH CHECK (creator_user_id IS NULL);
-
--- Note: Guest mode will use sessionStorage for temporary data
--- and will not persist to database until user creates account

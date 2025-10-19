@@ -1,5 +1,5 @@
 -- Seed data for Daggerheart MUD
--- Equipment data from web scraper
+-- Run this AFTER 02_policies.sql
 
 -- Insert equipment items from scraped data
 INSERT INTO items (name, type, description, properties, source) VALUES

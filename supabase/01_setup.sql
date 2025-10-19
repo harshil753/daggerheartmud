@@ -1,8 +1,26 @@
--- Daggerheart MUD Database Schema
--- Complete schema for single-player MUD with AI Dungeon Master
+-- Daggerheart MUD Database Setup
+-- Run this script first to create all tables
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Items table (equipment database) - CREATE FIRST to avoid circular references
+CREATE TABLE items (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  
+  -- Item Details
+  name TEXT NOT NULL,
+  type TEXT NOT NULL, -- 'armor', 'primary_weapon', 'secondary_weapon', 'consumable', 'item'
+  description TEXT,
+  
+  -- Properties (stored as JSONB for flexibility)
+  properties JSONB, -- Contains stats like damage, range, tier, etc.
+  
+  -- Source
+  source TEXT DEFAULT 'game', -- 'game', 'scraped', 'custom'
+  
+  created_at TIMESTAMP DEFAULT NOW()
+);
 
 -- Characters table (core player data)
 CREATE TABLE characters (
@@ -99,24 +117,6 @@ CREATE TABLE campaign_state (
   world_state JSONB, -- NPC relationships, completed quests, world changes
   
   updated_at TIMESTAMP DEFAULT NOW()
-);
-
--- Items table (equipment database)
-CREATE TABLE items (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  
-  -- Item Details
-  name TEXT NOT NULL,
-  type TEXT NOT NULL, -- 'armor', 'primary_weapon', 'secondary_weapon', 'consumable', 'item'
-  description TEXT,
-  
-  -- Properties (stored as JSONB for flexibility)
-  properties JSONB, -- Contains stats like damage, range, tier, etc.
-  
-  -- Source
-  source TEXT DEFAULT 'game', -- 'game', 'scraped', 'custom'
-  
-  created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- Character inventory
