@@ -124,6 +124,7 @@ export default function GameSession({
               <Terminal 
                 onGameStateChange={handleGameStateChange}
                 isGuest={isGuest}
+                onLogout={onLogout}
               />
             </div>
           )}
