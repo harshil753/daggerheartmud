@@ -114,32 +114,32 @@ class CommandParser {
   }
 
   async handleEquip(args, gameState, aiService) {
-    const itemName = args.join(' ');
+    const itemName = Array.isArray(args) ? args.join(' ') : args || '';
     return await aiService.processCommand('equip', [itemName], gameState);
   }
 
   async handleUnequip(args, gameState, aiService) {
-    const slot = args[0] || 'all';
+    const slot = Array.isArray(args) ? args[0] || 'all' : args || 'all';
     return await aiService.processCommand('unequip', [slot], gameState);
   }
 
   async handleUse(args, gameState, aiService) {
-    const itemName = args.join(' ');
+    const itemName = Array.isArray(args) ? args.join(' ') : args || '';
     return await aiService.processCommand('use', [itemName], gameState);
   }
 
   async handleAttack(args, gameState, aiService) {
-    const target = args.join(' ');
+    const target = Array.isArray(args) ? args.join(' ') : args || '';
     return await aiService.processCommand('attack', [target], gameState);
   }
 
   async handleCast(args, gameState, aiService) {
-    const spell = args.join(' ');
+    const spell = Array.isArray(args) ? args.join(' ') : args || '';
     return await aiService.processCommand('cast', [spell], gameState);
   }
 
   async handleTalk(args, gameState, aiService) {
-    const npc = args.join(' ');
+    const npc = Array.isArray(args) ? args.join(' ') : args || '';
     return await aiService.processCommand('talk', [npc], gameState);
   }
 

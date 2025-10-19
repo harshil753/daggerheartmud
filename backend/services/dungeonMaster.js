@@ -189,7 +189,7 @@ class DungeonMaster {
     // Add player command
     history.push({
       role: 'player',
-      content: `${command} ${args.join(' ')}`,
+      content: `${command} ${Array.isArray(args) ? args.join(' ') : args || ''}`,
       timestamp: new Date()
     });
 
