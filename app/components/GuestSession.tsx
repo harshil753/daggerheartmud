@@ -73,16 +73,6 @@ export default function GuestSession({ onSessionStart, onSessionEnd }: GuestSess
   if (sessionData) {
     return (
       <div className="guest-session">
-        <div className="guest-header">
-          <h3>Guest Session Active</h3>
-          <div className="session-info">
-            <span className="session-id">Session: {sessionData.sessionId}</span>
-            <span className="session-time">
-              Started: {new Date(sessionData.createdAt).toLocaleTimeString()}
-            </span>
-          </div>
-        </div>
-        
         <div className="guest-warning">
           <div className="warning-icon">⚠️</div>
           <div className="warning-text">
@@ -91,47 +81,18 @@ export default function GuestSession({ onSessionStart, onSessionEnd }: GuestSess
           </div>
         </div>
 
-        <div className="guest-actions">
-          <button 
-            onClick={endGuestSession}
-            className="end-session-button"
-          >
-            End Guest Session
-          </button>
-        </div>
+        <button 
+          onClick={endGuestSession}
+          className="end-session-button"
+        >
+          End Guest Session
+        </button>
       </div>
     );
   }
 
   return (
     <div className="guest-session-setup">
-      <div className="guest-info">
-        <h3>Play as Guest</h3>
-        <p>
-          Try the game without creating an account. Your progress will be saved 
-          in this browser session only.
-        </p>
-        
-        <div className="guest-features">
-          <div className="feature-item">
-            <span className="feature-icon">✅</span>
-            <span>Full game experience</span>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">✅</span>
-            <span>AI Dungeon Master</span>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">✅</span>
-            <span>Character creation</span>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">⚠️</span>
-            <span>Progress not saved between sessions</span>
-          </div>
-        </div>
-      </div>
-
       <div className="guest-actions">
         <button 
           onClick={startGuestSession}

@@ -5,7 +5,6 @@ import Terminal from './Terminal';
 import GameControls from './GameControls';
 import InventoryPanel from './InventoryPanel';
 import StatsPanel from './StatsPanel';
-import GuestSession from './GuestSession';
 
 interface GameSessionProps {
   isGuest?: boolean;
@@ -24,6 +23,35 @@ export default function GameSession({
 
   const handleGameStateChange = (newGameState: any) => {
     setGameState(newGameState);
+  };
+
+  const handleGuestSessionStart = (sessionData: any) => {
+    setGameState(sessionData);
+  };
+
+  const handleGuestSessionEnd = () => {
+    setGameState(null);
+    onLogout?.();
+  };
+
+  const startGuestSession = () => {
+    // Generate unique session ID
+    const sessionId = `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    const newSession = {
+      sessionId,
+      isGuest: true,
+      userId: null,
+      character: null,
+      campaign: null,
+      createdAt: new Date().toISOString(),
+      lastActivity: new Date().toISOString()
+    };
+
+    // Store in sessionStorage
+    sessionStorage.setItem('daggerheart_guest_game', JSON.stringify(newSession));
+    
+    handleGuestSessionStart(newSession);
   };
 
   const handleDiceRoll = () => {
@@ -56,22 +84,15 @@ export default function GameSession({
     console.log(`Use ${itemId}`);
   };
 
-  const handleGuestSessionStart = (sessionData: any) => {
-    setGameState(sessionData);
-  };
-
-  const handleGuestSessionEnd = () => {
-    setGameState(null);
-    onLogout?.();
-  };
-
   const handleConnectionChange = (connected: boolean) => {
     setIsConnected(connected);
   };
 
   return (
     <div className="game-session">
+      {/* LOCKED LAYOUT - DO NOT MODIFY DIV STRUCTURE OR SIZING */}
       <div className="game-header">
+        {/* Game Title Section - Fixed position */}
         <div className="game-title">
           <h1>Daggerheart MUD</h1>
           <div className="game-status">
@@ -81,7 +102,22 @@ export default function GameSession({
             </span>
           </div>
         </div>
+
+        {/* Guest Info Header - Fixed position between title and controls */}
+        {isGuest && (
+          <div className="guest-info-header">
+            <h2>Play as Guest</h2>
+            <p>Try the game without creating an account. Your progress will be saved in this browser session only.</p>
+            <button 
+              onClick={startGuestSession}
+              className="start-guest-button"
+            >
+              Start Guest Session
+            </button>
+          </div>
+        )}
         
+        {/* Game Controls - Fixed position on right */}
         <div className="game-controls">
           <button 
             onClick={() => setActivePanel('terminal')}
@@ -112,62 +148,60 @@ export default function GameSession({
         </div>
       </div>
 
+      {/* Main Content Area - LOCKED LAYOUT */}
       <div className="game-content">
-        {isGuest && (
-          <div className="guest-session-container">
-            <GuestSession 
-              onSessionStart={handleGuestSessionStart}
-              onSessionEnd={handleGuestSessionEnd}
+        <div className="game-main-layout">
+          {/* Left Section - LOCKED at 75% width */}
+          <div className="game-left-section" style={{ width: '75%' }}>
+            <div className="game-panels">
+              {activePanel === 'terminal' && (
+                <div className="terminal-panel">
+                  <Terminal 
+                    onGameStateChange={handleGameStateChange}
+                    isGuest={isGuest}
+                    onLogout={onLogout}
+                    onConnectionChange={handleConnectionChange}
+                  />
+                </div>
+              )}
+
+              {activePanel === 'inventory' && (
+                <div className="inventory-panel">
+                  <InventoryPanel 
+                    inventory={gameState?.inventory || []}
+                    equipped={{
+                      primary_weapon: gameState?.character?.primary_weapon,
+                      secondary_weapon: gameState?.character?.secondary_weapon,
+                      armor: gameState?.character?.armor
+                    }}
+                    onEquip={handleEquip}
+                    onUnequip={handleUnequip}
+                    onUse={handleUse}
+                  />
+                </div>
+              )}
+
+              {activePanel === 'stats' && (
+                <div className="stats-panel">
+                  <StatsPanel 
+                    character={gameState?.character}
+                    campaign={gameState?.campaign}
+                    combat={gameState?.combat}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Sidebar - LOCKED at 25% width */}
+          <div className="game-sidebar" style={{ width: '25%' }}>
+            <GameControls 
+              onDiceRoll={handleDiceRoll}
+              onSave={handleSave}
+              onRest={handleRest}
+              gameState={gameState}
             />
           </div>
-        )}
-
-        <div className="game-panels">
-          {activePanel === 'terminal' && (
-            <div className="terminal-panel">
-              <Terminal 
-                onGameStateChange={handleGameStateChange}
-                isGuest={isGuest}
-                onLogout={onLogout}
-                onConnectionChange={handleConnectionChange}
-              />
-            </div>
-          )}
-
-          {activePanel === 'inventory' && (
-            <div className="inventory-panel">
-              <InventoryPanel 
-                inventory={gameState?.inventory || []}
-                equipped={{
-                  primary_weapon: gameState?.character?.primary_weapon,
-                  secondary_weapon: gameState?.character?.secondary_weapon,
-                  armor: gameState?.character?.armor
-                }}
-                onEquip={handleEquip}
-                onUnequip={handleUnequip}
-                onUse={handleUse}
-              />
-            </div>
-          )}
-
-          {activePanel === 'stats' && (
-            <div className="stats-panel">
-              <StatsPanel 
-                character={gameState?.character}
-                campaign={gameState?.campaign}
-                combat={gameState?.combat}
-              />
-            </div>
-          )}
-        </div>
-
-        <div className="game-sidebar">
-          <GameControls 
-            onDiceRoll={handleDiceRoll}
-            onSave={handleSave}
-            onRest={handleRest}
-            gameState={gameState}
-          />
         </div>
       </div>
 
