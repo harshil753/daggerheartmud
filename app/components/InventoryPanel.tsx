@@ -170,7 +170,7 @@ export default function InventoryPanel({
                     
                     {getItemProperties(item) && (
                       <div className="item-properties">
-                        {getItemProperties(item).map((prop, idx) => (
+                        {getItemProperties(item)?.map((prop, idx) => (
                           <div key={idx} className="property">
                             {prop}
                           </div>
