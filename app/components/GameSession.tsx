@@ -25,34 +25,6 @@ export default function GameSession({
     setGameState(newGameState);
   };
 
-  const handleGuestSessionStart = (sessionData: any) => {
-    setGameState(sessionData);
-  };
-
-  const handleGuestSessionEnd = () => {
-    setGameState(null);
-    onLogout?.();
-  };
-
-  const startGuestSession = () => {
-    // Generate unique session ID
-    const sessionId = `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
-    const newSession = {
-      sessionId,
-      isGuest: true,
-      userId: null,
-      character: null,
-      campaign: null,
-      createdAt: new Date().toISOString(),
-      lastActivity: new Date().toISOString()
-    };
-
-    // Store in sessionStorage
-    sessionStorage.setItem('daggerheart_guest_game', JSON.stringify(newSession));
-    
-    handleGuestSessionStart(newSession);
-  };
 
   const handleDiceRoll = () => {
     // Dice rolling is handled by the terminal/WebSocket
@@ -108,12 +80,6 @@ export default function GameSession({
           <div className="guest-info-header">
             <h2>Play as Guest</h2>
             <p>Try the game without creating an account. Your progress will be saved in this browser session only.</p>
-            <button 
-              onClick={startGuestSession}
-              className="start-guest-button"
-            >
-              Start Guest Session
-            </button>
           </div>
         )}
         
