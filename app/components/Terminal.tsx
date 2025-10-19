@@ -19,6 +19,18 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
   const [terminal, setTerminal] = useState<any>(null);
 
   useEffect(() => {
+    // Prevent multiple initializations
+    if (terminal) {
+      console.log('Terminal already initialized, skipping...');
+      return;
+    }
+
+    // Check if terminal already exists in DOM
+    if (terminalRef.current && terminalRef.current.querySelector('.xterm')) {
+      console.log('Terminal already exists in DOM, skipping initialization');
+      return;
+    }
+
     // Dynamically import xterm only on client side
     const initTerminal = async () => {
       try {
@@ -45,8 +57,54 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
           fitAddon.fit();
           setTerminal(term);
           displayWelcomeMessage(term, isGuest);
+          
+          // Set up input handling immediately after opening
+          // Use a persistent variable that won't be cleared on re-renders
+          if (!(window as any).terminalInput) {
+            (window as any).terminalInput = '';
+          }
+          
+          const handleInput = (data: string) => {
+            console.log('Input received:', data, 'charCode:', data.charCodeAt(0));
+            if (data === '\r' || data === '\n') {
+              // Enter key pressed - process the command
+              const currentInput = (window as any).terminalInput || '';
+              console.log('Enter pressed, processing command:', currentInput);
+              if (currentInput.trim()) {
+                term.write('\r\n');
+                handleCommand(currentInput.trim(), term, isGuest, onLogout);
+                (window as any).terminalInput = '';
+              } else {
+                term.write('\r\n> ');
+              }
+            } else if (data === '\u007f' || data === '\b') {
+              // Backspace
+              const currentInput = (window as any).terminalInput || '';
+              if (currentInput.length > 0) {
+                (window as any).terminalInput = currentInput.slice(0, -1);
+                term.write('\b \b');
+                console.log('Backspace, new input:', (window as any).terminalInput);
+              }
+            } else if (data.length === 1 && data >= ' ') {
+              // Regular character input
+              (window as any).terminalInput = ((window as any).terminalInput || '') + data;
+              term.write(data);
+              console.log('Character added, new input:', (window as any).terminalInput);
+              // Force terminal to update display and ensure cursor is visible
+              term.refresh(0, term.rows - 1);
+              term.scrollToBottom();
+            }
+          };
+
+          term.onData(handleInput);
+          
           setTimeout(() => {
             term.focus();
+            // Ensure the terminal container is also focused
+            if (terminalRef.current) {
+              terminalRef.current.focus();
+            }
+            console.log('Terminal initialized and focused');
           }, 100);
         }
       } catch (error) {
@@ -55,36 +113,29 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
     };
 
     initTerminal();
-  }, []);
 
-  // Socket connection logic
-  useEffect(() => {
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
-    const socket = io(backendUrl, {
-      transports: ['websocket', 'polling']
-    });
-
-    socket.on('connect', () => {
-      console.log('Connected to game server');
-      setIsConnected(true);
-      onConnectionChange?.(true);
-    });
-
-    socket.on('disconnect', () => {
-      console.log('Disconnected from game server');
-      setIsConnected(false);
-      onConnectionChange?.(false);
-    });
-
-    socket.on('gameState', (data) => {
-      setGameState(data);
-    });
-
-    setSocket(socket);
-
+    // Cleanup function
     return () => {
-      socket.disconnect();
+      if (terminal) {
+        terminal.dispose();
+        setTerminal(null);
+      }
     };
+  }, [terminal]);
+
+  // Socket connection logic - DISABLED to prevent WebSocket errors
+  useEffect(() => {
+    // Force offline mode to prevent WebSocket connection issues
+    console.log('Running in offline mode - WebSocket disabled to prevent connection errors');
+    setIsConnected(false);
+    onConnectionChange?.(false);
+    
+    // TODO: Re-enable WebSocket connection once backend is properly configured
+    // const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+    // const socket = io(backendUrl, {
+    //   transports: ['websocket', 'polling']
+    // });
+    // ... rest of socket setup
   }, []);
 
   // Add your game state management here
@@ -94,42 +145,6 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
     }
   }, [gameState]); // Remove onGameStateChange dependency to prevent infinite loop
 
-  // Handle terminal input and commands
-  useEffect(() => {
-    if (terminal) {
-      let currentInput = '';
-      
-      const handleInput = (data: string) => {
-        if (data === '\r' || data === '\n') {
-          // Enter key pressed - process the command
-          if (currentInput.trim()) {
-            terminal.write('\r\n');
-            handleCommand(currentInput.trim(), terminal, isGuest, onLogout);
-            currentInput = '';
-          } else {
-            terminal.write('\r\n> ');
-          }
-        } else if (data === '\u007f' || data === '\b') {
-          // Backspace
-          if (currentInput.length > 0) {
-            currentInput = currentInput.slice(0, -1);
-            terminal.write('\b \b');
-          }
-        } else if (data.length === 1 && data >= ' ') {
-          // Regular character input
-          currentInput += data;
-          terminal.write(data);
-        }
-      };
-
-      terminal.onData(handleInput);
-      terminal.focus();
-      
-      return () => {
-        terminal.off('data', handleInput);
-      };
-    }
-  }, [terminal, isGuest, onLogout]);
 
   // IMPORTANT: Return JSX
   return (
@@ -141,8 +156,8 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
           <span className="font-mono text-sm">Daggerheart MUD Terminal</span>
         </div>
         <div className="flex items-center space-x-4 text-xs">
-          <span className={`px-2 py-1 rounded ${isConnected ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
-            {isConnected ? 'Connected' : 'Disconnected'}
+          <span className={`px-2 py-1 rounded ${isConnected ? 'bg-green-600 text-white' : 'bg-orange-600 text-white'}`}>
+            {isConnected ? 'Connected' : 'Offline Mode'}
           </span>
           {isGuest && (
             <span className="px-2 py-1 rounded bg-yellow-600 text-white">
@@ -165,8 +180,10 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
           onClick={() => {
             if (terminal) {
               terminal.focus();
+              console.log('Terminal clicked, focused');
             }
           }}
+          tabIndex={0}
         />
       </div>
       
@@ -322,6 +339,11 @@ Try these commands:
 - 'character' - View character
 
 `);
+      break;
+      
+    case 'testinput':
+      terminal.write('\r\n✅ Testing input handling...\r\n');
+      terminal.write('Type any character to test: ');
       break;
       
     case 'quit':
