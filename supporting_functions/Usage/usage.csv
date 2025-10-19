@@ -1,0 +1,5 @@
+timestamp,request_type,model,prompt_length,response_length,estimated_input_tokens,estimated_output_tokens,estimated_total_tokens,input_cost,output_cost,total_cost,duration_seconds,success,error,actual_input_tokens,actual_output_tokens,actual_total_tokens
+2025-10-19T18:12:27.052499,generate_content,gemini-2.5-flash,58,147,14,32,46,1e-06,1e-05,1.1e-05,0.933,True,,14,33,68
+2025-10-19T18:12:27.985008,generate_content,gemini-2.5-flash,98,2480,23,531,555,2e-06,0.00016,0.000161,12.053,True,,23,535,1764
+2025-10-19T18:12:41.045481,generate_content,gemini-2.5-flash,89,8418,19,1645,1665,1e-06,0.000494,0.000495,23.799,True,,20,2038,3787
+2025-10-19T18:13:05.847337,generate_content,gemini-2.5-flash,91,1049,20,231,252,2e-06,6.9e-05,7.1e-05,9.534,True,,19,259,1546

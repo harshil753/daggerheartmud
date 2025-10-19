@@ -154,24 +154,24 @@ class GeminiUsageMonitor:
     def _calculate_cost_estimate(self, metric_type: str, value: float) -> float:
         """
         Calculate estimated cost based on metric type and value
-        Gemini pricing (as of 2024):
-        - Input tokens: $0.000075 per 1K tokens
-        - Output tokens: $0.0003 per 1K tokens
+        Gemini 2.5 Flash pricing (as of 2024):
+        - Input tokens: $0.30 per 1M tokens
+        - Output tokens: $2.50 per 1M tokens
         """
         if not value:
             return 0.0
             
-        # Convert to thousands of tokens
-        tokens_k = value / 1000
+        # Convert to millions of tokens
+        tokens_m = value / 1000000
         
         if "input_token" in metric_type:
-            return tokens_k * 0.000075
+            return tokens_m * 0.30
         elif "output_token" in metric_type:
-            return tokens_k * 0.0003
+            return tokens_m * 2.50
         elif "total_token" in metric_type:
             # Estimate 70% input, 30% output for total tokens
-            input_cost = (tokens_k * 0.7) * 0.000075
-            output_cost = (tokens_k * 0.3) * 0.0003
+            input_cost = (tokens_m * 0.7) * 0.30
+            output_cost = (tokens_m * 0.3) * 2.50
             return input_cost + output_cost
         else:
             return 0.0
@@ -365,7 +365,38 @@ def main():
     # Check for Google Cloud credentials - try multiple methods
     credentials_found = False
     
-    if credentials_path:
+    # First, try to use service account credentials from environment variables
+    service_account_email = os.getenv('GOOGLE_SERVICE_ACCOUNT_EMAIL')
+    private_key = os.getenv('GOOGLE_PRIVATE_KEY')
+    
+    if service_account_email and private_key:
+        print("✅ Found service account credentials in environment variables")
+        # Create temporary credentials file
+        temp_credentials = {
+            "type": "service_account",
+            "project_id": project_id,
+            "private_key_id": os.getenv('GOOGLE_PRIVATE_KEY_ID', ''),
+            "private_key": private_key,
+            "client_email": service_account_email,
+            "client_id": os.getenv('GOOGLE_CLIENT_ID', ''),
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "universe_domain": "googleapis.com"
+        }
+        
+        # Create temporary credentials file
+        import tempfile
+        temp_file = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
+        json.dump(temp_credentials, temp_file)
+        temp_file.close()
+        
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.name
+        credentials_found = True
+        print(f"✅ Created temporary credentials file: {temp_file.name}")
+    elif credentials_path:
+        # Fallback to credentials file if specified
+        print("🔄 Trying credentials file method...")
         # Convert relative path to absolute path
         if not os.path.isabs(credentials_path):
             # If it's a relative path, make it relative to the project root (not current working directory)
@@ -386,48 +417,12 @@ def main():
             print(f"   Current working directory: {os.getcwd()}")
             print(f"   Script directory: {os.path.dirname(__file__)}")
     else:
-        print("⚠️  GOOGLE_APPLICATION_CREDENTIALS not set in .env file")
-    
-    # Try alternative authentication methods
-    if not credentials_found:
-        print("🔄 Trying alternative authentication methods...")
-        
-        # Check if we have service account key as environment variables
-        service_account_email = os.getenv('GOOGLE_SERVICE_ACCOUNT_EMAIL')
-        private_key = os.getenv('GOOGLE_PRIVATE_KEY')
-        
-        if service_account_email and private_key:
-            print("✅ Found service account credentials in environment variables")
-            # Create temporary credentials file
-            temp_credentials = {
-                "type": "service_account",
-                "project_id": project_id,
-                "private_key_id": os.getenv('GOOGLE_PRIVATE_KEY_ID', ''),
-                "private_key": private_key,
-                "client_email": service_account_email,
-                "client_id": os.getenv('GOOGLE_CLIENT_ID', ''),
-                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-                "token_uri": "https://oauth2.googleapis.com/token",
-                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-                "universe_domain": "googleapis.com"
-            }
-            
-            # Create temporary credentials file
-            import tempfile
-            temp_file = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
-            json.dump(temp_credentials, temp_file)
-            temp_file.close()
-            
-            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.name
-            credentials_found = True
-            print(f"✅ Created temporary credentials file: {temp_file.name}")
-        else:
-            print("⚠️  No service account credentials found in environment variables")
-            print("💡 You can set these environment variables instead of using a JSON file:")
-            print("   GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com")
-            print("   GOOGLE_PRIVATE_KEY=your-private-key")
-            print("   GOOGLE_PRIVATE_KEY_ID=your-private-key-id")
-            print("   GOOGLE_CLIENT_ID=your-client-id")
+        print("⚠️  No credentials method specified")
+        print("💡 You can set these environment variables in backend/.env:")
+        print("   GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@project.iam.gserviceaccount.com")
+        print("   GOOGLE_PRIVATE_KEY=your-private-key")
+        print("   GOOGLE_PRIVATE_KEY_ID=your-private-key-id")
+        print("   GOOGLE_CLIENT_ID=your-client-id")
     
     if not project_id or not api_key:
         print("❌ Project ID and API Key are required!")
