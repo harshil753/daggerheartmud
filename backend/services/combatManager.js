@@ -21,9 +21,9 @@ class CombatManager {
       id: combatId,
       campaignId,
       sessionId,
-      participants: participants.map(p => ({
+      participants: participants.filter(p => p !== null).map(p => ({
         ...p,
-        currentHP: p.hit_points_current,
+        currentHP: p.hit_points_current || 0,
         currentStress: p.stress_current || 0,
         statusEffects: []
       })),

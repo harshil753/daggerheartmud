@@ -126,17 +126,17 @@ class DungeonMaster {
       
       'stats': `The player wants to see their character statistics. Display their traits, HP, stress, equipment bonuses, and any status effects.`,
       
-      'equip': `The player wants to equip: ${args.join(' ')}. Check if they have this item and if it can be equipped. Update their stats accordingly.`,
+      'equip': `The player wants to equip: ${Array.isArray(args) ? args.join(' ') : args || ''}. Check if they have this item and if it can be equipped. Update their stats accordingly.`,
       
-      'unequip': `The player wants to unequip: ${args[0]}. Remove the item from the specified slot and update their stats.`,
+      'unequip': `The player wants to unequip: ${Array.isArray(args) ? args[0] : args || ''}. Remove the item from the specified slot and update their stats.`,
       
-      'use': `The player wants to use: ${args.join(' ')}. Check if they have this consumable item and apply its effects.`,
+      'use': `The player wants to use: ${Array.isArray(args) ? args.join(' ') : args || ''}. Check if they have this consumable item and apply its effects.`,
       
-      'attack': `The player wants to attack: ${args.join(' ')}. If in combat, process the attack. If not in combat, start combat if appropriate.`,
+      'attack': `The player wants to attack: ${Array.isArray(args) ? args.join(' ') : args || ''}. If in combat, process the attack. If not in combat, start combat if appropriate.`,
       
-      'cast': `The player wants to cast: ${args.join(' ')}. Check if they have this ability and if they can use it. Apply magical effects.`,
+      'cast': `The player wants to cast: ${Array.isArray(args) ? args.join(' ') : args || ''}. Check if they have this ability and if they can use it. Apply magical effects.`,
       
-      'talk': `The player wants to talk to: ${args.join(' ')}. Roleplay the NPC conversation. Be engaging and in-character.`,
+      'talk': `The player wants to talk to: ${Array.isArray(args) ? args.join(' ') : args || ''}. Roleplay the NPC conversation. Be engaging and in-character.`,
       
       'rest': `The player wants to rest. Allow them to recover HP and stress if it's safe to do so.`,
       
