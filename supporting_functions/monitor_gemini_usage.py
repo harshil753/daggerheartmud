@@ -31,6 +31,7 @@ from google.auth import default
 from google.cloud import monitoring_v3
 from google.cloud.monitoring_v3 import query
 import pandas as pd
+from dotenv import load_dotenv
 
 class GeminiUsageMonitor:
     def __init__(self, project_id: str, api_key: str):
@@ -343,18 +344,56 @@ def main():
     print("🔍 Gemini API Usage Monitor")
     print("=" * 40)
     
-    # Get configuration from environment or user input
-    project_id = os.getenv('GOOGLE_CLOUD_PROJECT_ID')
+    # Load environment variables from backend/.env file
+    env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'backend', '.env')
+    if os.path.exists(env_path):
+        load_dotenv(env_path)
+        print(f"✅ Loaded environment variables from: {env_path}")
+    else:
+        print(f"⚠️  .env file not found at: {env_path}")
+        print("   Trying to load from system environment variables...")
+    
+    # Get configuration from environment variables (matching backend/.env format)
+    project_id = os.getenv('GOOGLE_CLOUD_PROJECT')
     api_key = os.getenv('GEMINI_API_KEY')
+    credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
     
-    if not project_id:
-        project_id = input("Enter your Google Cloud Project ID: ").strip()
+    print(f"📋 Project ID: {project_id if project_id else 'NOT FOUND'}")
+    print(f"🔑 API Key: {'*' * 10 if api_key else 'NOT FOUND'}")
+    print(f"🔐 Credentials: {credentials_path if credentials_path else 'NOT SET'}")
     
-    if not api_key:
-        api_key = input("Enter your Gemini API Key: ").strip()
+    # Check for Google Cloud credentials file
+    if credentials_path:
+        # Convert relative path to absolute path
+        if not os.path.isabs(credentials_path):
+            # If it's a relative path, make it relative to the current working directory
+            credentials_path = os.path.join(os.getcwd(), credentials_path)
+        
+        # Normalize the path to handle any .. or . components
+        credentials_path = os.path.normpath(credentials_path)
+        
+        if os.path.exists(credentials_path):
+            print(f"✅ Google Cloud credentials file found: {credentials_path}")
+            # Set the environment variable to the absolute path for Google Cloud libraries
+            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+        else:
+            print(f"⚠️  Credentials file not found at: {credentials_path}")
+            print(f"   Looking for: {os.path.abspath(credentials_path)}")
+            print(f"   Current working directory: {os.getcwd()}")
+            print(f"   Script directory: {os.path.dirname(__file__)}")
+    else:
+        print("⚠️  GOOGLE_APPLICATION_CREDENTIALS not set in .env file")
     
     if not project_id or not api_key:
         print("❌ Project ID and API Key are required!")
+        print("💡 Make sure your backend/.env file contains:")
+        print("   GOOGLE_CLOUD_PROJECT=your_actual_project_id")
+        print("   GEMINI_API_KEY=your_gemini_api_key_here")
+        print("   GOOGLE_APPLICATION_CREDENTIALS=../supporting_functions/credentials/gemini-monitoring-key.json")
+        print("\n📝 Example .env file format:")
+        print("   GOOGLE_CLOUD_PROJECT=daggerheartmud")
+        print("   GEMINI_API_KEY=your_actual_api_key")
+        print("   GOOGLE_APPLICATION_CREDENTIALS=../supporting_functions/credentials/gemini-monitoring-key.json")
         sys.exit(1)
     
     # Create monitor instance

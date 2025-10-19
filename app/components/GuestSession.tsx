@@ -24,7 +24,7 @@ export default function GuestSession({ onSessionStart, onSessionEnd }: GuestSess
         sessionStorage.removeItem('daggerheart_guest_game');
       }
     }
-  }, [onSessionStart]);
+  }, []); // Remove onSessionStart dependency to prevent infinite loop
 
   const startGuestSession = () => {
     setIsLoading(true);

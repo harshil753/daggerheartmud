@@ -65,6 +65,10 @@ export default function GameSession({
     onLogout?.();
   };
 
+  const handleConnectionChange = (connected: boolean) => {
+    setIsConnected(connected);
+  };
+
   return (
     <div className="game-session">
       <div className="game-header">
@@ -125,6 +129,7 @@ export default function GameSession({
                 onGameStateChange={handleGameStateChange}
                 isGuest={isGuest}
                 onLogout={onLogout}
+                onConnectionChange={handleConnectionChange}
               />
             </div>
           )}

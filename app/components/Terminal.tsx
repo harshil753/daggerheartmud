@@ -8,9 +8,10 @@ interface TerminalProps {
   onLogout: () => void;
   totalChapters?: number;
   onGameStateChange?: (gameState: any) => void;
+  onConnectionChange?: (isConnected: boolean) => void;
 }
 
-export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGameStateChange }: TerminalProps) {
+export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGameStateChange, onConnectionChange }: TerminalProps) {
   const terminalRef = useRef<HTMLDivElement>(null);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -52,9 +53,34 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
     initTerminal();
   }, []);
 
-  // Add your socket connection logic here
+  // Socket connection logic
   useEffect(() => {
-    // Socket connection logic
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+    const socket = io(backendUrl, {
+      transports: ['websocket', 'polling']
+    });
+
+    socket.on('connect', () => {
+      console.log('Connected to game server');
+      setIsConnected(true);
+      onConnectionChange?.(true);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from game server');
+      setIsConnected(false);
+      onConnectionChange?.(false);
+    });
+
+    socket.on('gameState', (data) => {
+      setGameState(data);
+    });
+
+    setSocket(socket);
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   // Add your game state management here
@@ -62,7 +88,7 @@ export default function Terminal({ isGuest, onLogout, totalChapters = 10, onGame
     if (onGameStateChange && gameState) {
       onGameStateChange(gameState);
     }
-  }, [gameState, onGameStateChange]);
+  }, [gameState]); // Remove onGameStateChange dependency to prevent infinite loop
 
   // IMPORTANT: Return JSX
   return (
