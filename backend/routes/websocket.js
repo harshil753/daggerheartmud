@@ -11,7 +11,7 @@ class WebSocketHandler {
     this.io = io;
     this.commandParser = new CommandParser();
     this.gameStateManager = new GameStateManager();
-    this.dungeonMaster = new DungeonMaster();
+    this.dungeonMaster = DungeonMaster.getInstance();
     this.combatManager = new CombatManager();
     
     this.setupEventHandlers();

@@ -3,19 +3,36 @@ const { getFullContext } = require('../utils/geminiContext');
 
 /**
  * AI Dungeon Master service using Gemini
+ * Singleton pattern to ensure context is loaded only once per server instance
  */
 class DungeonMaster {
   constructor() {
     this.contextLoaded = false;
     this.fullContext = null;
+    this.initializationPromise = null; // Prevent multiple simultaneous initializations
   }
 
   /**
-   * Initialize AI with SRD and equipment context
+   * Initialize AI with SRD and equipment context (ONCE per server instance)
    */
   async initializeAI() {
+    // If already loaded, return immediately
     if (this.contextLoaded) return;
+    
+    // If initialization is in progress, wait for it
+    if (this.initializationPromise) {
+      return await this.initializationPromise;
+    }
 
+    // Start initialization
+    this.initializationPromise = this._doInitialize();
+    return await this.initializationPromise;
+  }
+
+  /**
+   * Internal initialization method
+   */
+  async _doInitialize() {
     try {
       console.log('Loading AI context...');
       this.fullContext = getFullContext();
@@ -23,6 +40,7 @@ class DungeonMaster {
       console.log('AI context loaded successfully');
     } catch (error) {
       console.error('Failed to load AI context:', error);
+      this.initializationPromise = null; // Reset on error
       throw error;
     }
   }
@@ -62,12 +80,21 @@ class DungeonMaster {
    */
   buildPrompt(command, args, gameState) {
     const { character, campaign, currentLocation, combat } = gameState;
+    const history = gameState.aiContext?.conversationHistory || [];
     
-    let prompt = `${this.fullContext.fullContext}\n\n`;
+    let prompt = '';
     
-    prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
-    prompt += `Respond in character as a helpful, engaging DM. `;
-    prompt += `Use the Daggerheart rules and equipment data provided above.\n\n`;
+    // Only include full context if this is the first interaction (no history)
+    if (history.length === 0) {
+      prompt += `${this.fullContext.fullContext}\n\n`;
+      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+      prompt += `Respond in character as a helpful, engaging DM. `;
+      prompt += `Use the Daggerheart rules and equipment data provided above.\n\n`;
+    } else {
+      // For subsequent interactions, just provide the DM role
+      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+      prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+    }
     
     // Add current game state
     if (character) {
@@ -267,4 +294,8 @@ class DungeonMaster {
   }
 }
 
+// Create singleton instance to ensure context is loaded only once
+const dungeonMasterInstance = new DungeonMaster();
+
 module.exports = DungeonMaster;
+module.exports.getInstance = () => dungeonMasterInstance;
