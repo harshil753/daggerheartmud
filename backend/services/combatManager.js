@@ -47,6 +47,12 @@ class CombatManager {
    */
   rollInitiative(participants) {
     return participants.map(participant => {
+      // Ensure participant exists and has required properties
+      if (!participant) {
+        console.error('Null participant in combat initiative');
+        return null;
+      }
+      
       const hopeDice = participant.hope_tokens || 0;
       const fearDice = participant.fear_tokens || 0;
       
@@ -69,7 +75,7 @@ class CombatManager {
         fearRolls,
         isPlayer: participant.isPlayer || false
       };
-    }).sort((a, b) => b.initiative - a.initiative);
+    }).filter(participant => participant !== null).sort((a, b) => b.initiative - a.initiative);
   }
 
   /**

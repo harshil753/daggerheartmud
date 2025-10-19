@@ -21,6 +21,8 @@ class CommandParser {
       'rest': this.handleRest,
       'help': this.handleHelp,
       'save': this.handleSave,
+      'create': this.handleCreate,
+      'character': this.handleCreate,
       
       // Combat commands
       'fight': this.handleAttack,
@@ -185,6 +187,7 @@ INTERACTION:
 
 SYSTEM:
   save             - Create a manual save point
+  create character - Start character creation process
 
 MOVEMENT SHORTCUTS:
   n, north         - Move north
@@ -198,6 +201,38 @@ MOVEMENT SHORTCUTS:
       success: true,
       message: helpText
     };
+  }
+
+  /**
+   * Handle character creation
+   */
+  async handleCreate(gameState, args) {
+    try {
+      // Check if character already exists
+      if (gameState.character) {
+        return {
+          success: false,
+          message: 'You already have a character. Use "stats" to view your character sheet.'
+        };
+      }
+
+      // Start character creation process
+      const dungeonMaster = require('./dungeonMaster');
+      const dm = new dungeonMaster();
+      
+      const response = await dm.processCommand(gameState, 'create character', args);
+      
+      return {
+        success: true,
+        message: response.message || 'Character creation started. Follow the prompts to create your character.'
+      };
+    } catch (error) {
+      console.error('Character creation error:', error);
+      return {
+        success: false,
+        message: 'Failed to start character creation. Please try again.'
+      };
+    }
   }
 }
 
