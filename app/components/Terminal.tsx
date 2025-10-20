@@ -27,6 +27,8 @@ export default function Terminal({
   const socketRef = useRef<any>(null);
   const terminalInstanceRef = useRef<any>(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [fontSize, setFontSize] = useState(14);
+  const [autoScroll, setAutoScroll] = useState(true);
 
   useEffect(() => {
     // Prevent multiple initializations
@@ -126,14 +128,24 @@ export default function Terminal({
           terminalInstanceRef.current.echo(data.message, {
             raw: true,
             finalize: (div: any) => {
-              // Apply color based on success/failure
+              // Apply colorblind-friendly colors based on success/failure
               if (data.success === false) {
-                div.css('color', '#ff6b6b'); // Red for errors
+                div.css('color', '#e74c3c'); // Bright red for errors
               } else {
-                div.css('color', '#51cf66'); // Green for success
+                div.css('color', '#27ae60'); // Bright green for success
               }
             }
           });
+          
+          // Auto-scroll to bottom after adding content
+          if (autoScroll) {
+            setTimeout(() => {
+              const container = terminalRef.current?.closest('.terminal-container');
+              if (container) {
+                container.scrollTop = container.scrollHeight;
+              }
+            }, 100);
+          }
         }
       });
 
@@ -142,12 +154,24 @@ export default function Terminal({
           terminalInstanceRef.current.echo(data.message, {
             raw: true,
             finalize: (div: any) => {
-              // Apply ANSI color formatting if needed
+              // Apply colorblind-friendly colors
               if (data.color) {
                 div.css('color', data.color);
+              } else {
+                div.css('color', '#f39c12'); // Orange for general messages
               }
             }
           });
+          
+          // Auto-scroll to bottom after adding content
+          if (autoScroll) {
+            setTimeout(() => {
+              const container = terminalRef.current?.closest('.terminal-container');
+              if (container) {
+                container.scrollTop = container.scrollHeight;
+              }
+            }, 100);
+          }
         }
       });
 
@@ -236,57 +260,58 @@ export default function Terminal({
         }
       });
 
-      // Initialize jQuery Terminal
-      const terminal = window.$(terminalRef.current).terminal(
-        (command: string) => {
-          if (command.trim()) {
-            // Handle special commands locally
-            if (command.trim().toLowerCase() === 'logout' && onLogout) {
-              terminal.echo('Logging out...');
-              socket.disconnect();
-              onLogout();
-              return;
-            }
-            
-            if (command.trim().toLowerCase() === 'quit') {
-              terminal.echo('Goodbye!');
-              socket.disconnect();
-              if (onLogout) {
-                onLogout();
-              }
-              return;
-            }
+              // Initialize jQuery Terminal
+              const terminal = window.$(terminalRef.current).terminal(
+                (command: string) => {
+                  if (command.trim()) {
+                    // Handle special commands locally
+                    if (command.trim().toLowerCase() === 'logout' && onLogout) {
+                      terminal.echo('Logging out...');
+                      socket.disconnect();
+                      onLogout();
+                      return;
+                    }
 
-            // Send command to server
-            socket.emit('player_command', {
-              command: command.trim(),
-              isGuest: isGuest
-            });
-          }
-        },
-        {
-          greetings: isGuest 
-            ? 'Welcome to Daggerheart MUD (Guest Mode)\nType "help" for available commands.'
-            : 'Welcome to Daggerheart MUD\nType "help" for available commands.',
-          prompt: '> ',
-          name: 'daggerheart',
-          height: '100%',
-          width: '100%',
-          checkArity: false,
-          completion: (command: string, callback: (matches: string[]) => void) => {
-            // Basic command completion
-            const commands = [
-              'look', 'move', 'north', 'south', 'east', 'west', 'up', 'down',
-              'inventory', 'stats', 'attack', 'defend', 'cast', 'use', 'equip',
-              'unequip', 'save', 'rest', 'help', 'quit', 'logout'
-            ];
-            const matches = commands.filter(cmd => 
-              cmd.toLowerCase().startsWith(command.toLowerCase())
-            );
-            callback(matches);
-          }
-        }
-      );
+                    if (command.trim().toLowerCase() === 'quit') {
+                      terminal.echo('Goodbye!');
+                      socket.disconnect();
+                      if (onLogout) {
+                        onLogout();
+                      }
+                      return;
+                    }
+
+                    // Send command to server
+                    socket.emit('player_command', {
+                      command: command.trim(),
+                      isGuest: isGuest
+                    });
+                  }
+                },
+                {
+                  greetings: isGuest
+                    ? 'Welcome to Daggerheart MUD (Guest Mode)\nType "help" for available commands.'
+                    : 'Welcome to Daggerheart MUD\nType "help" for available commands.',
+                  prompt: '> ',
+                  name: 'daggerheart',
+                  height: '100%',
+                  width: '100%',
+                  checkArity: false,
+                  fontSize: fontSize,
+                  completion: (command: string, callback: (matches: string[]) => void) => {
+                    // Basic command completion
+                    const commands = [
+                      'look', 'move', 'north', 'south', 'east', 'west', 'up', 'down',
+                      'inventory', 'stats', 'attack', 'defend', 'cast', 'use', 'equip',
+                      'unequip', 'save', 'rest', 'help', 'quit', 'logout'
+                    ];
+                    const matches = commands.filter(cmd =>
+                      cmd.toLowerCase().startsWith(command.toLowerCase())
+                    );
+                    callback(matches);
+                  }
+                }
+              );
 
       terminalInstanceRef.current = terminal;
 
@@ -326,14 +351,56 @@ export default function Terminal({
     };
   }, []); // Empty dependency array to run only once
 
+  const increaseFontSize = () => {
+    setFontSize(prev => Math.min(prev + 2, 24));
+  };
+
+  const decreaseFontSize = () => {
+    setFontSize(prev => Math.max(prev - 2, 10));
+  };
+
+  const toggleAutoScroll = () => {
+    setAutoScroll(prev => !prev);
+  };
+
   return (
     <div className="terminal-container">
-      <div className="terminal-status">
-        <span className={`status-indicator ${isConnected ? 'connected' : 'disconnected'}`}>
-          {isConnected ? 'Connected' : 'Disconnected'}
-        </span>
+      <div className="terminal-controls">
+        <div className="terminal-status">
+          <span className={`status-indicator ${isConnected ? 'connected' : 'disconnected'}`}>
+            {isConnected ? 'Connected' : 'Disconnected'}
+          </span>
+        </div>
+        <div className="terminal-options">
+          <button 
+            onClick={decreaseFontSize}
+            className="font-control-btn"
+            title="Decrease font size"
+          >
+            A-
+          </button>
+          <span className="font-size-display">{fontSize}px</span>
+          <button 
+            onClick={increaseFontSize}
+            className="font-control-btn"
+            title="Increase font size"
+          >
+            A+
+          </button>
+          <button 
+            onClick={toggleAutoScroll}
+            className={`auto-scroll-btn ${autoScroll ? 'active' : ''}`}
+            title={autoScroll ? 'Disable auto-scroll' : 'Enable auto-scroll'}
+          >
+            {autoScroll ? '📌' : '📌'}
+          </button>
+        </div>
       </div>
-      <div ref={terminalRef} className="terminal" />
+      <div 
+        ref={terminalRef} 
+        className="terminal" 
+        style={{ fontSize: `${fontSize}px` }}
+      />
     </div>
   );
 }
