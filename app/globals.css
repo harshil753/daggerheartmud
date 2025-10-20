@@ -973,3 +973,140 @@ body {
   background: #666;
   cursor: not-allowed;
 }
+
+/* Dice Pool Container */
+.dice-pool-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dice-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.dice-label {
+  font-weight: bold;
+  color: #fff;
+  min-width: 30px;
+  font-size: 0.9rem;
+}
+
+.dice-counter-display {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: #fff;
+  font-family: monospace;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.dice-increment-btn,
+.dice-decrement-btn {
+  background: #444;
+  border: 1px solid #666;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dice-increment-btn:hover,
+.dice-decrement-btn:hover {
+  background: #555;
+}
+
+.dice-increment-btn:disabled,
+.dice-decrement-btn:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.roll-button {
+  background: #27ae60;
+  border: 1px solid #2ecc71;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-top: 0.5rem;
+}
+
+.roll-button:hover:not(:disabled) {
+  background: #2ecc71;
+}
+
+.roll-button:disabled {
+  background: #333;
+  color: #666;
+  border-color: #444;
+  cursor: not-allowed;
+}
+
+.dice-results-section {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.result-label {
+  font-weight: bold;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.result-values {
+  color: #f39c12;
+  font-family: monospace;
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+.total-sum-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid #444;
+}
+
+.total-label {
+  font-weight: bold;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.total-value {
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.1rem;
+}

@@ -31,16 +31,6 @@ export default function GameSession({
     console.log('Dice roll requested');
   };
 
-  const handleSave = () => {
-    // Save command is handled by the terminal/WebSocket
-    console.log('Save requested');
-  };
-
-  const handleRest = () => {
-    // Rest command is handled by the terminal/WebSocket
-    console.log('Rest requested');
-  };
-
   const handleEquip = (itemId: string, slot: string) => {
     // Equipment commands are handled by the terminal/WebSocket
     console.log(`Equip ${itemId} to ${slot}`);
@@ -162,8 +152,6 @@ export default function GameSession({
           <div className="game-sidebar" style={{ width: '25%' }}>
             <GameControls 
               onDiceRoll={handleDiceRoll}
-              onSave={handleSave}
-              onRest={handleRest}
               gameState={gameState}
             />
           </div>
