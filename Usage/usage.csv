@@ -1,0 +1,2 @@
+timestamp,request_type,model,prompt_length,response_length,estimated_input_tokens,estimated_output_tokens,estimated_total_tokens,input_cost,output_cost,total_cost,duration_seconds,success,error,actual_input_tokens,actual_output_tokens,actual_total_tokens
+2025-10-20T14:22:37.600977,generate_content,gemini-2.5-flash,58,139,14,28,42,1e-06,9e-06,1e-05,1.644,True,,14,26,74

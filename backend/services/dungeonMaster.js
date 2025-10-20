@@ -1,5 +1,6 @@
 const { model, imageModel } = require('../config/gemini');
 const { getFullContext } = require('../utils/geminiContext');
+const promptLoader = require('./promptLoader');
 
 /**
  * AI Dungeon Master service using Gemini
@@ -58,10 +59,13 @@ class DungeonMaster {
       const response = await result.response;
       const text = response.text();
 
+      // Process triggers in the response
+      const processedText = await this.processTriggers({ message: text }, gameState);
+      
       // Update conversation history
-      this.updateConversationHistory(gameState, 'player_input', [input], { message: text });
+      this.updateConversationHistory(gameState, 'player_input', [input], processedText);
 
-      return text;
+      return processedText.message || processedText;
     } catch (error) {
       console.error('AI processing error:', error);
       return 'The Dungeon Master seems distracted. Please try again.';
@@ -84,10 +88,13 @@ class DungeonMaster {
       // Parse AI response for structured data
       const parsedResponse = this.parseAIResponse(text, command);
       
+      // Process triggers (IMAGE_GENERATION_TRIGGER, ASCII_MAP, etc.)
+      const processedResponse = await this.processTriggers(parsedResponse, gameState);
+      
       // Update conversation history
-      this.updateConversationHistory(gameState, command, args, parsedResponse);
+      this.updateConversationHistory(gameState, command, args, processedResponse);
 
-      return parsedResponse;
+      return processedResponse;
     } catch (error) {
       console.error('AI processing error:', error);
       return {
@@ -99,7 +106,7 @@ class DungeonMaster {
   }
 
   /**
-   * Build prompt for AI based on command and game state
+   * Build prompt for AI based on command and game state using prompt SDK
    */
   buildPrompt(command, args, gameState) {
     const { character, campaign, currentLocation, combat } = gameState;
@@ -107,16 +114,30 @@ class DungeonMaster {
     
     let prompt = '';
     
-    // Only include full context if this is the first interaction (no history)
+    // Use the prompt SDK for the base system instruction
     if (history.length === 0) {
-      prompt += `${this.fullContext.fullContext}\n\n`;
-      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
-      prompt += `Respond in character as a helpful, engaging DM. `;
-      prompt += `Use the Daggerheart rules and equipment data provided above.\n\n`;
+      // First interaction - use full prompt SDK with context
+      const sdkPrompt = promptLoader.getDungeonMasterPromptWithContext(this.fullContext.fullContext);
+      if (sdkPrompt) {
+        prompt += sdkPrompt;
+      } else {
+        // Fallback to original prompt if SDK fails to load
+        prompt += `${this.fullContext.fullContext}\n\n`;
+        prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+        prompt += `Respond in character as a helpful, engaging DM. `;
+        prompt += `Use the Daggerheart rules and equipment data provided above.\n\n`;
+      }
     } else {
-      // For subsequent interactions, just provide the DM role
-      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
-      prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+      // Subsequent interactions - use simplified SDK prompt
+      const sdkPrompt = promptLoader.loadDungeonMasterPrompt();
+      if (sdkPrompt) {
+        prompt += sdkPrompt;
+        prompt += `\n\nContinue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+      } else {
+        // Fallback to original prompt
+        prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+        prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+      }
     }
     
     // Add current game state
@@ -171,16 +192,30 @@ class DungeonMaster {
     
     let prompt = '';
     
-    // Only include full context if this is the first interaction (no history)
+    // Use the prompt SDK for the base system instruction
     if (history.length === 0) {
-      prompt += `${this.fullContext.fullContext}\n\n`;
-      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
-      prompt += `Respond in character as a helpful, engaging DM. `;
-      prompt += `Use the Daggerheart rules and equipment data provided above.\n\n`;
+      // First interaction - use full prompt SDK with context
+      const sdkPrompt = promptLoader.getDungeonMasterPromptWithContext(this.fullContext.fullContext);
+      if (sdkPrompt) {
+        prompt += sdkPrompt;
+      } else {
+        // Fallback to original prompt if SDK fails to load
+        prompt += `${this.fullContext.fullContext}\n\n`;
+        prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+        prompt += `Respond in character as a helpful, engaging DM. `;
+        prompt += `Use the Daggerheart rules and equipment data provided above.\n\n`;
+      }
     } else {
-      // For subsequent interactions, just provide the DM role
-      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
-      prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+      // Subsequent interactions - use simplified SDK prompt
+      const sdkPrompt = promptLoader.loadDungeonMasterPrompt();
+      if (sdkPrompt) {
+        prompt += sdkPrompt;
+        prompt += `\n\nContinue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+      } else {
+        // Fallback to original prompt
+        prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+        prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+      }
     }
     
     // Add current game state
@@ -359,13 +394,76 @@ class DungeonMaster {
   }
 
   /**
-   * Generate image based on description
+   * Process triggers in AI responses (IMAGE_GENERATION_TRIGGER, ASCII_MAP, etc.)
+   */
+  async processTriggers(response, gameState) {
+    if (!response.message) return response;
+
+    const message = response.message;
+    let processedMessage = message;
+
+    // Check for IMAGE_GENERATION_TRIGGER
+    const imageTriggerMatch = message.match(/\[IMAGE_GENERATION_TRIGGER\][\s\S]*?\[PROMPT:/);
+    if (imageTriggerMatch) {
+      const triggerContent = imageTriggerMatch[0];
+      
+      // Extract trigger details
+      const typeMatch = triggerContent.match(/Type:\s*([^\n]+)/);
+      const descMatch = triggerContent.match(/Description:\s*([^\n]+)/);
+      const contextMatch = triggerContent.match(/Context:\s*([^\n]+)/);
+      const moodMatch = triggerContent.match(/Mood:\s*([^\n]+)/);
+      
+      if (typeMatch && descMatch) {
+        const imageType = typeMatch[1].trim();
+        const description = descMatch[1].trim();
+        const context = contextMatch ? contextMatch[1].trim() : 'Game context';
+        const mood = moodMatch ? moodMatch[1].trim() : 'Fantasy atmosphere';
+        
+        // Generate image using the trigger information
+        try {
+          const imageResult = await this.generateImage(description, imageType);
+          if (imageResult.success) {
+            // Add image generation note to the response
+            processedMessage = message.replace(/\[IMAGE_GENERATION_TRIGGER\][\s\S]*?\[PROMPT:/, 
+              `[IMAGE_GENERATED: ${imageType} - ${description}]\n\n`);
+          }
+        } catch (error) {
+          console.error('Image generation from trigger failed:', error);
+        }
+      }
+    }
+
+    // Check for ASCII_MAP
+    const asciiMapMatch = message.match(/\[ASCII_MAP\][\s\S]*?\[LEGEND\][\s\S]*?\[PROMPT:/);
+    if (asciiMapMatch) {
+      // ASCII map is already formatted, just ensure it's properly displayed
+      processedMessage = message.replace(/\[ASCII_MAP\]/g, '\n[ASCII_MAP]\n');
+    }
+
+    return {
+      ...response,
+      message: processedMessage
+    };
+  }
+
+  /**
+   * Generate image based on description using prompt SDK
    */
   async generateImage(imageDescription, imageType = 'ITEM') {
     try {
-      const prompt = `Create a fantasy ${imageType.toLowerCase()} image: ${imageDescription}. ` +
-        `Style: Detailed fantasy artwork, suitable for a tabletop RPG game. ` +
-        `Quality: High resolution, professional illustration style.`;
+      // Load the image creator prompt SDK
+      const imagePrompt = promptLoader.getImageCreatorPrompt();
+      
+      let prompt;
+      if (imagePrompt) {
+        // Use the SDK prompt with the specific image request
+        prompt = `${imagePrompt}\n\n[IMAGE_REQUEST]\nType: ${imageType}\nSubject: ${imageDescription}\nDescription: ${imageDescription}\nContext: Daggerheart MUD game\nMood: Fantasy adventure atmosphere`;
+      } else {
+        // Fallback to original prompt
+        prompt = `Create a fantasy ${imageType.toLowerCase()} image: ${imageDescription}. ` +
+          `Style: Detailed fantasy artwork, suitable for a tabletop RPG game. ` +
+          `Quality: High resolution, professional illustration style.`;
+      }
 
       const result = await imageModel.generateContent(prompt);
       const response = await result.response;

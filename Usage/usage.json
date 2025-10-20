@@ -1,13 +1,53 @@
 {
-  "export_timestamp": "2025-10-19T16:26:56.354446",
-  "project_id": "gen-lang-client-0919718700",
-  "analysis": {},
-  "usage_data": [],
+  "export_timestamp": "2025-10-20T14:22:39.245241",
+  "monitor_type": "simple_gemini_monitor",
+  "analysis": {
+    "total_calls": 1,
+    "successful_calls": 1,
+    "failed_calls": 0,
+    "success_rate": 1.0,
+    "total_tokens": 42,
+    "total_cost": 1e-05,
+    "average_tokens_per_call": 42.0,
+    "average_cost_per_call": 1e-05,
+    "estimated_daily_cost": 0.0,
+    "estimated_monthly_cost": 0.01
+  },
+  "quota_info": {
+    "requests_per_minute": 15,
+    "tokens_per_minute": 1000000,
+    "tokens_per_day": 50000000,
+    "requests_per_day": 1000,
+    "current_usage_requests": 1,
+    "current_usage_tokens": 42,
+    "current_cost": 1e-05
+  },
+  "usage_data": [
+    {
+      "timestamp": "2025-10-20T14:22:37.600977",
+      "request_type": "generate_content",
+      "model": "gemini-2.5-flash",
+      "prompt_length": 58,
+      "response_length": 139,
+      "estimated_input_tokens": 14,
+      "estimated_output_tokens": 28,
+      "estimated_total_tokens": 42,
+      "input_cost": 1e-06,
+      "output_cost": 9e-06,
+      "total_cost": 1e-05,
+      "duration_seconds": 1.644,
+      "success": true,
+      "error": null,
+      "actual_input_tokens": 14,
+      "actual_output_tokens": 26,
+      "actual_total_tokens": 74
+    }
+  ],
   "summary": {
-    "total_records": 0,
+    "total_records": 1,
     "date_range": {
-      "start": null,
-      "end": null
+      "start": "2025-10-20T14:22:37.600977",
+      "end": "2025-10-20T14:22:37.600977"
     }
   }
 }
