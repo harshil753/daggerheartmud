@@ -74,13 +74,24 @@ class CommandParser {
    * Execute a parsed command
    */
   async executeCommand(parsedCommand, gameState, aiService) {
-    const { command, args, isValid } = parsedCommand;
+    const { command, args, isValid, originalInput } = parsedCommand;
 
     if (!isValid) {
-      return {
-        success: false,
-        message: `Unknown command: ${command}. Type 'help' for available commands.`
-      };
+      // Send unrecognized commands to AI Dungeon Master
+      try {
+        const aiResponse = await aiService.processPlayerInput(originalInput, gameState);
+        return {
+          success: true,
+          message: aiResponse,
+          data: gameState // AI may have updated game state
+        };
+      } catch (error) {
+        console.error('AI processing error:', error);
+        return {
+          success: false,
+          message: `Unknown command: ${command}. Type 'help' for available commands.`
+        };
+      }
     }
 
     try {

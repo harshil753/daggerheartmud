@@ -46,6 +46,29 @@ class DungeonMaster {
   }
 
   /**
+   * Process any player input with AI (for unrecognized commands)
+   */
+  async processPlayerInput(input, gameState) {
+    await this.initializeAI();
+
+    const prompt = this.buildGeneralPrompt(input, gameState);
+    
+    try {
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+
+      // Update conversation history
+      this.updateConversationHistory(gameState, 'player_input', [input], { message: text });
+
+      return text;
+    } catch (error) {
+      console.error('AI processing error:', error);
+      return 'The Dungeon Master seems distracted. Please try again.';
+    }
+  }
+
+  /**
    * Process a player command through the AI DM
    */
   async processCommand(command, args, gameState) {
@@ -135,6 +158,79 @@ class DungeonMaster {
 
     // Add command-specific instructions
     prompt += this.getCommandInstructions(command, args);
+
+    return prompt;
+  }
+
+  /**
+   * Build prompt for general player input (unrecognized commands)
+   */
+  buildGeneralPrompt(input, gameState) {
+    const { character, campaign, currentLocation, combat } = gameState;
+    const history = gameState.aiContext?.conversationHistory || [];
+    
+    let prompt = '';
+    
+    // Only include full context if this is the first interaction (no history)
+    if (history.length === 0) {
+      prompt += `${this.fullContext.fullContext}\n\n`;
+      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+      prompt += `Respond in character as a helpful, engaging DM. `;
+      prompt += `Use the Daggerheart rules and equipment data provided above.\n\n`;
+    } else {
+      // For subsequent interactions, just provide the DM role
+      prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
+      prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
+    }
+    
+    // Add current game state
+    if (character) {
+      prompt += `CURRENT CHARACTER:\n`;
+      prompt += `Name: ${character.name}\n`;
+      prompt += `Ancestry: ${character.ancestry}\n`;
+      prompt += `Class: ${character.class}\n`;
+      prompt += `Level: ${character.level}\n`;
+      prompt += `HP: ${character.hit_points_current}/${character.hit_points_max}\n`;
+      prompt += `Stress: ${character.stress_current}/${character.stress_max}\n\n`;
+    }
+
+    if (campaign) {
+      prompt += `CURRENT CAMPAIGN:\n`;
+      prompt += `Title: ${campaign.title}\n`;
+      prompt += `Chapter: ${campaign.current_chapter}/${campaign.total_chapters}\n`;
+      prompt += `Story Length: ${campaign.story_length}\n\n`;
+    }
+
+    if (currentLocation) {
+      prompt += `CURRENT LOCATION: ${currentLocation}\n\n`;
+    }
+
+    if (combat) {
+      prompt += `COMBAT ACTIVE:\n`;
+      prompt += `Round: ${combat.round_number}\n`;
+      prompt += `Initiative: ${JSON.stringify(combat.initiative_order)}\n\n`;
+    }
+
+    // Add conversation history for context
+    if (history.length > 0) {
+      prompt += `RECENT CONVERSATION:\n`;
+      history.slice(-10).forEach(entry => {
+        prompt += `${entry.role}: ${entry.content}\n`;
+      });
+      prompt += `\n`;
+    }
+
+    // Add general instructions for player input
+    prompt += `PLAYER INPUT: "${input}"\n\n`;
+    prompt += `The player has provided input that is not a recognized game command. `;
+    prompt += `As the Dungeon Master, you should:\n`;
+    prompt += `1. Interpret their input in the context of the current game situation\n`;
+    prompt += `2. Respond as their character would experience it\n`;
+    prompt += `3. If it's a valid action, describe what happens\n`;
+    prompt += `4. If it's unclear or invalid, guide them toward valid actions\n`;
+    prompt += `5. Keep responses engaging and in character\n`;
+    prompt += `6. If they're trying to do something that requires a specific command, suggest the proper command\n\n`;
+    prompt += `Respond as the Dungeon Master would to this player input:`;
 
     return prompt;
   }
