@@ -87,6 +87,12 @@ export default function Terminal({
         if (connectionTimeout) {
           clearTimeout(connectionTimeout);
         }
+        
+        // Join the game session
+        socket.emit('join_game', {
+          userId: isGuest ? `guest_${Date.now()}` : 'user',
+          isGuest: isGuest
+        });
       });
 
       socket.on('disconnect', (reason) => {
@@ -111,7 +117,23 @@ export default function Terminal({
         onGameStateChange(gameState);
       });
 
-      socket.on('gameOutput', (data) => {
+      socket.on('command_response', (data) => {
+        if (terminalInstanceRef.current) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              // Apply color based on success/failure
+              if (data.success === false) {
+                div.css('color', '#ff6b6b'); // Red for errors
+              } else {
+                div.css('color', '#51cf66'); // Green for success
+              }
+            }
+          });
+        }
+      });
+
+      socket.on('game_message', (data) => {
         if (terminalInstanceRef.current) {
           terminalInstanceRef.current.echo(data.message, {
             raw: true,
@@ -147,7 +169,7 @@ export default function Terminal({
             }
 
             // Send command to server
-            socket.emit('playerCommand', {
+            socket.emit('player_command', {
               command: command.trim(),
               isGuest: isGuest
             });
