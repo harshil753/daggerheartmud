@@ -129,7 +129,7 @@ backend/
 app/
 ├── page.tsx               # Main entry point
 ├── components/
-│   ├── Terminal.tsx       # xterm.js terminal
+│   ├── Terminal.tsx       # jQuery Terminal
 │   ├── GameControls.tsx   # Dice roller, stats panel
 │   ├── InventoryPanel.tsx # Equipment display
 │   ├── StatsPanel.tsx    # Character stats

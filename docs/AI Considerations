@@ -97,7 +97,7 @@ Creating a responsive and interactive ASCII terminal interface within a web brow
 Leverage existing libraries to handle the terminal emulation and structure your UI in a modular way with React components.
 
 *   **Implementation:**
-    *   **Terminal Emulation:** Use a library like `xterm.js` to create a terminal interface within your Next.js application. This will handle input, output, and the classic terminal aesthetic.
+    *   **Terminal Emulation:** Use jQuery Terminal to create a terminal interface within your Next.js application. This will handle input, output, and the classic terminal aesthetic.
     *   **Component-Based Design:** Break down your UI into reusable React components. For example, you could have components for the main game output, the command input line, player stats display, and inventory. This will make your code easier to manage and update.
 
 **Pitfall 5: Potential for Latency and Concurrency Issues**

@@ -46,7 +46,7 @@ npm run dev
 ## 🏗️ Architecture
 
 ### Frontend (Next.js + Vercel)
-- **Terminal Interface**: xterm.js for ASCII terminal emulation
+- **Terminal Interface**: jQuery Terminal for ASCII terminal emulation
 - **Game Components**: React components for UI panels
 - **WebSocket Client**: Real-time communication with backend
 - **Guest Mode**: SessionStorage-based temporary sessions
