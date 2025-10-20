@@ -120,16 +120,15 @@ export default function GameSession({
           {/* Left Section - LOCKED at 75% width */}
           <div className="game-left-section" style={{ width: '75%' }}>
             <div className="game-panels">
-              {activePanel === 'terminal' && (
-                <div className="terminal-panel">
-                  <Terminal 
-                    onGameStateChange={handleGameStateChange}
-                    isGuest={isGuest}
-                    onLogout={onLogout}
-                    onConnectionChange={handleConnectionChange}
-                  />
-                </div>
-              )}
+              {/* Terminal component always mounted to maintain WebSocket connection */}
+              <div className={`terminal-panel ${activePanel === 'terminal' ? 'visible' : 'hidden'}`}>
+                <Terminal 
+                  onGameStateChange={handleGameStateChange}
+                  isGuest={isGuest}
+                  onLogout={onLogout}
+                  onConnectionChange={handleConnectionChange}
+                />
+              </div>
 
               {activePanel === 'inventory' && (
                 <div className="inventory-panel">

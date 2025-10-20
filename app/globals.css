@@ -217,6 +217,14 @@ body {
   background: #0a0a0a;
 }
 
+.terminal-panel.hidden {
+  display: none;
+}
+
+.terminal-panel.visible {
+  display: block;
+}
+
 .inventory-panel {
   flex: 1;
   padding: 1rem;
