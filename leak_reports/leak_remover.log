@@ -1,0 +1,73 @@
+2025-10-20 12:25:25,663 - INFO - Running gitleaks to detect secrets...
+2025-10-20 12:25:51,602 - WARNING - Gitleaks returned non-zero exit code: 1
+2025-10-20 12:25:51,602 - WARNING - Stderr: 
+    ○
+    │╲
+    │ ○
+    ○ ░
+    ░    gitleaks
+
+[90m12:25PM[0m [32mINF[0m [1m28 commits scanned.[0m
+[90m12:25PM[0m [32mINF[0m [1mscanned ~82571167 bytes (82.57 MB) in 24.2s[0m
+[90m12:25PM[0m [33mWRN[0m [1mleaks found: 9[0m
+
+2025-10-20 12:25:51,602 - INFO - Gitleaks report saved to: leak_reports\gitleaks_report.json
+2025-10-20 12:25:51,602 - INFO - Found 9 potential leaks
+2025-10-20 12:25:51,602 - INFO - Leaks exported to CSV: leak_reports\leaks.csv
+2025-10-20 12:25:51,602 - INFO - Manual removal script created: leak_reports\manual_leak_removal.py
+2025-10-20 12:29:21,310 - INFO - Running gitleaks to detect secrets...
+2025-10-20 12:29:27,755 - WARNING - Gitleaks returned non-zero exit code: 1
+2025-10-20 12:29:27,755 - WARNING - Stderr: 
+    ○
+    │╲
+    │ ○
+    ○ ░
+    ░    gitleaks
+
+[90m12:29PM[0m [32mINF[0m [1m28 commits scanned.[0m
+[90m12:29PM[0m [32mINF[0m [1mscanned ~82571167 bytes (82.57 MB) in 6s[0m
+[90m12:29PM[0m [33mWRN[0m [1mleaks found: 9[0m
+
+2025-10-20 12:29:27,755 - INFO - Gitleaks report saved to: leak_reports\gitleaks_report.json
+2025-10-20 12:29:27,757 - INFO - Found 9 potential leaks
+2025-10-20 12:29:27,759 - INFO - Leaks exported to CSV: leak_reports\leaks.csv
+2025-10-20 12:29:27,759 - INFO - Manual removal script created: leak_reports\manual_leak_removal.py
+2025-10-20 12:29:27,759 - INFO - Path removal script created: leak_reports\remove_leak_files.sh
+2025-10-20 12:31:24,641 - INFO - Running gitleaks to detect secrets...
+2025-10-20 12:31:31,248 - WARNING - Gitleaks returned non-zero exit code: 1
+2025-10-20 12:31:31,248 - WARNING - Stderr: 
+    ○
+    │╲
+    │ ○
+    ○ ░
+    ░    gitleaks
+
+[90m12:31PM[0m [32mINF[0m [1m28 commits scanned.[0m
+[90m12:31PM[0m [32mINF[0m [1mscanned ~82571167 bytes (82.57 MB) in 6.05s[0m
+[90m12:31PM[0m [33mWRN[0m [1mleaks found: 9[0m
+
+2025-10-20 12:31:31,248 - INFO - Gitleaks report saved to: leak_reports\gitleaks_report.json
+2025-10-20 12:31:31,248 - INFO - Found 9 potential leaks
+2025-10-20 12:31:31,248 - INFO - Leaks exported to CSV: leak_reports\leaks.csv
+2025-10-20 12:31:31,248 - INFO - Manual removal script created: leak_reports\manual_leak_removal.py
+2025-10-20 12:31:31,248 - INFO - Path removal script created: leak_reports\remove_leak_files.sh
+2025-10-20 12:33:27,522 - INFO - Starting full leak scan and removal process...
+2025-10-20 12:33:27,526 - INFO - Running gitleaks to detect secrets...
+2025-10-20 12:33:34,177 - WARNING - Gitleaks returned non-zero exit code: 1
+2025-10-20 12:33:34,177 - WARNING - Stderr: 
+    ○
+    │╲
+    │ ○
+    ○ ░
+    ░    gitleaks
+
+[90m12:33PM[0m [32mINF[0m [1m28 commits scanned.[0m
+[90m12:33PM[0m [32mINF[0m [1mscanned ~82571167 bytes (82.57 MB) in 6.33s[0m
+[90m12:33PM[0m [33mWRN[0m [1mleaks found: 9[0m
+
+2025-10-20 12:33:34,177 - INFO - Gitleaks report saved to: leak_reports\gitleaks_report.json
+2025-10-20 12:33:34,177 - INFO - Found 9 potential leaks
+2025-10-20 12:33:34,177 - INFO - Filter-repo script created: leak_reports\filter_repo_script.py
+2025-10-20 12:33:34,181 - INFO - Path removal script created: leak_reports\remove_leak_files.sh
+2025-10-20 12:33:34,181 - INFO - Manual removal script created: leak_reports\manual_leak_removal.py
+2025-10-20 12:33:34,181 - INFO - Leak detection completed. Check the output directory for reports and scripts.
