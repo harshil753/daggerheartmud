@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 
 interface TerminalProps {
@@ -26,6 +26,7 @@ export default function Terminal({
   const terminalRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<any>(null);
   const terminalInstanceRef = useRef<any>(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     // Prevent multiple initializations
@@ -83,6 +84,7 @@ export default function Terminal({
 
       socket.on('connect', () => {
         console.log('Connected to game server');
+        setIsConnected(true);
         onConnectionChange(true);
         if (connectionTimeout) {
           clearTimeout(connectionTimeout);
@@ -97,6 +99,7 @@ export default function Terminal({
 
       socket.on('disconnect', (reason) => {
         console.log('Disconnected from game server:', reason);
+        setIsConnected(false);
         onConnectionChange(false);
         
         // Only attempt to reconnect if it wasn't a manual disconnect
@@ -110,6 +113,7 @@ export default function Terminal({
 
       socket.on('connect_error', (error) => {
         console.log('Connection error:', error);
+        setIsConnected(false);
         onConnectionChange(false);
       });
 
@@ -142,6 +146,91 @@ export default function Terminal({
               if (data.color) {
                 div.css('color', data.color);
               }
+            }
+          });
+        }
+      });
+
+      // Handle game session events
+      socket.on('game_joined', (data) => {
+        console.log('Game joined successfully:', data);
+        if (terminalInstanceRef.current && data.message) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              div.css('color', '#51cf66'); // Green for success
+            }
+          });
+        }
+      });
+
+      socket.on('character_created', (data) => {
+        console.log('Character created:', data);
+        if (terminalInstanceRef.current && data.message) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              div.css('color', '#51cf66'); // Green for success
+            }
+          });
+        }
+      });
+
+      socket.on('character_creation_error', (data) => {
+        console.log('Character creation error:', data);
+        if (terminalInstanceRef.current && data.message) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              div.css('color', '#ff6b6b'); // Red for errors
+            }
+          });
+        }
+      });
+
+      socket.on('campaign_created', (data) => {
+        console.log('Campaign created:', data);
+        if (terminalInstanceRef.current && data.message) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              div.css('color', '#51cf66'); // Green for success
+            }
+          });
+        }
+      });
+
+      socket.on('campaign_creation_error', (data) => {
+        console.log('Campaign creation error:', data);
+        if (terminalInstanceRef.current && data.message) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              div.css('color', '#ff6b6b'); // Red for errors
+            }
+          });
+        }
+      });
+
+      socket.on('combat_started', (data) => {
+        console.log('Combat started:', data);
+        if (terminalInstanceRef.current && data.message) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              div.css('color', '#ffd43b'); // Yellow for combat
+            }
+          });
+        }
+      });
+
+      socket.on('error', (data) => {
+        console.log('Server error:', data);
+        if (terminalInstanceRef.current && data.message) {
+          terminalInstanceRef.current.echo(data.message, {
+            raw: true,
+            finalize: (div: any) => {
+              div.css('color', '#ff6b6b'); // Red for errors
             }
           });
         }
@@ -240,7 +329,9 @@ export default function Terminal({
   return (
     <div className="terminal-container">
       <div className="terminal-status">
-        <span className="status-indicator disconnected">Disconnected</span>
+        <span className={`status-indicator ${isConnected ? 'connected' : 'disconnected'}`}>
+          {isConnected ? 'Connected' : 'Disconnected'}
+        </span>
       </div>
       <div ref={terminalRef} className="terminal" />
     </div>
