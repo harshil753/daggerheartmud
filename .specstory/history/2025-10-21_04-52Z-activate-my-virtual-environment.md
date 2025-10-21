@@ -980,7 +980,519 @@ Lines added: 16, lines removed: 1
 
 ---
 
+Now I'll add the dice counter functions:
 
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 37, lines removed: undefined
+
+```diff
+@@ -27,4 +27,41 @@
+    } | null>(null);
+  
++   const updateDiceCount = (diceType: keyof typeof diceCounts, delta: number) => {
++     setDiceCounts(prev => ({
++       ...prev,
++       [diceType]: Math.max(0, Math.min(99, prev[diceType] + delta))
++     }));
++   };
++ 
++   const rollDice = (sides: number, count: number): number[] => {
++     const results: number[] = [];
++     for (let i = 0; i < count; i++) {
++       results.push(Math.floor(Math.random() * sides) + 1);
++     }
++     return results;
++   };
++ 
++   const rollAllDice = () => {
++     const results: { [key: string]: number[] } = {};
++     let total = 0;
++ 
++     Object.entries(diceCounts).forEach(([diceType, count]) => {
++       if (count > 0) {
++         const sides = parseInt(diceType.substring(1));
++         const diceResults = rollDice(sides, count);
++         results[diceType] = diceResults;
++         total += diceResults.reduce((sum, result) => sum + result, 0);
++       }
++     });
++ 
++     setDiceResults({
++       results: results,
++       total: total
++     });
++   };
++ 
++   const getTotalDiceCount = () => {
++     return Object.values(diceCounts).reduce((sum, count) => sum + count, 0);
++   };
+  
+    const getCharacterStats = () => {
+```
+
+</details>
+
+---
+
+Now I'll replace the dice roller section with the new dice counter implementation:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 57, lines removed: 13
+
+```diff
+@@ -86,17 +86,61 @@
+      <div className="game-controls">
+        <div className="controls-section">
+-         <h3>Dice Roller</h3>
+-         <div className="action-buttons">
+-           {/* Client-side dice roller will be implemented here */}
+-         </div>
+-         
+-         {diceResult !== null && (
+-           <div className="dice-result">
+-             <span className="dice-label">Last Roll:</span>
+-             <span className={`dice-value ${diceResult >= 0 ? 'positive' : 'negative'}`}>
+-               {diceResult > 0 ? `+${diceResult}` : diceResult}
+-             </span>
+-           </div>
+-         )}
++         <h3>Dice Pool</h3>
++         <div className="dice-counter">
++           <div className="dice-list">
++             {Object.entries(diceCounts).map(([diceType, count]) => (
++               <div key={diceType} className="dice-item">
++                 <span className="dice-type">{diceType}:</span>
++                 <div className="dice-controls">
++                   <button 
++                     onClick={() => updateDiceCount(diceType as keyof typeof diceCounts, -1)}
++                     className="dice-btn minus-btn"
++                     disabled={count === 0}
++                   >
++                     -
++                   </button>
++                   <span className="dice-count">
++                     {count.toString().padStart(2, '0')}
++                   </span>
++                   <button 
++                     onClick={() => updateDiceCount(diceType as keyof typeof diceCounts, 1)}
++                     className="dice-btn plus-btn"
++                     disabled={count >= 99}
++                   >
++                     +
++                   </button>
++                 </div>
++               </div>
++             ))}
++           </div>
++           
++           <button 
++             onClick={rollAllDice}
++             className="roll-button"
++             disabled={getTotalDiceCount() === 0}
++           >
++             ROLL
++           </button>
++           
++           {diceResults && (
++             <div className="dice-results">
++               <div className="results-display">
++                 <span className="results-label">Result:</span>
++                 <div className="results-list">
++                   {Object.entries(diceResults.results).map(([diceType, results]) => (
++                     <div key={diceType} className="result-item">
++                       <span className="result-dice-type">{diceType}:</span>
++                       <span className="result-values">[{results.join(', ')}]</span>
++                     </div>
++                   ))}
++                 </div>
++               </div>
++               <div className="total-display">
++                 <span className="total-label">Total Sum:</span>
++                 <span className="total-value">{diceResults.total}</span>
++               </div>
++             </div>
++           )}
++         </div>
+        </div>
+  
+```
+
+</details>
+
+---
+
+Now I need to add the CSS styles for the dice counter. Let me add them to the globals.css file:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/globals.css</summary>
+
+**Chunk 1**
+Lines added: 159, lines removed: undefined
+
+```diff
+@@ -407,4 +407,163 @@
+    color: #ff0000;
+  }
++ 
++ /* Dice Counter Styling */
++ .dice-counter {
++   display: flex;
++   flex-direction: column;
++   gap: 1rem;
++ }
++ 
++ .dice-list {
++   display: flex;
++   flex-direction: column;
++   gap: 0.5rem;
++ }
++ 
++ .dice-item {
++   display: flex;
++   justify-content: space-between;
++   align-items: center;
++   padding: 0.5rem;
++   background: #333;
++   border-radius: 4px;
++   border: 1px solid #555;
++ }
++ 
++ .dice-type {
++   font-weight: bold;
++   color: #fff;
++   min-width: 2.5rem;
++ }
++ 
++ .dice-controls {
++   display: flex;
++   align-items: center;
++   gap: 0.5rem;
++ }
++ 
++ .dice-btn {
++   width: 1.5rem;
++   height: 1.5rem;
++   background: #007acc;
++   color: white;
++   border: none;
++   border-radius: 3px;
++   cursor: pointer;
++   font-weight: bold;
++   font-size: 0.875rem;
++   display: flex;
++   align-items: center;
++   justify-content: center;
++   transition: background 0.2s;
++ }
++ 
++ .dice-btn:hover:not(:disabled) {
++   background: #005a99;
++ }
++ 
++ .dice-btn:disabled {
++   background: #555;
++   cursor: not-allowed;
++   opacity: 0.6;
++ }
++ 
++ .dice-count {
++   min-width: 2rem;
++   text-align: center;
++   color: #fff;
++   font-weight: bold;
++   font-family: 'Courier New', monospace;
++   font-size: 0.875rem;
++ }
++ 
++ .roll-button {
++   padding: 0.75rem;
++   background: #007acc;
++   color: white;
++   border: none;
++   border-radius: 4px;
++   cursor: pointer;
++   font-weight: bold;
++   font-size: 1rem;
++   transition: background 0.2s;
++   text-transform: uppercase;
++ }
++ 
++ .roll-button:hover:not(:disabled) {
++   background: #005a99;
++ }
++ 
++ .roll-button:disabled {
++   background: #555;
++   cursor: not-allowed;
++   opacity: 0.6;
++ }
++ 
++ .dice-results {
++   display: flex;
++   flex-direction: column;
++   gap: 0.75rem;
++   padding: 0.75rem;
++   background: #333;
++   border-radius: 4px;
++   border: 1px solid #555;
++ }
++ 
++ .results-display {
++   display: flex;
++   flex-direction: column;
++   gap: 0.5rem;
++ }
++ 
++ .results-label {
++   font-size: 0.875rem;
++   color: #ccc;
++   font-weight: bold;
++ }
++ 
++ .results-list {
++   display: flex;
++   flex-direction: column;
++   gap: 0.25rem;
++ }
++ 
++ .result-item {
++   display: flex;
++   gap: 0.5rem;
++   font-size: 0.875rem;
++ }
++ 
++ .result-dice-type {
++   color: #fff;
++   font-weight: bold;
++   min-width: 2.5rem;
++ }
++ 
++ .result-values {
++   color: #00ff00;
++   font-family: 'Courier New', monospace;
++ }
++ 
++ .total-display {
++   display: flex;
++   justify-content: space-between;
++   align-items: center;
++   padding-top: 0.5rem;
++   border-top: 1px solid #555;
++ }
++ 
++ .total-label {
++   font-size: 0.875rem;
++   color: #ccc;
++   font-weight: bold;
++ }
++ 
++ .total-value {
++   color: #00ff00;
++   font-weight: bold;
++   font-size: 1rem;
++   font-family: 'Courier New', monospace;
++ }
+  
+  .character-stats {
+```
+
+</details>
+
+---
+
+Let me check for any linting errors in the files I've modified:
+
+
+---
+
+Tool use: **read_lints**
+
+<details>
+          <summary>Read lints for 2 files</summary>
+      
+Lint paths:
+
+- `app/components/GameControls.tsx`
+- `app/globals.css`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+
+---
+
+Perfect! I've successfully created a dice counter component that matches the current design aesthetic. Here's what I've implemented:
+
+## Dice Counter Features:
+
+1. **Dice Pool Title** - Changed from "Dice Roller" to "Dice Pool" to match the reference
+2. **Dice Type List** - All six dice types (d4, d6, d8, d10, d12, d20) listed vertically
+3. **Counter Controls** - Each dice type has:
+   - A `-` button (disabled when count is 0)
+   - A counter display showing the count with leading zeros (e.g., "00", "05")
+   - A `+` button (disabled when count reaches 99)
+4. **ROLL Button** - Only active when at least one die is selected
+5. **Result Display** - Shows:
+   - Individual results for each dice type (e.g., "d4: [3], d6: [5, 2]")
+   - Total sum of all rolled dice
+
+## Design Features:
+
+- **Dark theme** matching the existing UI with #333 backgrounds and #555 borders
+- **Blue accent color** (#007acc) for buttons, consistent with existing design
+- **Monospace font** for counters and results to match the terminal aesthetic
+- **Green text** (#00ff00) for results and totals
+- **Proper spacing and padding** to fit within the sidebar column
+- **Disabled states** for buttons when limits are reached
+- **Hover effects** for better user interaction
+
+The dice counter is now fully functional and ready to use!
+
+---
+
+_**User (2025-10-21 04:52Z)**_
+
+is my current script loading the ai context starting data and if so from where 
+
+---
+
+_**Assistant (default)**_
+
+I'll help you check if your current script is loading AI context starting data and identify where it's coming from. Let me examine the relevant files to understand the AI context loading process.
+
+
+---
+
+Tool use: **codebase_search**
+
+<details>
+                <summary>Searched codebase "How is AI context or starting data loaded in the application?" • **12** results</summary>
+            
+| File | Lines |
+|------|-------|
+| `backend/utils/geminiContext.js` | L53 |
+| `backend/services/dungeonMaster.js` | L7-487 |
+| `backend/utils/geminiContext.js` | L27-75 |
+| `backend/utils/geminiContext.js` | L10-71 |
+| `docs/Dungeon_Master_Prompt.md` | L25 |
+| `supporting_functions/prompt_sdks/dungeon_master.txt` | L44 |
+| `backend/services/promptLoader.js` | L5-104 |
+| `supporting_functions/prompt_sdks/dungeon_master_wrong.txt` | L44 |
+| `backend/services/dungeonMaster.js` | L487 |
+| `backend/services/gameStateManager.js` | L4-145 |
+| `.cursor/plans/daggerheart-mud-mvp-cbb7ae8e.plan.md` | L135-216 |
+| `app/components/GuestSession.tsx` | L4-106 |
+
+</details>
+
+---
+
+Now let me examine the specific files that handle AI context loading:
+
+
+---
+
+Tool use: **read_file**
+
+Read file: backend/utils/geminiContext.js
+
+---
+
+Tool use: **read_file**
+
+Read file: backend/services/dungeonMaster.js
+
+---
+
+Tool use: **read_file**
+
+Read file: backend/services/promptLoader.js
+
+---
+
+Now let me check what files are being loaded as AI context:
+
+
+---
+
+Tool use: **list_dir**
+
+<details>
+            <summary>Listed directory undefined • **0** results</summary>
+        
+No results found
+</details>
+
+---
+
+Tool use: **read_file**
+
+Read file: supporting_functions/prompt_sdks/dungeon_master.txt
+
+---
+
+Based on my analysis, **yes, your current script is loading AI context starting data**. Here's where it's coming from:
+
+## AI Context Loading Sources:
+
+### 1. **SRD (System Reference Document) Data**
+- **File**: `supporting_functions/Results/DH_SRD_Part_01_Pages_1-135.txt`
+- **Purpose**: Complete Daggerheart rules, mechanics, classes, ancestries
+- **Loaded by**: `backend/utils/geminiContext.js` → `loadSRDContext()`
+
+### 2. **Equipment Database**
+- **File**: `supporting_functions/Results/equipment_data.json`
+- **Purpose**: Weapons, armor, consumables, magical items
+- **Loaded by**: `backend/utils/geminiContext.js` → `loadEquipmentContext()`
+
+### 3. **Dungeon Master Prompt SDK**
+- **File**: `supporting_functions/prompt_sdks/dungeon_master.txt`
+- **Purpose**: AI behavior instructions and system prompts
+- **Loaded by**: `backend/services/promptLoader.js` → `loadDungeonMasterPrompt()`
+
+## Loading Process:
+
+1. **Initialization**: When the DungeonMaster service starts (`backend/services/dungeonMaster.js`)
+2. **Context Loading**: Calls `getFullContext()` from `geminiContext.js`
+3. **Data Sources**: 
+   - SRD text from the processed PDF
+   - Equipment data from scraped JSON
+   - Prompt SDK for AI behavior
+4. **Integration**: All data is combined into a single context string
+5. **Usage**: Context is loaded once per server instance and reused
+
+## Key Files Involved:
+
+- `backend/utils/geminiContext.js` - Main context loader
+- `backend/services/dungeonMaster.js` - AI service that uses the context
+- `backend/services/promptLoader.js` - Loads prompt SDKs
+- `supporting_functions/Results/` - Contains the actual data files
+- `supporting_functions/prompt_sdks/` - Contains AI behavior prompts
+
+The system loads this context data once when the server starts and reuses it for all AI interactions, ensuring consistent game mechanics and rules throughout the session.
 
 ---
 

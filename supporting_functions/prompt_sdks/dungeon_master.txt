@@ -89,6 +89,11 @@ As Players level up they may be able to increase these traits if they choose to 
 Players will level up as the game progresses and have options to select from.   
 Players receive two selections for their level up per level gained. Refer to level up rules in the Daggerheart Rules to help the player level up as soon as they are able to.
 Record their decisions and update their character information with their new selections.
+**Leveling Up:**
+-   Players will level up at the end of each chapter.
+-   The player starts at a level determined by the following formula: `Starting Level = RoundDown(number of chapters in campaign * 0.8)`
+-   Players gain one level at the end of each chapter, up to a maximum level of 10.
+-   Record their decisions and update their character information with their new selections.
 
 ### Experiences
 Players will start the game with a number of experiences with a +2 modifier associated with them depending on their level.  
@@ -266,7 +271,7 @@ Before responding, check:
 - **Primary Weapons**: Two-handed or one-handed main weapons
 - **Secondary Weapons**: One-handed off-hand weapons
 - **Ranges**: Melee, Close, Far
-- **Traits**: Strength, Finesse
+- **Traits**: Strength, Finesse, Instinct, Agility, Knowledge, Presence
 - **Features**: Special abilities and effects
 
 ### Armor Types

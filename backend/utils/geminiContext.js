@@ -12,7 +12,7 @@ function loadSRDContext() {
   if (srdContext) return srdContext;
   
   try {
-    const srdPath = path.join(__dirname, '../../supporting_functions/Results/DH_SRD_Part_01_Pages_1-135.txt');
+    const srdPath = path.join(__dirname, '../../supporting_functions/Results/DH_SRD_Part_01_Pages_1-415.txt');
     srdContext = fs.readFileSync(srdPath, 'utf8');
     console.log('SRD context loaded successfully');
     return srdContext;
