@@ -61,3 +61,926 @@ Your virtual environment is now activated! You should see `(venv)` in your comma
 
 ---
 
+_**User (2025-10-21 04:52Z)**_
+
+lets remove these buttons here but preserve the div I want to put a client side dice roller in this space 
+
+---
+
+_**Assistant (default)**_
+
+I can see you want to remove the buttons (Roll Dice, Save, Rest) from the UI while preserving the div container to add a client-side dice roller. Let me first examine the current code to understand the structure and then make the changes.
+
+
+---
+
+Tool use: **codebase_search**
+
+<details>
+                <summary>Searched codebase "Where are the Roll Dice, Save, and Rest buttons implemented in the UI components?" • **12** results</summary>
+            
+| File | Lines |
+|------|-------|
+| `app/components/GameControls.tsx` | L9-145 |
+| `app/components/GameSession.tsx` | L8-182 |
+| `app/components/GameSession.tsx` | L12-182 |
+| `app/components/GameControls.tsx` | L145 |
+| `app/components/GameControls.tsx` | L4-145 |
+| `app/globals.css` | L331-467 |
+| `docs/LAYOUT_LOCK.md` | L56 |
+| `docs/COMMANDS.md` | L63 |
+| `app/components/GuestSession.tsx` | L7-106 |
+| `.cursor/plans/daggerheart-mud-mvp-cbb7ae8e.plan.md` | L296-387 |
+| `app/components/CampaignConfigurator.tsx` | L6-122 |
+| `app/page.tsx` | L5-99 |
+
+</details>
+
+---
+
+Now let me read the full GameControls component to understand the complete structure:
+
+
+---
+
+Tool use: **read_file**
+
+Read file: app/components/GameControls.tsx
+
+---
+
+Perfect! I can see the structure. The buttons are in the `action-buttons` div within the `controls-section`. I'll remove the buttons while preserving the div structure so you can add your client-side dice roller. Let me modify the GameControls component:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 2, lines removed: 24
+
+```diff
+@@ -56,29 +56,7 @@
+      <div className="game-controls">
+        <div className="controls-section">
+-         <h3>Quick Actions</h3>
++         <h3>Dice Roller</h3>
+          <div className="action-buttons">
+-           <button 
+-             onClick={rollDice}
+-             className="dice-button"
+-             title="Roll 2d12 (Hope - Fear dice)"
+-           >
+-             🎲 Roll Dice
+-           </button>
+-           
+-           <button 
+-             onClick={onSave}
+-             className="save-button"
+-             title="Create manual save point"
+-           >
+-             💾 Save
+-           </button>
+-           
+-           <button 
+-             onClick={onRest}
+-             className="rest-button"
+-             title="Rest to recover HP and stress"
+-           >
+-             😴 Rest
+-           </button>
++           {/* Client-side dice roller will be implemented here */}
+          </div>
+          
+```
+
+</details>
+
+---
+
+Now I need to clean up the unused functions and props since we removed the buttons. Let me update the component to remove the unused code:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: undefined, lines removed: 3
+
+```diff
+@@ -4,7 +4,4 @@
+  
+  interface GameControlsProps {
+-   onDiceRoll?: () => void;
+-   onSave?: () => void;
+-   onRest?: () => void;
+    gameState?: any;
+  }
+```
+
+</details>
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: undefined, lines removed: 3
+
+```diff
+@@ -8,7 +8,4 @@
+  
+  export default function GameControls({ 
+-   onDiceRoll, 
+-   onSave, 
+-   onRest, 
+    gameState 
+  }: GameControlsProps) {
+```
+
+</details>
+
+---
+
+Now I need to remove the unused `rollDice` function since it's no longer being used:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: undefined, lines removed: 16
+
+```diff
+@@ -12,20 +12,4 @@
+    const [diceResult, setDiceResult] = useState<number | null>(null);
+  
+-   const rollDice = () => {
+-     // Roll 2d12 (Hope and Fear dice)
+-     const hopeDie = Math.floor(Math.random() * 12) + 1;
+-     const fearDie = Math.floor(Math.random() * 12) + 1;
+-     const result = hopeDie - fearDie;
+-     
+-     setDiceResult(result);
+-     onDiceRoll?.();
+-     
+-     // Send dice roll to terminal
+-     const terminal = document.querySelector('.terminal');
+-     if (terminal) {
+-       // This would be handled by the WebSocket connection
+-       console.log(`Dice roll: Hope ${hopeDie} - Fear ${fearDie} = ${result}`);
+-     }
+-   };
+  
+    const getCharacterStats = () => {
+```
+
+</details>
+
+---
+
+Now I need to update the GameSession component to remove the unused props being passed to GameControls:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameSession.tsx</summary>
+
+**Chunk 1**
+Lines added: undefined, lines removed: 3
+
+```diff
+@@ -162,7 +162,4 @@
+            <div className="game-sidebar" style={{ width: '25%' }}>
+              <GameControls 
+-               onDiceRoll={handleDiceRoll}
+-               onSave={handleSave}
+-               onRest={handleRest}
+                gameState={gameState}
+              />
+```
+
+</details>
+
+---
+
+Let me check for any linting errors in the files I've modified:
+
+
+---
+
+Tool use: **read_lints**
+
+<details>
+          <summary>Read lints for 2 files</summary>
+      
+Lint paths:
+
+- `app/components/GameControls.tsx`
+- `app/components/GameSession.tsx`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+
+---
+
+Perfect! I've successfully removed the three buttons (Roll Dice, Save, Rest) while preserving the div structure. Here's what I've done:
+
+## Changes Made:
+
+1. **Removed the three buttons** from the `action-buttons` div in `GameControls.tsx`
+2. **Updated the section title** from "Quick Actions" to "Dice Roller" 
+3. **Cleaned up unused code**:
+   - Removed unused props (`onDiceRoll`, `onSave`, `onRest`) from the interface
+   - Removed the `rollDice` function that was no longer needed
+   - Updated the component props in `GameSession.tsx` to only pass `gameState`
+4. **Preserved the div structure** - the `action-buttons` div is still there with a comment indicating where your client-side dice roller will go
+
+The div container is now ready for you to implement your client-side dice roller. The existing dice result display functionality is still preserved, so you can integrate it with your new dice roller implementation.
+
+---
+
+_**User (2025-10-21 04:52Z)**_
+
+add 8 more helpful commands here 
+
+---
+
+_**Assistant (default)**_
+
+I'll add 8 more helpful commands to the Quick Help section in the GameControls component. Let me update the help commands list:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 24, lines removed: undefined
+
+```diff
+@@ -96,4 +96,28 @@
+              <code>help</code> - Full command list
+            </div>
++           <div className="command-item">
++             <code>move</code> - Travel to new location
++           </div>
++           <div className="command-item">
++             <code>talk</code> - Speak with NPCs
++           </div>
++           <div className="command-item">
++             <code>attack</code> - Engage in combat
++           </div>
++           <div className="command-item">
++             <code>equip</code> - Wear equipment
++           </div>
++           <div className="command-item">
++             <code>use</code> - Use items or abilities
++           </div>
++           <div className="command-item">
++             <code>rest</code> - Recover HP and stress
++           </div>
++           <div className="command-item">
++             <code>save</code> - Create save point
++           </div>
++           <div className="command-item">
++             <code>roll</code> - Make dice rolls
++           </div>
+          </div>
+        </div>
+```
+
+</details>
+
+---
+
+Perfect! I've added 8 more helpful commands to the Quick Help section. The new commands include:
+
+1. **`move`** - Travel to new location
+2. **`talk`** - Speak with NPCs  
+3. **`attack`** - Engage in combat
+4. **`equip`** - Wear equipment
+5. **`use`** - Use items or abilities
+6. **`rest`** - Recover HP and stress
+7. **`save`** - Create save point
+8. **`roll`** - Make dice rolls
+
+These commands cover the essential gameplay actions for a Daggerheart MUD, including movement, interaction, combat, equipment management, and game mechanics. The commands follow the same format as the existing ones and will help players understand the available actions in the game.
+
+---
+
+_**User (2025-10-21 04:52Z)**_
+
+Lets create the diceroller here it should display in the following format widen the div a little bit and make the dice roller match the aesthetic of the current design
+
+d4     | # of dice
+d6     | # of dice
+d8     | # of dice
+d10   | # of dice
+d12   | # of dice
+d20   | # of dice
+
+results | each rolled die and its value
+total sum | sum of dice values 
+
+---
+
+_**Assistant (default)**_
+
+I'll create a dice roller component that matches the current design aesthetic. Let me implement this in the GameControls component:
+
+
+---
+
+Invalid: old_string and new_string are exactly the same.
+
+---
+
+Let me first read the current file to see its state:
+
+
+---
+
+Tool use: **read_file**
+
+Read file: app/components/GameControls.tsx
+
+---
+
+Now I'll implement the dice roller. I need to add state for the dice counts and results, and create the UI:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 16, lines removed: 1
+
+```diff
+@@ -11,5 +11,20 @@
+  }: GameControlsProps) {
+    const [diceResult, setDiceResult] = useState<number | null>(null);
+- 
++   
++   // Dice roller state
++   const [diceCounts, setDiceCounts] = useState({
++     d4: 0,
++     d6: 0,
++     d8: 0,
++     d10: 0,
++     d12: 0,
++     d20: 0
++   });
++   
++   const [diceResults, setDiceResults] = useState<{
++     results: number[];
++     total: number;
++   } | null>(null);
++ 
+  
+    const getCharacterStats = () => {
+```
+
+</details>
+
+---
+
+Now I'll add the dice rolling functions and update the dice roller section:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 33, lines removed: undefined
+
+```diff
+@@ -27,4 +27,37 @@
+    } | null>(null);
+  
++   const updateDiceCount = (diceType: keyof typeof diceCounts, value: number) => {
++     setDiceCounts(prev => ({
++       ...prev,
++       [diceType]: Math.max(0, value)
++     }));
++   };
++ 
++   const rollDice = (sides: number, count: number): number[] => {
++     const results: number[] = [];
++     for (let i = 0; i < count; i++) {
++       results.push(Math.floor(Math.random() * sides) + 1);
++     }
++     return results;
++   };
++ 
++   const rollAllDice = () => {
++     const allResults: number[] = [];
++     let total = 0;
++ 
++     Object.entries(diceCounts).forEach(([diceType, count]) => {
++       if (count > 0) {
++         const sides = parseInt(diceType.substring(1));
++         const results = rollDice(sides, count);
++         allResults.push(...results);
++         total += results.reduce((sum, result) => sum + result, 0);
++       }
++     });
++ 
++     setDiceResults({
++       results: allResults,
++       total: total
++     });
++   };
+  
+    const getCharacterStats = () => {
+```
+
+</details>
+
+---
+
+Now I'll replace the dice roller section with the new implementation:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 94, lines removed: 13
+
+```diff
+@@ -81,18 +81,99 @@
+    return (
+      <div className="game-controls">
+-       <div className="controls-section">
++       <div className="controls-section dice-roller-section">
+          <h3>Dice Roller</h3>
+-         <div className="action-buttons">
+-           {/* Client-side dice roller will be implemented here */}
+-         </div>
+-         
+-         {diceResult !== null && (
+-           <div className="dice-result">
+-             <span className="dice-label">Last Roll:</span>
+-             <span className={`dice-value ${diceResult >= 0 ? 'positive' : 'negative'}`}>
+-               {diceResult > 0 ? `+${diceResult}` : diceResult}
+-             </span>
+-           </div>
+-         )}
++         <div className="dice-roller">
++           <div className="dice-inputs">
++             <div className="dice-row">
++               <span className="dice-type">d4</span>
++               <input 
++                 type="number" 
++                 min="0" 
++                 max="10" 
++                 value={diceCounts.d4}
++                 onChange={(e) => updateDiceCount('d4', parseInt(e.target.value) || 0)}
++                 className="dice-count-input"
++               />
++             </div>
++             <div className="dice-row">
++               <span className="dice-type">d6</span>
++               <input 
++                 type="number" 
++                 min="0" 
++                 max="10" 
++                 value={diceCounts.d6}
++                 onChange={(e) => updateDiceCount('d6', parseInt(e.target.value) || 0)}
++                 className="dice-count-input"
++               />
++             </div>
++             <div className="dice-row">
++               <span className="dice-type">d8</span>
++               <input 
++                 type="number" 
++                 min="0" 
++                 max="10" 
++                 value={diceCounts.d8}
++                 onChange={(e) => updateDiceCount('d8', parseInt(e.target.value) || 0)}
++                 className="dice-count-input"
++               />
++             </div>
++             <div className="dice-row">
++               <span className="dice-type">d10</span>
++               <input 
++                 type="number" 
++                 min="0" 
++                 max="10" 
++                 value={diceCounts.d10}
++                 onChange={(e) => updateDiceCount('d10', parseInt(e.target.value) || 0)}
++                 className="dice-count-input"
++               />
++             </div>
++             <div className="dice-row">
++               <span className="dice-type">d12</span>
++               <input 
++                 type="number" 
++                 min="0" 
++                 max="10" 
++                 value={diceCounts.d12}
++                 onChange={(e) => updateDiceCount('d12', parseInt(e.target.value) || 0)}
++                 className="dice-count-input"
++               />
++             </div>
++             <div className="dice-row">
++               <span className="dice-type">d20</span>
++               <input 
++                 type="number" 
++                 min="0" 
++                 max="10" 
++                 value={diceCounts.d20}
++                 onChange={(e) => updateDiceCount('d20', parseInt(e.target.value) || 0)}
++                 className="dice-count-input"
++               />
++             </div>
++           </div>
++           
++           <button 
++             onClick={rollAllDice}
++             className="roll-button"
++             disabled={Object.values(diceCounts).every(count => count === 0)}
++           >
++             🎲 Roll Dice
++           </button>
++           
++           {diceResults && (
++             <div className="dice-results">
++               <div className="results-section">
++                 <span className="results-label">Results:</span>
++                 <span className="results-values">
++                   {diceResults.results.join(', ')}
++                 </span>
++               </div>
++               <div className="total-section">
++                 <span className="total-label">Total Sum:</span>
++                 <span className="total-value">{diceResults.total}</span>
++               </div>
++             </div>
++           )}
++         </div>
+        </div>
+  
+```
+
+</details>
+
+---
+
+Now I need to add CSS styles to make the dice roller look good and match the current design. Let me check the current CSS file:
+
+
+---
+
+Tool use: **read_file**
+
+Read file: app/globals.css
+
+---
+
+Let me search for the game controls CSS to understand the current styling:
+
+
+---
+
+Tool use: **grep**
+
+<details>
+<summary>Grep for "\.game-controls|\.controls-section|\.action-buttons" in "app/globals.css" • 4 matches</summary>
+
+Output mode: content
+
+
+| File | Content | Line |
+|------|------|------|
+| `app/globals.css` | `.game-controls \{` | L225 |
+| `app/globals.css` | `.game-controls \{` | L343 |
+| `app/globals.css` | `.controls-section h3,` | L347 |
+| `app/globals.css` | `.action-buttons \{` | L356 |
+
+
+</details>
+
+---
+
+Let me get more of the game controls CSS:
+
+
+---
+
+Tool use: **grep**
+
+<details>
+<summary>Grep for "\.game-controls|\.controls-section|\.action-buttons|\.dice-button|\.save-button|\.rest-button" in "app/globals.css" • 10 matches</summary>
+
+Output mode: content
+
+
+| File | Content | Line |
+|------|------|------|
+| `app/globals.css` | `.game-controls \{` | L225 |
+| `app/globals.css` | `.game-controls \{` | L343 |
+| `app/globals.css` | `.controls-section h3,` | L347 |
+| `app/globals.css` | `.action-buttons \{` | L356 |
+| `app/globals.css` | `.dice-button,` | L363 |
+| `app/globals.css` | `.save-button,` | L364 |
+| `app/globals.css` | `.rest-button \{` | L365 |
+| `app/globals.css` | `.dice-button:hover,` | L376 |
+| `app/globals.css` | `.save-button:hover,` | L377 |
+| `app/globals.css` | `.rest-button:hover \{` | L378 |
+
+
+</details>
+
+---
+
+Now I'll add the CSS styles for the dice roller to match the existing design. Let me add them to the globals.css file:
+
+
+---
+
+Invalid: old_string and new_string are exactly the same.
+
+---
+
+Let me find the end of the game controls CSS section and add the dice roller styles:
+
+
+---
+
+Tool use: **grep**
+
+<details>
+<summary>Grep for "\.dice-result" in "app/globals.css" • 1 match</summary>
+
+Output mode: content
+
+
+| File | Content | Line |
+|------|------|------|
+| `app/globals.css` | `.dice-result \{` | L382 |
+
+
+</details>
+
+---
+
+Let me get more of the CSS to see where the game controls section ends:
+
+
+---
+
+Tool use: **grep**
+
+<details>
+<summary>Grep for "\.dice-value\.positive|\.dice-value\.negative" in "app/globals.css" • 2 matches</summary>
+
+Output mode: content
+
+
+| File | Content | Line |
+|------|------|------|
+| `app/globals.css` | `.dice-value.positive \{` | L402 |
+| `app/globals.css` | `.dice-value.negative \{` | L406 |
+
+
+</details>
+
+---
+
+Perfect! Now I'll add the dice roller CSS styles after the existing dice styles:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/globals.css</summary>
+
+**Chunk 1**
+Lines added: 108, lines removed: undefined
+
+```diff
+@@ -407,4 +407,112 @@
+    color: #ff0000;
+  }
++ 
++ /* Dice Roller Styling */
++ .dice-roller-section {
++   width: 100%;
++ }
++ 
++ .dice-roller {
++   display: flex;
++   flex-direction: column;
++   gap: 1rem;
++ }
++ 
++ .dice-inputs {
++   display: flex;
++   flex-direction: column;
++   gap: 0.5rem;
++ }
++ 
++ .dice-row {
++   display: flex;
++   justify-content: space-between;
++   align-items: center;
++   padding: 0.5rem;
++   background: #333;
++   border-radius: 4px;
++   border: 1px solid #555;
++ }
++ 
++ .dice-type {
++   font-weight: bold;
++   color: #fff;
++   min-width: 2rem;
++ }
++ 
++ .dice-count-input {
++   width: 3rem;
++   padding: 0.25rem 0.5rem;
++   background: #222;
++   color: #fff;
++   border: 1px solid #555;
++   border-radius: 4px;
++   text-align: center;
++   font-size: 0.875rem;
++ }
++ 
++ .dice-count-input:focus {
++   outline: none;
++   border-color: #007acc;
++   box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
++ }
++ 
++ .roll-button {
++   padding: 0.75rem;
++   background: #007acc;
++   color: white;
++   border: none;
++   border-radius: 4px;
++   cursor: pointer;
++   font-weight: bold;
++   transition: background 0.2s;
++   font-size: 1rem;
++ }
++ 
++ .roll-button:hover:not(:disabled) {
++   background: #005a99;
++ }
++ 
++ .roll-button:disabled {
++   background: #555;
++   cursor: not-allowed;
++   opacity: 0.6;
++ }
++ 
++ .dice-results {
++   display: flex;
++   flex-direction: column;
++   gap: 0.5rem;
++   padding: 0.75rem;
++   background: #333;
++   border-radius: 4px;
++   border: 1px solid #555;
++ }
++ 
++ .results-section,
++ .total-section {
++   display: flex;
++   justify-content: space-between;
++   align-items: center;
++ }
++ 
++ .results-label,
++ .total-label {
++   font-size: 0.875rem;
++   color: #ccc;
++   font-weight: bold;
++ }
++ 
++ .results-values {
++   color: #fff;
++   font-family: 'Courier New', monospace;
++   font-size: 0.875rem;
++ }
++ 
++ .total-value {
++   color: #00ff00;
++   font-weight: bold;
++   font-size: 1.125rem;
++ }
+  
+  .character-stats {
+```
+
+</details>
+
+---
+
+Now let me check for any linting errors in the files I've modified:
+
+
+---
+
+_**User (2025-10-21 04:52Z)**_
+
+lets create the dice counter here is a brief description 
+
+*   **Dice Pool Title:** Clearly labels the section.
+*   **Dice Type List:** `d4, d6, d8, d10, d12, d20` are listed vertically for easy scanning.
+*   **Counter:** Each dice type has a counter (initialized to `00`) which the user can adjust using `+` and `-` buttons. The maximum value would be `99`.
+*   **ROLL Button:** This button becomes active only when `(d4_counter + d6_counter + ... + d20_counter) > 0`. When clicked, it would simulate the dice rolls.
+*   **Result Display:** Below the button, a section would show the individual results of each die rolled (e.g., `d4: [3], d6: [5, 2]`) and the `Total Sum` of all rolled dice.
+
+I've included a reference image above but use it only for design aspects of layout. Make the one you create match the current aesthetic and it should fit in the dice roller column I've included in the image 
+
+---
+
+_**Assistant (default)**_
+
+I'll create a dice counter component that matches the current design aesthetic. Let me implement this in the GameControls component:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: app/components/GameControls.tsx</summary>
+
+**Chunk 1**
+Lines added: 16, lines removed: 1
+
+```diff
+@@ -11,5 +11,20 @@
+  }: GameControlsProps) {
+    const [diceResult, setDiceResult] = useState<number | null>(null);
+- 
++   
++   // Dice counter state
++   const [diceCounts, setDiceCounts] = useState({
++     d4: 0,
++     d6: 0,
++     d8: 0,
++     d10: 0,
++     d12: 0,
++     d20: 0
++   });
++   
++   const [diceResults, setDiceResults] = useState<{
++     results: { [key: string]: number[] };
++     total: number;
++   } | null>(null);
++ 
+  
+    const getCharacterStats = () => {
+```
+
+</details>
+
+---
+
+
+
+---
+

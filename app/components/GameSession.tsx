@@ -161,9 +161,6 @@ export default function GameSession({
           {/* Right Sidebar - LOCKED at 25% width */}
           <div className="game-sidebar" style={{ width: '25%' }}>
             <GameControls 
-              onDiceRoll={handleDiceRoll}
-              onSave={handleSave}
-              onRest={handleRest}
               gameState={gameState}
             />
           </div>

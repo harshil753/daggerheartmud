@@ -3,35 +3,65 @@
 import { useState } from 'react';
 
 interface GameControlsProps {
-  onDiceRoll?: () => void;
-  onSave?: () => void;
-  onRest?: () => void;
   gameState?: any;
 }
 
 export default function GameControls({ 
-  onDiceRoll, 
-  onSave, 
-  onRest, 
   gameState 
 }: GameControlsProps) {
   const [diceResult, setDiceResult] = useState<number | null>(null);
+  
+  // Dice counter state
+  const [diceCounts, setDiceCounts] = useState({
+    d4: 0,
+    d6: 0,
+    d8: 0,
+    d10: 0,
+    d12: 0,
+    d20: 0
+  });
+  
+  const [diceResults, setDiceResults] = useState<{
+    results: { [key: string]: number[] };
+    total: number;
+  } | null>(null);
 
-  const rollDice = () => {
-    // Roll 2d12 (Hope and Fear dice)
-    const hopeDie = Math.floor(Math.random() * 12) + 1;
-    const fearDie = Math.floor(Math.random() * 12) + 1;
-    const result = hopeDie - fearDie;
-    
-    setDiceResult(result);
-    onDiceRoll?.();
-    
-    // Send dice roll to terminal
-    const terminal = document.querySelector('.terminal');
-    if (terminal) {
-      // This would be handled by the WebSocket connection
-      console.log(`Dice roll: Hope ${hopeDie} - Fear ${fearDie} = ${result}`);
+  const updateDiceCount = (diceType: keyof typeof diceCounts, delta: number) => {
+    setDiceCounts(prev => ({
+      ...prev,
+      [diceType]: Math.max(0, Math.min(99, prev[diceType] + delta))
+    }));
+  };
+
+  const rollDice = (sides: number, count: number): number[] => {
+    const results: number[] = [];
+    for (let i = 0; i < count; i++) {
+      results.push(Math.floor(Math.random() * sides) + 1);
     }
+    return results;
+  };
+
+  const rollAllDice = () => {
+    const results: { [key: string]: number[] } = {};
+    let total = 0;
+
+    Object.entries(diceCounts).forEach(([diceType, count]) => {
+      if (count > 0) {
+        const sides = parseInt(diceType.substring(1));
+        const diceResults = rollDice(sides, count);
+        results[diceType] = diceResults;
+        total += diceResults.reduce((sum, result) => sum + result, 0);
+      }
+    });
+
+    setDiceResults({
+      results: results,
+      total: total
+    });
+  };
+
+  const getTotalDiceCount = () => {
+    return Object.values(diceCounts).reduce((sum, count) => sum + count, 0);
   };
 
   const getCharacterStats = () => {
@@ -55,41 +85,63 @@ export default function GameControls({
   return (
     <div className="game-controls">
       <div className="controls-section">
-        <h3>Quick Actions</h3>
-        <div className="action-buttons">
-          <button 
-            onClick={rollDice}
-            className="dice-button"
-            title="Roll 2d12 (Hope - Fear dice)"
-          >
-            🎲 Roll Dice
-          </button>
-          
-          <button 
-            onClick={onSave}
-            className="save-button"
-            title="Create manual save point"
-          >
-            💾 Save
-          </button>
-          
-          <button 
-            onClick={onRest}
-            className="rest-button"
-            title="Rest to recover HP and stress"
-          >
-            😴 Rest
-          </button>
-        </div>
-        
-        {diceResult !== null && (
-          <div className="dice-result">
-            <span className="dice-label">Last Roll:</span>
-            <span className={`dice-value ${diceResult >= 0 ? 'positive' : 'negative'}`}>
-              {diceResult > 0 ? `+${diceResult}` : diceResult}
-            </span>
+        <h3>Dice Pool</h3>
+        <div className="dice-counter">
+          <div className="dice-list">
+            {Object.entries(diceCounts).map(([diceType, count]) => (
+              <div key={diceType} className="dice-item">
+                <span className="dice-type">{diceType}:</span>
+                <div className="dice-controls">
+                  <button 
+                    onClick={() => updateDiceCount(diceType as keyof typeof diceCounts, -1)}
+                    className="dice-btn minus-btn"
+                    disabled={count === 0}
+                  >
+                    -
+                  </button>
+                  <span className="dice-count">
+                    {count.toString().padStart(2, '0')}
+                  </span>
+                  <button 
+                    onClick={() => updateDiceCount(diceType as keyof typeof diceCounts, 1)}
+                    className="dice-btn plus-btn"
+                    disabled={count >= 99}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        )}
+          
+          <button 
+            onClick={rollAllDice}
+            className="roll-button"
+            disabled={getTotalDiceCount() === 0}
+          >
+            ROLL
+          </button>
+          
+          {diceResults && (
+            <div className="dice-results">
+              <div className="results-display">
+                <span className="results-label">Result:</span>
+                <div className="results-list">
+                  {Object.entries(diceResults.results).map(([diceType, results]) => (
+                    <div key={diceType} className="result-item">
+                      <span className="result-dice-type">{diceType}:</span>
+                      <span className="result-values">[{results.join(', ')}]</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="total-display">
+                <span className="total-label">Total Sum:</span>
+                <span className="total-value">{diceResults.total}</span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {stats && (
@@ -138,6 +190,30 @@ export default function GameControls({
           </div>
           <div className="command-item">
             <code>help</code> - Full command list
+          </div>
+          <div className="command-item">
+            <code>move</code> - Travel to new location
+          </div>
+          <div className="command-item">
+            <code>talk</code> - Speak with NPCs
+          </div>
+          <div className="command-item">
+            <code>attack</code> - Engage in combat
+          </div>
+          <div className="command-item">
+            <code>equip</code> - Wear equipment
+          </div>
+          <div className="command-item">
+            <code>use</code> - Use items or abilities
+          </div>
+          <div className="command-item">
+            <code>rest</code> - Recover HP and stress
+          </div>
+          <div className="command-item">
+            <code>save</code> - Create save point
+          </div>
+          <div className="command-item">
+            <code>roll</code> - Make dice rolls
           </div>
         </div>
       </div>
