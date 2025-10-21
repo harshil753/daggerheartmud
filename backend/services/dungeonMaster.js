@@ -1,8 +1,10 @@
 const { model, imageModel } = require('../config/gemini');
-const { getFullContext } = require('../utils/geminiContext');
+const { getContextForGameState } = require('../utils/geminiContext');
 const promptLoader = require('./promptLoader');
 const AIResponseParser = require('./aiResponseParser');
 const DatabaseSync = require('./databaseSync');
+const ResponseValidator = require('./responseValidator');
+const LoggingService = require('./loggingService');
 
 /**
  * AI Dungeon Master service using Gemini
@@ -15,6 +17,9 @@ class DungeonMaster {
     this.initializationPromise = null; // Prevent multiple simultaneous initializations
     this.responseParser = new AIResponseParser();
     this.databaseSync = new DatabaseSync();
+    this.responseValidator = new ResponseValidator();
+    this.loggingService = new LoggingService();
+    this.interactionCount = 0; // Track interactions for rule reinforcement
   }
 
   /**
@@ -80,14 +85,36 @@ class DungeonMaster {
    * Process a player command through the AI DM
    */
   async processCommand(command, args, gameState) {
+    const startTime = Date.now();
     await this.initializeAI();
+    this.interactionCount++;
 
-    const prompt = this.buildPrompt(command, args, gameState);
-    
     try {
+      // Load context dynamically based on command
+      const contextStartTime = Date.now();
+      const context = await getContextForGameState(command, gameState);
+      const contextLoadTime = Date.now() - contextStartTime;
+      
+      const prompt = this.buildPromptWithContext(command, args, gameState, context);
+      const promptSize = prompt.length;
+      
+      const aiStartTime = Date.now();
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
+      const aiResponseTime = Date.now() - aiStartTime;
+
+      // Validate AI response
+      const validationStartTime = Date.now();
+      const validation = await this.responseValidator.validateAIResponse(text, gameState);
+      const validationTime = Date.now() - validationStartTime;
+      
+      if (!validation.valid) {
+        console.warn('AI response validation failed:', validation.errors);
+        this.loggingService.logValidationFailure(command, gameState, validation.errors, text);
+        // Retry with stricter prompt including validation errors
+        return await this.retryWithValidationErrors(command, args, gameState, text, validation.errors);
+      }
 
       // Parse AI response for structured data
       const parsedResponse = this.parseAIResponse(text, command);
@@ -98,15 +125,145 @@ class DungeonMaster {
       // Update conversation history
       this.updateConversationHistory(gameState, command, args, processedResponse);
 
+      // Log performance metrics
+      const totalTime = Date.now() - startTime;
+      this.loggingService.logPerformanceMetrics(command, gameState, {
+        promptSize,
+        responseTime: aiResponseTime,
+        validationTime,
+        totalTime,
+        rulesLoaded: context.rules ? context.rules.length : 0,
+        equipmentLoaded: context.equipment ? context.equipment.length : 0
+      });
+
       return processedResponse;
     } catch (error) {
       console.error('AI processing error:', error);
+      this.loggingService.logAIError(error, command, gameState);
       return {
         success: false,
         message: 'The Dungeon Master seems distracted. Please try again.',
         type: 'error'
       };
     }
+  }
+
+  /**
+   * Build prompt with dynamic context
+   */
+  buildPromptWithContext(command, args, gameState, context) {
+    let prompt = context.fullContext;
+    
+    // Every 10 interactions, reinforce critical rules
+    if (this.interactionCount % 10 === 0) {
+      prompt += `\n\n## CRITICAL RULE REMINDER\n`;
+      prompt += `- Always use duality dice (d12 Hope + d12 Fear)\n`;
+      prompt += `- Item tier must match character level ±1\n`;
+      prompt += `- HP and Stress cannot exceed maximums\n`;
+      prompt += `- Include structured data tags for all changes\n`;
+    }
+    
+    // Add game state context
+    prompt += this.buildGameStateContext(gameState);
+    
+    // Add command-specific instructions
+    prompt += this.getCommandInstructions(command, args);
+    
+    return prompt;
+  }
+
+  /**
+   * Retry with validation errors
+   */
+  async retryWithValidationErrors(command, args, gameState, previousResponse, errors) {
+    const errorPrompt = `
+      Your previous response violated game rules:
+      ${errors.join('\n')}
+      
+      Please correct these errors and respond again.
+      Previous response: ${previousResponse}
+      
+      Remember to:
+      - Use proper structured data tags
+      - Follow Daggerheart rules exactly
+      - Validate all stat changes and item distributions
+    `;
+    
+    try {
+      const result = await model.generateContent(errorPrompt);
+      const response = await result.response;
+      const text = response.text();
+      
+      // Validate the retry response
+      const validation = await this.responseValidator.validateAIResponse(text, gameState);
+      
+      if (!validation.valid) {
+        console.error('Retry validation also failed:', validation.errors);
+        return {
+          success: false,
+          message: 'The Dungeon Master is having trouble following the rules. Please try a simpler command.',
+          type: 'error'
+        };
+      }
+      
+      // Parse and process the corrected response
+      const parsedResponse = this.parseAIResponse(text, command);
+      return await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
+      
+    } catch (error) {
+      console.error('Retry processing error:', error);
+      return {
+        success: false,
+        message: 'The Dungeon Master seems confused. Please try again.',
+        type: 'error'
+      };
+    }
+  }
+
+  /**
+   * Build game state context
+   */
+  buildGameStateContext(gameState) {
+    let context = '\n\n## CURRENT GAME STATE\n\n';
+    
+    if (gameState.character) {
+      context += `CURRENT CHARACTER:\n`;
+      context += `Name: ${gameState.character.name}\n`;
+      context += `Ancestry: ${gameState.character.ancestry}\n`;
+      context += `Class: ${gameState.character.class}\n`;
+      context += `Level: ${gameState.character.level}\n`;
+      context += `HP: ${gameState.character.hit_points_current}/${gameState.character.hit_points_max}\n`;
+      context += `Stress: ${gameState.character.stress_current}/${gameState.character.stress_max}\n\n`;
+    }
+
+    if (gameState.campaign) {
+      context += `CURRENT CAMPAIGN:\n`;
+      context += `Title: ${gameState.campaign.title}\n`;
+      context += `Chapter: ${gameState.campaign.current_chapter}/${gameState.campaign.total_chapters}\n`;
+      context += `Story Length: ${gameState.campaign.story_length}\n\n`;
+    }
+
+    if (gameState.currentLocation) {
+      context += `CURRENT LOCATION: ${gameState.currentLocation}\n\n`;
+    }
+
+    if (gameState.combat) {
+      context += `COMBAT ACTIVE:\n`;
+      context += `Round: ${gameState.combat.round_number}\n`;
+      context += `Initiative: ${JSON.stringify(gameState.combat.initiative_order)}\n\n`;
+    }
+
+    // Add conversation history for context
+    const history = gameState.aiContext?.conversationHistory || [];
+    if (history.length > 0) {
+      context += `RECENT CONVERSATION:\n`;
+      history.slice(-10).forEach(entry => {
+        context += `${entry.role}: ${entry.content}\n`;
+      });
+      context += `\n`;
+    }
+
+    return context;
   }
 
   /**

@@ -1,78 +1,50 @@
-const fs = require('fs');
-const path = require('path');
+const RuleManager = require('../services/ruleManager');
+const EquipmentManager = require('../services/equipmentManager');
 
-// Load SRD and equipment data for AI context
-let srdContext = null;
-let equipmentContext = null;
+// Initialize managers
+const ruleManager = new RuleManager();
+const equipmentManager = new EquipmentManager();
 
 /**
- * Load SRD text from the processed PDF
+ * Get context for specific game state and command
  */
-function loadSRDContext() {
-  if (srdContext) return srdContext;
-  
+async function getContextForGameState(command, gameState) {
   try {
-    const srdPath = path.join(__dirname, '../../supporting_functions/Results/DH_SRD_Part_01_Pages_1-415.txt');
-    srdContext = fs.readFileSync(srdPath, 'utf8');
-    console.log('SRD context loaded successfully');
-    return srdContext;
+    const rules = await ruleManager.loadRulesForContext(command, gameState);
+    const equipment = await equipmentManager.loadEquipmentForContext(gameState);
+    
+    return {
+      rules,
+      equipment,
+      fullContext: `${rules}\n\n## EQUIPMENT DATABASE\n\n${equipment}`
+    };
   } catch (error) {
-    console.error('Error loading SRD context:', error);
-    return null;
+    console.error('Error loading dynamic context:', error);
+    // Fallback to basic context
+    return {
+      rules: 'Basic Daggerheart rules',
+      equipment: 'Equipment database unavailable',
+      fullContext: 'Daggerheart game rules and equipment'
+    };
   }
 }
 
 /**
- * Load equipment data from scraped JSON
- */
-function loadEquipmentContext() {
-  if (equipmentContext) return equipmentContext;
-  
-  try {
-    const equipmentPath = path.join(__dirname, '../../supporting_functions/Results/equipment_data.json');
-    const equipmentData = JSON.parse(fs.readFileSync(equipmentPath, 'utf8'));
-    
-    // Format equipment data for AI context
-    equipmentContext = equipmentData.map(item => {
-      if (item.type === 'consumable' || item.type === 'item') {
-        return `${item.name} (${item.type}): ${item.description || 'No description'}`;
-      } else {
-        const props = item.properties || {};
-        const propStr = Object.entries(props)
-          .map(([key, value]) => `${key}: ${typeof value === 'object' ? JSON.stringify(value) : value}`)
-          .join(', ');
-        return `${item.name} (${item.type}): ${propStr}`;
-      }
-    }).join('\n');
-    
-    console.log('Equipment context loaded successfully');
-    return equipmentContext;
-  } catch (error) {
-    console.error('Error loading equipment context:', error);
-    return null;
-  }
-}
-
-/**
- * Get the complete AI context with SRD and equipment
+ * Legacy function for backward compatibility
+ * @deprecated Use getContextForGameState instead
  */
 function getFullContext() {
-  const srd = loadSRDContext();
-  const equipment = loadEquipmentContext();
+  console.warn('getFullContext() is deprecated. Use getContextForGameState(command, gameState) instead.');
   
-  if (!srd || !equipment) {
-    throw new Error('Failed to load AI context data');
-  }
-  
+  // Return a basic context for legacy compatibility
   return {
-    srd,
-    equipment,
-    fullContext: `DAGGERHEART SYSTEM REFERENCE DOCUMENT:\n\n${srd}\n\nAVAILABLE EQUIPMENT:\n\n${equipment}`
+    srd: 'Legacy SRD context',
+    equipment: 'Legacy equipment context',
+    fullContext: 'Legacy Daggerheart context - please use getContextForGameState() for better performance'
   };
 }
 
 module.exports = {
-  loadSRDContext,
-  loadEquipmentContext,
+  getContextForGameState,
   getFullContext
 };
