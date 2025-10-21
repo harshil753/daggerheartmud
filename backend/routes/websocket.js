@@ -76,7 +76,7 @@ class WebSocketHandler {
       // Send welcome message
       socket.emit('game_message', {
         type: 'welcome',
-        message: 'Welcome to Daggerheart MUD! Type "help" for available commands or "start" to begin.'
+        message: 'Welcome to Daggerheart MUD! Type "help" for available commands or "create character" to begin.'
       });
 
     } catch (error) {
