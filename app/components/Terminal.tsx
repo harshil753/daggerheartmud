@@ -77,7 +77,9 @@ export default function Terminal({
       }
 
       // Initialize WebSocket connection
-      const socket = io('http://localhost:3001', {
+      const serverUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+      
+      const socket = io(serverUrl, {
         transports: ['websocket', 'polling'],
         timeout: 20000,
         forceNew: true

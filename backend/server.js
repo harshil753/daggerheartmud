@@ -14,7 +14,13 @@ const server = createServer(app);
 
 // Configure CORS
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: process.env.NODE_ENV === 'production' 
+    ? [
+        'https://daggerheartmud.vercel.app',
+        'https://daggerheartmud-git-main.vercel.app',
+        'https://daggerheartmud-git-develop.vercel.app'
+      ]
+    : process.env.CORS_ORIGIN || 'http://localhost:3000',
   methods: ['GET', 'POST'],
   credentials: true
 };
