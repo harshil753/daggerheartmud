@@ -8,6 +8,7 @@ interface TerminalProps {
   isGuest?: boolean;
   onLogout?: () => void;
   onConnectionChange: (connected: boolean) => void;
+  onMapUpdate?: (mapData: any) => void;
 }
 
 declare global {
@@ -21,7 +22,8 @@ export default function Terminal({
   onGameStateChange, 
   isGuest = false, 
   onLogout,
-  onConnectionChange 
+  onConnectionChange,
+  onMapUpdate
 }: TerminalProps) {
   const terminalRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<any>(null);
@@ -257,6 +259,13 @@ export default function Terminal({
               div.css('color', '#ff6b6b'); // Red for errors
             }
           });
+        }
+      });
+
+      socket.on('map_update', (data) => {
+        console.log('Map update received:', data);
+        if (onMapUpdate) {
+          onMapUpdate(data.map);
         }
       });
 

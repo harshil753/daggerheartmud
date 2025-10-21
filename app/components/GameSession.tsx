@@ -20,6 +20,7 @@ export default function GameSession({
   const [gameState, setGameState] = useState<any>(null);
   const [activePanel, setActivePanel] = useState<'terminal' | 'inventory' | 'stats'>('terminal');
   const [isConnected, setIsConnected] = useState(false);
+  const [currentMap, setCurrentMap] = useState<any>(null);
 
   const handleGameStateChange = (newGameState: any) => {
     setGameState(newGameState);
@@ -58,6 +59,10 @@ export default function GameSession({
 
   const handleConnectionChange = (connected: boolean) => {
     setIsConnected(connected);
+  };
+
+  const handleMapUpdate = (mapData: any) => {
+    setCurrentMap(mapData);
   };
 
   return (
@@ -127,6 +132,7 @@ export default function GameSession({
                   isGuest={isGuest}
                   onLogout={onLogout}
                   onConnectionChange={handleConnectionChange}
+                  onMapUpdate={handleMapUpdate}
                 />
               </div>
 
@@ -162,6 +168,7 @@ export default function GameSession({
           <div className="game-sidebar" style={{ width: '25%' }}>
             <GameControls 
               gameState={gameState}
+              currentMap={currentMap}
             />
           </div>
         </div>

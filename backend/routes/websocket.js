@@ -128,6 +128,14 @@ class WebSocketHandler {
         await this.handleLocationChange(socket, gameState, result);
       }
 
+      // Handle map data if present
+      if (result.mapData) {
+        socket.emit('map_update', {
+          map: result.mapData,
+          message: 'Map updated'
+        });
+      }
+
     } catch (error) {
       console.error('Command processing error:', error);
       socket.emit('error', { message: 'Command processing failed' });

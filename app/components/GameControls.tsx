@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 interface GameControlsProps {
   gameState?: any;
+  currentMap?: any;
 }
 
 export default function GameControls({ 
-  gameState 
+  gameState,
+  currentMap
 }: GameControlsProps) {
   const [diceResult, setDiceResult] = useState<number | null>(null);
   
@@ -143,6 +145,21 @@ export default function GameControls({
           )}
         </div>
       </div>
+
+      {currentMap && (
+        <div className="map-section">
+          <h3>Map</h3>
+          <div className="map-display">
+            <pre className="map-grid">{currentMap.grid}</pre>
+            {currentMap.legend && (
+              <div className="map-legend">
+                <h4>Legend</h4>
+                <pre className="legend-text">{currentMap.legend}</pre>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {stats && (
         <div className="character-stats">

@@ -401,6 +401,7 @@ class DungeonMaster {
 
     const message = response.message;
     let processedMessage = message;
+    let extractedMap = null;
 
     // Check for IMAGE_GENERATION_TRIGGER
     const imageTriggerMatch = message.match(/\[IMAGE_GENERATION_TRIGGER\][\s\S]*?\[PROMPT:/);
@@ -433,16 +434,41 @@ class DungeonMaster {
       }
     }
 
-    // Check for ASCII_MAP
-    const asciiMapMatch = message.match(/\[ASCII_MAP\][\s\S]*?\[LEGEND\][\s\S]*?\[PROMPT:/);
+    // Check for ASCII_MAP and extract map data
+    const asciiMapMatch = message.match(/\[ASCII_MAP\][\s\S]*?\[LEGEND\][\s\S]*?(?=\[PROMPT:|$)/);
     if (asciiMapMatch) {
-      // ASCII map is already formatted, just ensure it's properly displayed
-      processedMessage = message.replace(/\[ASCII_MAP\]/g, '\n[ASCII_MAP]\n');
+      const mapContent = asciiMapMatch[0];
+      
+      // Extract the map grid (lines between [ASCII_MAP] and [LEGEND])
+      const mapGridMatch = mapContent.match(/\[ASCII_MAP\]([\s\S]*?)\[LEGEND\]/);
+      if (mapGridMatch) {
+        const mapGrid = mapGridMatch[1].trim();
+        
+        // Extract legend
+        const legendMatch = mapContent.match(/\[LEGEND\]([\s\S]*?)(?=\[PROMPT:|$)/);
+        const legend = legendMatch ? legendMatch[1].trim() : '';
+        
+        // Parse map data
+        extractedMap = {
+          grid: mapGrid,
+          legend: legend,
+          timestamp: new Date().toISOString()
+        };
+        
+        // Update game state with map data
+        if (gameState) {
+          gameState.currentMap = extractedMap;
+        }
+        
+        // Ensure proper formatting for display
+        processedMessage = message.replace(/\[ASCII_MAP\]/g, '\n[ASCII_MAP]\n');
+      }
     }
 
     return {
       ...response,
-      message: processedMessage
+      message: processedMessage,
+      mapData: extractedMap
     };
   }
 
