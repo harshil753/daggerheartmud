@@ -463,6 +463,28 @@ class DungeonMaster {
         // Ensure proper formatting for display
         processedMessage = message.replace(/\[ASCII_MAP\]/g, '\n[ASCII_MAP]\n');
       }
+    } else {
+      // Try alternative pattern - look for ASCII_MAP without strict LEGEND requirement
+      const simpleMapMatch = message.match(/\[ASCII_MAP\][\s\S]*?(?=\[PROMPT:|$)/);
+      if (simpleMapMatch) {
+        const mapContent = simpleMapMatch[0];
+        const mapGrid = mapContent.replace(/\[ASCII_MAP\]/, '').trim();
+        
+        // Parse map data
+        extractedMap = {
+          grid: mapGrid,
+          legend: '',
+          timestamp: new Date().toISOString()
+        };
+        
+        // Update game state with map data
+        if (gameState) {
+          gameState.currentMap = extractedMap;
+        }
+        
+        // Ensure proper formatting for display
+        processedMessage = message.replace(/\[ASCII_MAP\]/g, '\n[ASCII_MAP]\n');
+      }
     }
 
     return {

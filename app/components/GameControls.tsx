@@ -146,21 +146,6 @@ export default function GameControls({
         </div>
       </div>
 
-      {currentMap && (
-        <div className="map-section">
-          <h3>Map</h3>
-          <div className="map-display">
-            <pre className="map-grid">{currentMap.grid}</pre>
-            {currentMap.legend && (
-              <div className="map-legend">
-                <h4>Legend</h4>
-                <pre className="legend-text">{currentMap.legend}</pre>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       {stats && (
         <div className="character-stats">
           <h3>Character</h3>
@@ -234,6 +219,21 @@ export default function GameControls({
           </div>
         </div>
       </div>
+
+      {currentMap && (
+        <div className="map-section">
+          <h3>Map</h3>
+          <div className="map-display">
+            <pre className="map-grid">{currentMap.grid}</pre>
+            {currentMap.legend && (
+              <div className="map-legend">
+                <h4>Legend</h4>
+                <pre className="legend-text">{currentMap.legend}</pre>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
