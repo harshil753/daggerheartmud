@@ -1,6 +1,8 @@
 const { model, imageModel } = require('../config/gemini');
 const { getFullContext } = require('../utils/geminiContext');
 const promptLoader = require('./promptLoader');
+const AIResponseParser = require('./aiResponseParser');
+const DatabaseSync = require('./databaseSync');
 
 /**
  * AI Dungeon Master service using Gemini
@@ -11,6 +13,8 @@ class DungeonMaster {
     this.contextLoaded = false;
     this.fullContext = null;
     this.initializationPromise = null; // Prevent multiple simultaneous initializations
+    this.responseParser = new AIResponseParser();
+    this.databaseSync = new DatabaseSync();
   }
 
   /**
@@ -60,7 +64,7 @@ class DungeonMaster {
       const text = response.text();
 
       // Process triggers in the response
-      const processedText = await this.processTriggers({ message: text }, gameState);
+      const processedText = await this.processTriggers({ message: text }, gameState, gameState.sessionId);
       
       // Update conversation history
       this.updateConversationHistory(gameState, 'player_input', [input], processedText);
@@ -89,7 +93,7 @@ class DungeonMaster {
       const parsedResponse = this.parseAIResponse(text, command);
       
       // Process triggers (IMAGE_GENERATION_TRIGGER, ASCII_MAP, etc.)
-      const processedResponse = await this.processTriggers(parsedResponse, gameState);
+      const processedResponse = await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
       
       // Update conversation history
       this.updateConversationHistory(gameState, command, args, processedResponse);
@@ -396,12 +400,13 @@ class DungeonMaster {
   /**
    * Process triggers in AI responses (IMAGE_GENERATION_TRIGGER, ASCII_MAP, etc.)
    */
-  async processTriggers(response, gameState) {
+  async processTriggers(response, gameState, sessionId = null) {
     if (!response.message) return response;
 
     const message = response.message;
     let processedMessage = message;
     let extractedMap = null;
+    let syncResult = null;
 
     // Check for IMAGE_GENERATION_TRIGGER
     const imageTriggerMatch = message.match(/\[IMAGE_GENERATION_TRIGGER\][\s\S]*?\[PROMPT:/);
@@ -487,11 +492,42 @@ class DungeonMaster {
       }
     }
 
+    // Parse AI response for structured data changes
+    if (sessionId && gameState) {
+      try {
+        const parsedChanges = this.responseParser.parseResponse(response, gameState);
+        
+        // Only sync if there are actual changes
+        if (this.hasChanges(parsedChanges)) {
+          syncResult = await this.databaseSync.syncChanges(parsedChanges, gameState, sessionId);
+          console.log('Database sync result:', syncResult);
+        }
+      } catch (error) {
+        console.error('Database sync failed:', error);
+        syncResult = { success: false, error: error.message };
+      }
+    }
+
     return {
       ...response,
       message: processedMessage,
-      mapData: extractedMap
+      mapData: extractedMap,
+      syncResult: syncResult
     };
+  }
+
+  /**
+   * Check if parsed changes contain any actual changes
+   */
+  hasChanges(parsedChanges) {
+    return (
+      (parsedChanges.character && Object.keys(parsedChanges.character).length > 0) ||
+      (parsedChanges.inventory && parsedChanges.inventory.length > 0) ||
+      parsedChanges.location ||
+      parsedChanges.combat ||
+      parsedChanges.level ||
+      parsedChanges.experience
+    );
   }
 
   /**

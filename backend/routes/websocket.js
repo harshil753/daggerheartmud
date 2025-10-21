@@ -15,6 +15,7 @@ class WebSocketHandler {
     this.combatManager = new CombatManager();
     
     this.setupEventHandlers();
+    this.setupCleanupInterval();
   }
 
   setupEventHandlers() {
@@ -58,25 +59,45 @@ class WebSocketHandler {
    */
   async handleJoinGame(socket, data) {
     try {
-      const { userId, isGuest = false } = data;
+      const { userId, isGuest = false, sessionId } = data;
       
-      // Initialize game state
-      const gameState = await this.gameStateManager.initializeSession(
-        socket.id, 
-        userId, 
-        isGuest
-      );
+      let gameState;
+      
+      if (isGuest && sessionId) {
+        // Try to load existing guest session
+        gameState = await this.gameStateManager.loadGuestSession(sessionId);
+        
+        if (!gameState) {
+          // Create new guest session if none exists
+          gameState = await this.gameStateManager.initializeSession(
+            sessionId, 
+            null, 
+            true
+          );
+        }
+      } else {
+        // Initialize new session
+        gameState = await this.gameStateManager.initializeSession(
+          socket.id, 
+          userId, 
+          isGuest
+        );
+      }
 
       socket.emit('game_joined', {
         success: true,
-        sessionId: socket.id,
+        sessionId: gameState.sessionId,
         gameState
       });
 
       // Send welcome message
+      const welcomeMessage = gameState.character 
+        ? `Welcome back, ${gameState.character.name}! Your adventure continues...`
+        : 'Welcome to Daggerheart MUD! Type "help" for available commands or "create character" to begin.';
+        
       socket.emit('game_message', {
         type: 'welcome',
-        message: 'Welcome to Daggerheart MUD! Type "help" for available commands or "create character" to begin.'
+        message: welcomeMessage
       });
 
     } catch (error) {
@@ -134,6 +155,25 @@ class WebSocketHandler {
           map: result.mapData,
           message: 'Map updated'
         });
+      }
+
+      // Handle database sync results
+      if (result.syncResult) {
+        if (result.syncResult.success) {
+          console.log('Database sync successful:', result.syncResult);
+          // Optionally notify client of successful sync
+          socket.emit('sync_success', {
+            message: 'Game state synchronized',
+            synced: result.syncResult.synced,
+            failed: result.syncResult.failed
+          });
+        } else {
+          console.error('Database sync failed:', result.syncResult.error);
+          socket.emit('sync_error', {
+            message: 'Failed to synchronize game state',
+            error: result.syncResult.error
+          });
+        }
       }
 
     } catch (error) {
@@ -343,6 +383,26 @@ class WebSocketHandler {
     }
 
     return { valid: true };
+  }
+
+  /**
+   * Setup periodic cleanup for expired guest sessions
+   */
+  setupCleanupInterval() {
+    // Clean up expired guest sessions every hour
+    setInterval(async () => {
+      try {
+        const DatabaseSync = require('../services/databaseSync');
+        const databaseSync = new DatabaseSync();
+        const cleanedCount = await databaseSync.cleanupExpiredGuestSessions();
+        
+        if (cleanedCount > 0) {
+          console.log(`Cleaned up ${cleanedCount} expired guest sessions`);
+        }
+      } catch (error) {
+        console.error('Guest session cleanup error:', error);
+      }
+    }, 60 * 60 * 1000); // 1 hour
   }
 }
 

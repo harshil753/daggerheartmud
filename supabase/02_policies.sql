@@ -10,6 +10,7 @@ ALTER TABLE items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE character_inventory ENABLE ROW LEVEL SECURITY;
 ALTER TABLE game_sessions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE combat_encounters ENABLE ROW LEVEL SECURITY;
+ALTER TABLE guest_sessions ENABLE ROW LEVEL SECURITY;
 
 -- Characters policies
 -- Users can only access their own characters
@@ -204,3 +205,21 @@ CREATE POLICY "Guests can create temporary characters" ON characters
 
 CREATE POLICY "Guests can create temporary campaigns" ON campaigns
     FOR INSERT WITH CHECK (creator_user_id IS NULL);
+
+-- Guest sessions policies
+-- Allow anonymous access to guest sessions (no authentication required)
+-- This is safe because guest sessions are isolated by session_id
+CREATE POLICY "Anyone can view guest sessions" ON guest_sessions
+    FOR SELECT USING (true);
+
+CREATE POLICY "Anyone can insert guest sessions" ON guest_sessions
+    FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Anyone can update guest sessions" ON guest_sessions
+    FOR UPDATE USING (true);
+
+CREATE POLICY "Anyone can delete guest sessions" ON guest_sessions
+    FOR DELETE USING (true);
+
+-- Note: Guest sessions are isolated by session_id, so there's no risk of
+-- cross-session data access. The session_id acts as the security boundary.

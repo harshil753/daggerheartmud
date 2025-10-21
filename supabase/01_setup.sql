@@ -5,6 +5,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Items table (equipment database) - CREATE FIRST to avoid circular references
+DROP TABLE IF EXISTS items CASCADE;
 CREATE TABLE items (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   
@@ -23,6 +24,7 @@ CREATE TABLE items (
 );
 
 -- Characters table (core player data)
+DROP TABLE IF EXISTS characters CASCADE;
 CREATE TABLE characters (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -63,6 +65,7 @@ CREATE TABLE characters (
 );
 
 -- Campaigns table
+DROP TABLE IF EXISTS campaigns CASCADE;
 CREATE TABLE campaigns (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   creator_user_id UUID REFERENCES auth.users(id),
@@ -86,6 +89,7 @@ CREATE TABLE campaigns (
 );
 
 -- Campaign players (for future multiplayer)
+DROP TABLE IF EXISTS campaign_players CASCADE;
 CREATE TABLE campaign_players (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   campaign_id UUID REFERENCES campaigns(id) ON DELETE CASCADE,
@@ -105,6 +109,7 @@ CREATE TABLE campaign_players (
 );
 
 -- Campaign state (AI context & persistence)
+DROP TABLE IF EXISTS campaign_state CASCADE;
 CREATE TABLE campaign_state (
   campaign_id UUID PRIMARY KEY REFERENCES campaigns(id) ON DELETE CASCADE,
   
@@ -120,6 +125,7 @@ CREATE TABLE campaign_state (
 );
 
 -- Character inventory
+DROP TABLE IF EXISTS character_inventory CASCADE;
 CREATE TABLE character_inventory (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   character_id UUID REFERENCES characters(id) ON DELETE CASCADE,
@@ -137,6 +143,7 @@ CREATE TABLE character_inventory (
 );
 
 -- Game sessions
+DROP TABLE IF EXISTS game_sessions CASCADE;
 CREATE TABLE game_sessions (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   campaign_id UUID REFERENCES campaigns(id) ON DELETE CASCADE,
@@ -155,6 +162,7 @@ CREATE TABLE game_sessions (
 );
 
 -- Combat encounters
+DROP TABLE IF EXISTS combat_encounters CASCADE;
 CREATE TABLE combat_encounters (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   campaign_id UUID REFERENCES campaigns(id) ON DELETE CASCADE,
@@ -176,6 +184,28 @@ CREATE TABLE combat_encounters (
   ended_at TIMESTAMP
 );
 
+-- Guest sessions (temporary sessions for non-registered users)
+DROP TABLE IF EXISTS guest_sessions CASCADE;
+CREATE TABLE guest_sessions (
+  session_id TEXT PRIMARY KEY,
+  
+  -- Guest Character Data (stored as JSONB for flexibility)
+  character_data JSONB, -- Complete character object
+  inventory_data JSONB, -- Array of inventory items
+  game_state JSONB, -- Current location, combat state, etc.
+  
+  -- Session Management
+  created_at TIMESTAMP DEFAULT NOW(),
+  expires_at TIMESTAMP DEFAULT (NOW() + INTERVAL '24 hours'),
+  last_activity TIMESTAMP DEFAULT NOW(),
+  
+  -- AI Context
+  ai_context JSONB, -- Conversation history, world state, etc.
+  
+  -- Session Status
+  is_active BOOLEAN DEFAULT true
+);
+
 -- Indexes for performance
 CREATE INDEX idx_characters_user_id ON characters(user_id);
 CREATE INDEX idx_characters_active ON characters(is_active);
@@ -189,6 +219,9 @@ CREATE INDEX idx_items_type ON items(type);
 CREATE INDEX idx_game_sessions_campaign ON game_sessions(campaign_id);
 CREATE INDEX idx_combat_encounters_campaign ON combat_encounters(campaign_id);
 CREATE INDEX idx_combat_encounters_active ON combat_encounters(is_active);
+CREATE INDEX idx_guest_sessions_active ON guest_sessions(is_active);
+CREATE INDEX idx_guest_sessions_expires ON guest_sessions(expires_at);
+CREATE INDEX idx_guest_sessions_activity ON guest_sessions(last_activity);
 
 -- Update timestamps trigger
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -207,3 +240,27 @@ CREATE TRIGGER update_campaigns_updated_at BEFORE UPDATE ON campaigns
 
 CREATE TRIGGER update_campaign_state_updated_at BEFORE UPDATE ON campaign_state
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Guest session cleanup function
+CREATE OR REPLACE FUNCTION cleanup_expired_guest_sessions()
+RETURNS INTEGER AS $$
+DECLARE
+    deleted_count INTEGER;
+BEGIN
+    DELETE FROM guest_sessions 
+    WHERE expires_at < NOW() OR last_activity < (NOW() - INTERVAL '7 days');
+    
+    GET DIAGNOSTICS deleted_count = ROW_COUNT;
+    RETURN deleted_count;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Function to update guest session activity
+CREATE OR REPLACE FUNCTION update_guest_session_activity(session_id_param TEXT)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE guest_sessions 
+    SET last_activity = NOW() 
+    WHERE session_id = session_id_param;
+END;
+$$ LANGUAGE plpgsql;
