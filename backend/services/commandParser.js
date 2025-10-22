@@ -231,7 +231,7 @@ MOVEMENT SHORTCUTS:
       const dungeonMaster = require('./dungeonMaster');
       const dm = dungeonMaster.getInstance();
       
-      const response = await dm.processCommand('create character', Array.isArray(args) ? args : [], gameState);
+      const response = await dm.startCharacterCreation(gameState);
       
       return {
         success: true,

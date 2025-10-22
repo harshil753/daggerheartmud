@@ -3,6 +3,7 @@ const { getFullContext } = require('../utils/geminiContext');
 const promptLoader = require('./promptLoader');
 const AIResponseParser = require('./aiResponseParser');
 const DatabaseSync = require('./databaseSync');
+const ResponseOrchestrator = require('./responseOrchestrator');
 
 /**
  * AI Dungeon Master service using Gemini
@@ -15,6 +16,7 @@ class DungeonMaster {
     this.initializationPromise = null; // Prevent multiple simultaneous initializations
     this.responseParser = new AIResponseParser();
     this.databaseSync = new DatabaseSync();
+    this.responseOrchestrator = new ResponseOrchestrator();
   }
 
   static getInstance() {
@@ -74,10 +76,48 @@ class DungeonMaster {
       const processedResponse = await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
       this.updateConversationHistory(gameState, 'general', [input], processedResponse);
 
-      return processedResponse;
+      // Return just the message text for processPlayerInput
+      return processedResponse.message || processedResponse.text || text;
     } catch (error) {
       console.error('AI processing error:', error);
       return 'The Dungeon Master seems distracted. Please try again.';
+    }
+  }
+
+  /**
+   * Start character creation process
+   */
+  async startCharacterCreation(gameState) {
+    await this.initializeAI();
+
+    const prompt = this.buildCharacterCreationPrompt(gameState);
+    
+    try {
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+
+      // Create a proper response object for parsing
+      const responseObj = { message: text };
+      const parsedResponse = this.parseAIResponse(responseObj, 'create_character');
+      const processedResponse = await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
+      
+      this.updateConversationHistory(gameState, 'create_character', [], processedResponse);
+
+      // Return the AI's actual response text
+      return {
+        success: true,
+        message: text,
+        type: 'character_creation',
+        data: processedResponse
+      };
+    } catch (error) {
+      console.error('Character creation error:', error);
+      return {
+        success: false,
+        message: 'The Dungeon Master seems distracted. Please try again.',
+        type: 'error'
+      };
     }
   }
 
@@ -90,15 +130,30 @@ class DungeonMaster {
     const prompt = this.buildPrompt(command, args, gameState);
     
     try {
+      // Stage 1: Generate creative response with Gemini
+      console.log('🎭 DungeonMaster: Generating creative response');
       const result = await model.generateContent(prompt);
       const response = await result.response;
-      const text = response.text();
+      const creativeResponse = response.text();
 
-      const parsedResponse = this.parseAIResponse(text, command);
-      const processedResponse = await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
-      this.updateConversationHistory(gameState, command, args, processedResponse);
+      // Stage 2: Process through two-stage pipeline (temporarily disabled for debugging)
+      console.log('🔧 DungeonMaster: Processing through two-stage pipeline');
+      // const orchestrationResult = await this.responseOrchestrator.processAIResponse(creativeResponse, gameState);
 
-      return processedResponse;
+      // Use the processed response from the orchestrator
+      const processedText = creativeResponse;
+      
+      // For now, just return the AI's response directly (two-stage pipeline disabled)
+      const finalResponse = {
+        success: true,
+        message: processedText,
+        type: command,
+        data: {}
+      };
+      
+      this.updateConversationHistory(gameState, command, args, finalResponse);
+
+      return finalResponse;
     } catch (error) {
       console.error('AI processing error:', error);
       return {
@@ -151,6 +206,21 @@ class DungeonMaster {
     prompt += this.getCommandInstructions(command, args);
     
     return prompt;
+  }
+
+  /**
+   * Build character creation prompt
+   */
+  buildCharacterCreationPrompt(gameState) {
+    const context = this.fullContext ? this.fullContext.fullContext : '';
+    
+    return `${context}
+
+You are the Dungeon Master for a Daggerheart tabletop RPG game. A player wants to create a new character.
+
+Guide them through character creation naturally, helping them choose their ancestry, class, community, and traits. Be engaging and help them understand their options.
+
+Start the character creation process now.`;
   }
 
   /**

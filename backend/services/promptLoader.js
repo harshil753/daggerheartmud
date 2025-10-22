@@ -37,6 +37,21 @@ class PromptLoader {
   }
 
   /**
+   * Load the Rule Enforcer prompt SDK
+   */
+  loadRuleEnforcerPrompt() {
+    try {
+      const promptPath = path.join(__dirname, '../../supporting_functions/prompt_sdks/rule_enforcer.txt');
+      const promptContent = fs.readFileSync(promptPath, 'utf8');
+      console.log('Rule Enforcer prompt SDK loaded successfully');
+      return promptContent;
+    } catch (error) {
+      console.error('Error loading Rule Enforcer prompt SDK:', error);
+      return null;
+    }
+  }
+
+  /**
    * Load the Image Creator prompt SDK
    */
   loadImageCreatorPrompt() {
