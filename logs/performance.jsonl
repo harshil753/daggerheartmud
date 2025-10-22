@@ -1,0 +1,2 @@
+{"timestamp":"2025-10-21T23:05:24.520Z","type":"performance","command":"create character","metrics":{"promptSize":11039,"responseTime":2475,"validationTime":1,"totalTime":2479,"rulesLoaded":10898,"equipmentLoaded":0}}
+{"timestamp":"2025-10-21T23:27:59.293Z","type":"performance","command":"create character","metrics":{"promptSize":11039,"responseTime":2442,"validationTime":1,"totalTime":2446,"rulesLoaded":10898,"equipmentLoaded":0}}

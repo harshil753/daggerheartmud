@@ -1,10 +1,8 @@
 const { model, imageModel } = require('../config/gemini');
-const { getContextForGameState } = require('../utils/geminiContext');
+const { getFullContext } = require('../utils/geminiContext');
 const promptLoader = require('./promptLoader');
 const AIResponseParser = require('./aiResponseParser');
 const DatabaseSync = require('./databaseSync');
-const ResponseValidator = require('./responseValidator');
-const LoggingService = require('./loggingService');
 
 /**
  * AI Dungeon Master service using Gemini
@@ -17,9 +15,13 @@ class DungeonMaster {
     this.initializationPromise = null; // Prevent multiple simultaneous initializations
     this.responseParser = new AIResponseParser();
     this.databaseSync = new DatabaseSync();
-    this.responseValidator = new ResponseValidator();
-    this.loggingService = new LoggingService();
-    this.interactionCount = 0; // Track interactions for rule reinforcement
+  }
+
+  static getInstance() {
+    if (!DungeonMaster.instance) {
+      DungeonMaster.instance = new DungeonMaster();
+    }
+    return DungeonMaster.instance;
   }
 
   /**
@@ -68,13 +70,11 @@ class DungeonMaster {
       const response = await result.response;
       const text = response.text();
 
-      // Process triggers in the response
-      const processedText = await this.processTriggers({ message: text }, gameState, gameState.sessionId);
-      
-      // Update conversation history
-      this.updateConversationHistory(gameState, 'player_input', [input], processedText);
+      const parsedResponse = this.parseAIResponse(text, 'general');
+      const processedResponse = await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
+      this.updateConversationHistory(gameState, 'general', [input], processedResponse);
 
-      return processedText.message || processedText;
+      return processedResponse;
     } catch (error) {
       console.error('AI processing error:', error);
       return 'The Dungeon Master seems distracted. Please try again.';
@@ -85,185 +85,28 @@ class DungeonMaster {
    * Process a player command through the AI DM
    */
   async processCommand(command, args, gameState) {
-    const startTime = Date.now();
     await this.initializeAI();
-    this.interactionCount++;
 
+    const prompt = this.buildPrompt(command, args, gameState);
+    
     try {
-      // Load context dynamically based on command
-      const contextStartTime = Date.now();
-      const context = await getContextForGameState(command, gameState);
-      const contextLoadTime = Date.now() - contextStartTime;
-      
-      const prompt = this.buildPromptWithContext(command, args, gameState, context);
-      const promptSize = prompt.length;
-      
-      const aiStartTime = Date.now();
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
-      const aiResponseTime = Date.now() - aiStartTime;
 
-      // Validate AI response
-      const validationStartTime = Date.now();
-      const validation = await this.responseValidator.validateAIResponse(text, gameState);
-      const validationTime = Date.now() - validationStartTime;
-      
-      if (!validation.valid) {
-        console.warn('AI response validation failed:', validation.errors);
-        this.loggingService.logValidationFailure(command, gameState, validation.errors, text);
-        // Retry with stricter prompt including validation errors
-        return await this.retryWithValidationErrors(command, args, gameState, text, validation.errors);
-      }
-
-      // Parse AI response for structured data
       const parsedResponse = this.parseAIResponse(text, command);
-      
-      // Process triggers (IMAGE_GENERATION_TRIGGER, ASCII_MAP, etc.)
       const processedResponse = await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
-      
-      // Update conversation history
       this.updateConversationHistory(gameState, command, args, processedResponse);
-
-      // Log performance metrics
-      const totalTime = Date.now() - startTime;
-      this.loggingService.logPerformanceMetrics(command, gameState, {
-        promptSize,
-        responseTime: aiResponseTime,
-        validationTime,
-        totalTime,
-        rulesLoaded: context.rules ? context.rules.length : 0,
-        equipmentLoaded: context.equipment ? context.equipment.length : 0
-      });
 
       return processedResponse;
     } catch (error) {
       console.error('AI processing error:', error);
-      this.loggingService.logAIError(error, command, gameState);
       return {
         success: false,
         message: 'The Dungeon Master seems distracted. Please try again.',
         type: 'error'
       };
     }
-  }
-
-  /**
-   * Build prompt with dynamic context
-   */
-  buildPromptWithContext(command, args, gameState, context) {
-    let prompt = context.fullContext;
-    
-    // Every 10 interactions, reinforce critical rules
-    if (this.interactionCount % 10 === 0) {
-      prompt += `\n\n## CRITICAL RULE REMINDER\n`;
-      prompt += `- Always use duality dice (d12 Hope + d12 Fear)\n`;
-      prompt += `- Item tier must match character level ±1\n`;
-      prompt += `- HP and Stress cannot exceed maximums\n`;
-      prompt += `- Include structured data tags for all changes\n`;
-    }
-    
-    // Add game state context
-    prompt += this.buildGameStateContext(gameState);
-    
-    // Add command-specific instructions
-    prompt += this.getCommandInstructions(command, args);
-    
-    return prompt;
-  }
-
-  /**
-   * Retry with validation errors
-   */
-  async retryWithValidationErrors(command, args, gameState, previousResponse, errors) {
-    const errorPrompt = `
-      Your previous response violated game rules:
-      ${errors.join('\n')}
-      
-      Please correct these errors and respond again.
-      Previous response: ${previousResponse}
-      
-      Remember to:
-      - Use proper structured data tags
-      - Follow Daggerheart rules exactly
-      - Validate all stat changes and item distributions
-    `;
-    
-    try {
-      const result = await model.generateContent(errorPrompt);
-      const response = await result.response;
-      const text = response.text();
-      
-      // Validate the retry response
-      const validation = await this.responseValidator.validateAIResponse(text, gameState);
-      
-      if (!validation.valid) {
-        console.error('Retry validation also failed:', validation.errors);
-        return {
-          success: false,
-          message: 'The Dungeon Master is having trouble following the rules. Please try a simpler command.',
-          type: 'error'
-        };
-      }
-      
-      // Parse and process the corrected response
-      const parsedResponse = this.parseAIResponse(text, command);
-      return await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
-      
-    } catch (error) {
-      console.error('Retry processing error:', error);
-      return {
-        success: false,
-        message: 'The Dungeon Master seems confused. Please try again.',
-        type: 'error'
-      };
-    }
-  }
-
-  /**
-   * Build game state context
-   */
-  buildGameStateContext(gameState) {
-    let context = '\n\n## CURRENT GAME STATE\n\n';
-    
-    if (gameState.character) {
-      context += `CURRENT CHARACTER:\n`;
-      context += `Name: ${gameState.character.name}\n`;
-      context += `Ancestry: ${gameState.character.ancestry}\n`;
-      context += `Class: ${gameState.character.class}\n`;
-      context += `Level: ${gameState.character.level}\n`;
-      context += `HP: ${gameState.character.hit_points_current}/${gameState.character.hit_points_max}\n`;
-      context += `Stress: ${gameState.character.stress_current}/${gameState.character.stress_max}\n\n`;
-    }
-
-    if (gameState.campaign) {
-      context += `CURRENT CAMPAIGN:\n`;
-      context += `Title: ${gameState.campaign.title}\n`;
-      context += `Chapter: ${gameState.campaign.current_chapter}/${gameState.campaign.total_chapters}\n`;
-      context += `Story Length: ${gameState.campaign.story_length}\n\n`;
-    }
-
-    if (gameState.currentLocation) {
-      context += `CURRENT LOCATION: ${gameState.currentLocation}\n\n`;
-    }
-
-    if (gameState.combat) {
-      context += `COMBAT ACTIVE:\n`;
-      context += `Round: ${gameState.combat.round_number}\n`;
-      context += `Initiative: ${JSON.stringify(gameState.combat.initiative_order)}\n\n`;
-    }
-
-    // Add conversation history for context
-    const history = gameState.aiContext?.conversationHistory || [];
-    if (history.length > 0) {
-      context += `RECENT CONVERSATION:\n`;
-      history.slice(-10).forEach(entry => {
-        context += `${entry.role}: ${entry.content}\n`;
-      });
-      context += `\n`;
-    }
-
-    return context;
   }
 
   /**
@@ -295,52 +138,18 @@ class DungeonMaster {
         prompt += sdkPrompt;
         prompt += `\n\nContinue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
       } else {
-        // Fallback to original prompt
+        // Fallback prompt
         prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
         prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
       }
     }
+
+    // Add game state context
+    prompt += this.buildGameStateContext(gameState);
     
-    // Add current game state
-    if (character) {
-      prompt += `CURRENT CHARACTER:\n`;
-      prompt += `Name: ${character.name}\n`;
-      prompt += `Ancestry: ${character.ancestry}\n`;
-      prompt += `Class: ${character.class}\n`;
-      prompt += `Level: ${character.level}\n`;
-      prompt += `HP: ${character.hit_points_current}/${character.hit_points_max}\n`;
-      prompt += `Stress: ${character.stress_current}/${character.stress_max}\n\n`;
-    }
-
-    if (campaign) {
-      prompt += `CURRENT CAMPAIGN:\n`;
-      prompt += `Title: ${campaign.title}\n`;
-      prompt += `Chapter: ${campaign.current_chapter}/${campaign.total_chapters}\n`;
-      prompt += `Story Length: ${campaign.story_length}\n\n`;
-    }
-
-    if (currentLocation) {
-      prompt += `CURRENT LOCATION: ${currentLocation}\n\n`;
-    }
-
-    if (combat) {
-      prompt += `COMBAT ACTIVE:\n`;
-      prompt += `Round: ${combat.round_number}\n`;
-      prompt += `Initiative: ${JSON.stringify(combat.initiative_order)}\n\n`;
-    }
-
-    // Add conversation history for context
-    if (history.length > 0) {
-      prompt += `RECENT CONVERSATION:\n`;
-      history.slice(-10).forEach(entry => {
-        prompt += `${entry.role}: ${entry.content}\n`;
-      });
-      prompt += `\n`;
-    }
-
     // Add command-specific instructions
     prompt += this.getCommandInstructions(command, args);
-
+    
     return prompt;
   }
 
@@ -373,125 +182,176 @@ class DungeonMaster {
         prompt += sdkPrompt;
         prompt += `\n\nContinue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
       } else {
-        // Fallback to original prompt
+        // Fallback prompt
         prompt += `You are the Dungeon Master for a Daggerheart MUD game. `;
         prompt += `Continue the conversation using the Daggerheart rules and context from our previous interactions.\n\n`;
       }
     }
+
+    // Add game state context
+    prompt += this.buildGameStateContext(gameState);
     
-    // Add current game state
-    if (character) {
-      prompt += `CURRENT CHARACTER:\n`;
-      prompt += `Name: ${character.name}\n`;
-      prompt += `Ancestry: ${character.ancestry}\n`;
-      prompt += `Class: ${character.class}\n`;
-      prompt += `Level: ${character.level}\n`;
-      prompt += `HP: ${character.hit_points_current}/${character.hit_points_max}\n`;
-      prompt += `Stress: ${character.stress_current}/${character.stress_max}\n\n`;
-    }
-
-    if (campaign) {
-      prompt += `CURRENT CAMPAIGN:\n`;
-      prompt += `Title: ${campaign.title}\n`;
-      prompt += `Chapter: ${campaign.current_chapter}/${campaign.total_chapters}\n`;
-      prompt += `Story Length: ${campaign.story_length}\n\n`;
-    }
-
-    if (currentLocation) {
-      prompt += `CURRENT LOCATION: ${currentLocation}\n\n`;
-    }
-
-    if (combat) {
-      prompt += `COMBAT ACTIVE:\n`;
-      prompt += `Round: ${combat.round_number}\n`;
-      prompt += `Initiative: ${JSON.stringify(combat.initiative_order)}\n\n`;
-    }
-
-    // Add conversation history for context
-    if (history.length > 0) {
-      prompt += `RECENT CONVERSATION:\n`;
-      history.slice(-10).forEach(entry => {
-        prompt += `${entry.role}: ${entry.content}\n`;
-      });
-      prompt += `\n`;
-    }
-
-    // Add general instructions for player input
-    prompt += `PLAYER INPUT: "${input}"\n\n`;
-    prompt += `The player has provided input that is not a recognized game command. `;
-    prompt += `As the Dungeon Master, you should:\n`;
-    prompt += `1. Interpret their input in the context of the current game situation\n`;
-    prompt += `2. Respond as their character would experience it\n`;
-    prompt += `3. If it's a valid action, describe what happens\n`;
-    prompt += `4. If it's unclear or invalid, guide them toward valid actions\n`;
-    prompt += `5. Keep responses engaging and in character\n`;
-    prompt += `6. If they're trying to do something that requires a specific command, suggest the proper command\n\n`;
-    prompt += `Respond as the Dungeon Master would to this player input:`;
-
+    // Add general input handling
+    prompt += `\n\nPlayer input: "${input}"\n\n`;
+    prompt += `Respond to the player's input naturally and helpfully. `;
+    prompt += `If they're asking about game mechanics, provide accurate information from the rules. `;
+    prompt += `If they're roleplaying, respond in character as the DM.\n\n`;
+    
     return prompt;
   }
 
   /**
-   * Get command-specific instructions for the AI
+   * Build game state context for the prompt
+   */
+  buildGameStateContext(gameState) {
+    let context = '\n\n## CURRENT GAME STATE\n\n';
+    
+    if (gameState.character) {
+      context += `Character: ${gameState.character.name || 'Unnamed'} (Level ${gameState.character.level || 1})\n`;
+      context += `HP: ${gameState.character.hit_points_current || 0}/${gameState.character.hit_points_max || 0}\n`;
+      context += `Stress: ${gameState.character.stress_current || 0}/${gameState.character.stress_max || 0}\n`;
+      if (gameState.character.ancestry) context += `Ancestry: ${gameState.character.ancestry}\n`;
+      if (gameState.character.class) context += `Class: ${gameState.character.class}\n`;
+      if (gameState.character.community) context += `Community: ${gameState.character.community}\n`;
+    }
+    
+    if (gameState.campaign) {
+      context += `Campaign: ${gameState.campaign.name || 'Unnamed Campaign'}\n`;
+      context += `Chapter: ${gameState.campaign.current_chapter || 1}\n`;
+    }
+    
+    if (gameState.currentLocation) {
+      context += `Location: ${gameState.currentLocation.name || 'Unknown Location'}\n`;
+      if (gameState.currentLocation.description) {
+        context += `Description: ${gameState.currentLocation.description}\n`;
+      }
+    }
+    
+    if (gameState.combat && gameState.combat.active) {
+      context += `Combat: Active\n`;
+      if (gameState.combat.initiative) {
+        context += `Initiative Order: ${gameState.combat.initiative.join(', ')}\n`;
+      }
+    }
+    
+    // Add recent conversation history
+    const history = gameState.aiContext?.conversationHistory || [];
+    if (history.length > 0) {
+      context += `\nRecent conversation:\n`;
+      history.slice(-5).forEach(entry => {
+        context += `${entry.timestamp}: ${entry.type} - ${entry.content}\n`;
+      });
+    }
+    
+    return context;
+  }
+
+  /**
+   * Get command-specific instructions
    */
   getCommandInstructions(command, args) {
-    const instructions = {
-      'look': `The player wants to examine their surroundings. Describe the current location, any visible exits, items, NPCs, or other features. Be descriptive and atmospheric.`,
-      
-      'move': `The player wants to move in direction: ${args[0]}. Determine if this is possible and describe the new location they arrive at. If blocked, explain why.`,
-      
-      'inventory': `The player wants to see their inventory. List all items they're carrying, including equipped weapons and armor. Show item details and quantities.`,
-      
-      'stats': `The player wants to see their character statistics. Display their traits, HP, stress, equipment bonuses, and any status effects.`,
-      
-      'equip': `The player wants to equip: ${Array.isArray(args) ? args.join(' ') : args || ''}. Check if they have this item and if it can be equipped. Update their stats accordingly.`,
-      
-      'unequip': `The player wants to unequip: ${Array.isArray(args) ? args[0] : args || ''}. Remove the item from the specified slot and update their stats.`,
-      
-      'use': `The player wants to use: ${Array.isArray(args) ? args.join(' ') : args || ''}. Check if they have this consumable item and apply its effects.`,
-      
-      'attack': `The player wants to attack: ${Array.isArray(args) ? args.join(' ') : args || ''}. If in combat, process the attack. If not in combat, start combat if appropriate.`,
-      
-      'cast': `The player wants to cast: ${Array.isArray(args) ? args.join(' ') : args || ''}. Check if they have this ability and if they can use it. Apply magical effects.`,
-      
-      'talk': `The player wants to talk to: ${Array.isArray(args) ? args.join(' ') : args || ''}. Roleplay the NPC conversation. Be engaging and in-character.`,
-      
-      'rest': `The player wants to rest. Allow them to recover HP and stress if it's safe to do so.`,
-      
-      'save': `The player wants to create a save point. Confirm the save and note the current progress.`
-    };
-
-    return instructions[command] || `The player executed command: ${command} with args: ${Array.isArray(args) ? args.join(' ') : args || ''}. Respond appropriately as the DM.`;
+    let instructions = '\n\n## COMMAND INSTRUCTIONS\n\n';
+    
+    switch (command.toLowerCase()) {
+      case 'create character':
+        instructions += `Help the player create a new Daggerheart character. `;
+        instructions += `Guide them through selecting ancestry, class, community, and starting equipment. `;
+        instructions += `Use the character creation rules from the SRD. `;
+        instructions += `Include structured data tags for all character creation steps.\n`;
+        break;
+        
+      case 'attack':
+        instructions += `Process the attack action. `;
+        instructions += `Use the combat rules from the SRD. `;
+        instructions += `Calculate damage using duality dice (d12 Hope + d12 Fear). `;
+        instructions += `Include structured data tags for damage and status changes.\n`;
+        break;
+        
+      case 'cast':
+        instructions += `Process the spellcasting action. `;
+        instructions += `Use the magic rules from the SRD. `;
+        instructions += `Check if the character has access to the spell domain. `;
+        instructions += `Include structured data tags for spell effects.\n`;
+        break;
+        
+      case 'equip':
+        instructions += `Process equipment changes. `;
+        instructions += `Use the equipment rules from the SRD. `;
+        instructions += `Check tier requirements and burden limits. `;
+        instructions += `Include structured data tags for equipment changes.\n`;
+        break;
+        
+      case 'rest':
+        instructions += `Process rest actions. `;
+        instructions += `Use the rest rules from the SRD. `;
+        instructions += `Calculate HP and stress recovery. `;
+        instructions += `Include structured data tags for stat changes.\n`;
+        break;
+        
+      default:
+        instructions += `Process the "${command}" command appropriately. `;
+        instructions += `Use the relevant rules from the SRD. `;
+        instructions += `Include structured data tags for any game state changes.\n`;
+    }
+    
+    if (args && args.length > 0) {
+      instructions += `\nCommand arguments: ${args.join(' ')}\n`;
+    }
+    
+    return instructions;
   }
 
   /**
    * Parse AI response for structured data
    */
-  parseAIResponse(text, command) {
-    // Extract structured data from AI response
-    const response = {
-      success: true,
-      message: text,
-      type: 'narrative',
-      data: {}
-    };
+  parseAIResponse(response, command) {
+    return this.responseParser.parseResponse(response, command);
+  }
 
-    // Check for combat triggers
-    if (text.toLowerCase().includes('combat') || text.toLowerCase().includes('battle')) {
-      response.type = 'combat_start';
+  /**
+   * Process triggers in the response
+   */
+  async processTriggers(response, gameState, sessionId) {
+    if (!response.triggers || response.triggers.length === 0) {
+      return response;
     }
 
-    // Check for location changes
-    if (command === 'move' && !text.toLowerCase().includes('cannot') && !text.toLowerCase().includes('blocked')) {
-      response.type = 'location_change';
+    const processedResponse = { ...response };
+    processedResponse.triggers = [];
+
+    for (const trigger of response.triggers) {
+      switch (trigger.type) {
+        case 'IMAGE_GENERATION_TRIGGER':
+          try {
+            const imagePrompt = trigger.data.prompt;
+            const imageResult = await imageModel.generateContent(imagePrompt);
+            const imageResponse = await imageResult.response;
+            const imageData = await imageResponse.text();
+            
+            processedResponse.image = {
+              prompt: imagePrompt,
+              data: imageData
+            };
+          } catch (error) {
+            console.error('Image generation error:', error);
+          }
+          break;
+          
+        case 'ASCII_MAP':
+          processedResponse.asciiMap = trigger.data;
+          break;
+          
+        case 'DATABASE_SYNC':
+          try {
+            await this.databaseSync.syncGameState(gameState, sessionId);
+          } catch (error) {
+            console.error('Database sync error:', error);
+          }
+          break;
+      }
     }
 
-    // Check for item interactions
-    if (command === 'equip' || command === 'use') {
-      response.type = 'item_interaction';
-    }
-
-    return response;
+    return processedResponse;
   }
 
   /**
@@ -501,26 +361,27 @@ class DungeonMaster {
     if (!gameState.aiContext) {
       gameState.aiContext = { conversationHistory: [] };
     }
-
-    const history = gameState.aiContext.conversationHistory;
     
-    // Add player command
+    const history = gameState.aiContext.conversationHistory;
+    const timestamp = new Date().toISOString();
+    
+    // Add command to history
     history.push({
-      role: 'player',
-      content: `${command} ${Array.isArray(args) ? args.join(' ') : args || ''}`,
-      timestamp: new Date()
+      timestamp,
+      type: 'command',
+      content: `${command} ${args ? args.join(' ') : ''}`.trim()
     });
-
-    // Add AI response
+    
+    // Add response to history
     history.push({
-      role: 'assistant',
-      content: response.message,
-      timestamp: new Date()
+      timestamp,
+      type: 'response',
+      content: response.message || response.text || 'No response content'
     });
-
-    // Keep only last 50 messages to manage context size
-    if (history.length > 50) {
-      gameState.aiContext.conversationHistory = history.slice(-50);
+    
+    // Keep only last 20 entries
+    if (history.length > 20) {
+      gameState.aiContext.conversationHistory = history.slice(-20);
     }
   }
 
@@ -541,195 +402,18 @@ class DungeonMaster {
       const response = await result.response;
       const text = response.text();
       
-      // Try to parse JSON from response
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        return JSON.parse(jsonMatch[0]);
+      // Try to parse as JSON
+      try {
+        return JSON.parse(text);
+      } catch (parseError) {
+        console.error('Failed to parse campaign JSON:', parseError);
+        return { error: 'Failed to generate valid campaign structure' };
       }
-      
-      return { error: 'Could not parse campaign structure' };
     } catch (error) {
       console.error('Campaign generation error:', error);
       return { error: 'Failed to generate campaign' };
     }
   }
-
-  /**
-   * Process triggers in AI responses (IMAGE_GENERATION_TRIGGER, ASCII_MAP, etc.)
-   */
-  async processTriggers(response, gameState, sessionId = null) {
-    if (!response.message) return response;
-
-    const message = response.message;
-    let processedMessage = message;
-    let extractedMap = null;
-    let syncResult = null;
-
-    // Check for IMAGE_GENERATION_TRIGGER
-    const imageTriggerMatch = message.match(/\[IMAGE_GENERATION_TRIGGER\][\s\S]*?\[PROMPT:/);
-    if (imageTriggerMatch) {
-      const triggerContent = imageTriggerMatch[0];
-      
-      // Extract trigger details
-      const typeMatch = triggerContent.match(/Type:\s*([^\n]+)/);
-      const descMatch = triggerContent.match(/Description:\s*([^\n]+)/);
-      const contextMatch = triggerContent.match(/Context:\s*([^\n]+)/);
-      const moodMatch = triggerContent.match(/Mood:\s*([^\n]+)/);
-      
-      if (typeMatch && descMatch) {
-        const imageType = typeMatch[1].trim();
-        const description = descMatch[1].trim();
-        const context = contextMatch ? contextMatch[1].trim() : 'Game context';
-        const mood = moodMatch ? moodMatch[1].trim() : 'Fantasy atmosphere';
-        
-        // Generate image using the trigger information
-        try {
-          const imageResult = await this.generateImage(description, imageType);
-          if (imageResult.success) {
-            // Add image generation note to the response
-            processedMessage = message.replace(/\[IMAGE_GENERATION_TRIGGER\][\s\S]*?\[PROMPT:/, 
-              `[IMAGE_GENERATED: ${imageType} - ${description}]\n\n`);
-          }
-        } catch (error) {
-          console.error('Image generation from trigger failed:', error);
-        }
-      }
-    }
-
-    // Check for ASCII_MAP and extract map data
-    const asciiMapMatch = message.match(/\[ASCII_MAP\][\s\S]*?\[LEGEND\][\s\S]*?(?=\[PROMPT:|$)/);
-    if (asciiMapMatch) {
-      const mapContent = asciiMapMatch[0];
-      
-      // Extract the map grid (lines between [ASCII_MAP] and [LEGEND])
-      const mapGridMatch = mapContent.match(/\[ASCII_MAP\]([\s\S]*?)\[LEGEND\]/);
-      if (mapGridMatch) {
-        const mapGrid = mapGridMatch[1].trim();
-        
-        // Extract legend
-        const legendMatch = mapContent.match(/\[LEGEND\]([\s\S]*?)(?=\[PROMPT:|$)/);
-        const legend = legendMatch ? legendMatch[1].trim() : '';
-        
-        // Parse map data
-        extractedMap = {
-          grid: mapGrid,
-          legend: legend,
-          timestamp: new Date().toISOString()
-        };
-        
-        // Update game state with map data
-        if (gameState) {
-          gameState.currentMap = extractedMap;
-        }
-        
-        // Ensure proper formatting for display
-        processedMessage = message.replace(/\[ASCII_MAP\]/g, '\n[ASCII_MAP]\n');
-      }
-    } else {
-      // Try alternative pattern - look for ASCII_MAP without strict LEGEND requirement
-      const simpleMapMatch = message.match(/\[ASCII_MAP\][\s\S]*?(?=\[PROMPT:|$)/);
-      if (simpleMapMatch) {
-        const mapContent = simpleMapMatch[0];
-        const mapGrid = mapContent.replace(/\[ASCII_MAP\]/, '').trim();
-        
-        // Parse map data
-        extractedMap = {
-          grid: mapGrid,
-          legend: '',
-          timestamp: new Date().toISOString()
-        };
-        
-        // Update game state with map data
-        if (gameState) {
-          gameState.currentMap = extractedMap;
-        }
-        
-        // Ensure proper formatting for display
-        processedMessage = message.replace(/\[ASCII_MAP\]/g, '\n[ASCII_MAP]\n');
-      }
-    }
-
-    // Parse AI response for structured data changes
-    if (sessionId && gameState) {
-      try {
-        const parsedChanges = this.responseParser.parseResponse(response, gameState);
-        
-        // Only sync if there are actual changes
-        if (this.hasChanges(parsedChanges)) {
-          syncResult = await this.databaseSync.syncChanges(parsedChanges, gameState, sessionId);
-          console.log('Database sync result:', syncResult);
-        }
-      } catch (error) {
-        console.error('Database sync failed:', error);
-        syncResult = { success: false, error: error.message };
-      }
-    }
-
-    return {
-      ...response,
-      message: processedMessage,
-      mapData: extractedMap,
-      syncResult: syncResult
-    };
-  }
-
-  /**
-   * Check if parsed changes contain any actual changes
-   */
-  hasChanges(parsedChanges) {
-    return (
-      (parsedChanges.character && Object.keys(parsedChanges.character).length > 0) ||
-      (parsedChanges.inventory && parsedChanges.inventory.length > 0) ||
-      parsedChanges.location ||
-      parsedChanges.combat ||
-      parsedChanges.level ||
-      parsedChanges.experience
-    );
-  }
-
-  /**
-   * Generate image based on description using prompt SDK
-   */
-  async generateImage(imageDescription, imageType = 'ITEM') {
-    try {
-      // Load the image creator prompt SDK
-      const imagePrompt = promptLoader.getImageCreatorPrompt();
-      
-      let prompt;
-      if (imagePrompt) {
-        // Use the SDK prompt with the specific image request
-        prompt = `${imagePrompt}\n\n[IMAGE_REQUEST]\nType: ${imageType}\nSubject: ${imageDescription}\nDescription: ${imageDescription}\nContext: Daggerheart MUD game\nMood: Fantasy adventure atmosphere`;
-      } else {
-        // Fallback to original prompt
-        prompt = `Create a fantasy ${imageType.toLowerCase()} image: ${imageDescription}. ` +
-          `Style: Detailed fantasy artwork, suitable for a tabletop RPG game. ` +
-          `Quality: High resolution, professional illustration style.`;
-      }
-
-      const result = await imageModel.generateContent(prompt);
-      const response = await result.response;
-      
-      // Return the generated image data
-      return {
-        success: true,
-        imageData: response.text(), // This will contain the image generation result
-        type: imageType,
-        description: imageDescription
-      };
-    } catch (error) {
-      console.error('Image generation error:', error);
-      return {
-        success: false,
-        error: 'Failed to generate image',
-        type: imageType,
-        description: imageDescription
-      };
-    }
-  }
 }
 
-// Create singleton instance to ensure context is loaded only once
-const dungeonMasterInstance = new DungeonMaster();
-
 module.exports = DungeonMaster;
-module.exports.getInstance = () => dungeonMasterInstance;

@@ -625,6 +625,19 @@ Maintain context of:
 - Story length selection and campaign structure
 - **CRITICAL: Provided Daggerheart rules and item database (MUST be retained throughout entire session)**
 
+### CRITICAL: USE PROVIDED RULES
+**YOU MUST USE THE EXACT RULES PROVIDED IN THE CONTEXT. DO NOT MAKE UP OR INVENT NEW OPTIONS.**
+
+**For Character Creation:**
+- Use ONLY the ancestries, classes, and communities listed in the provided rules
+- Do NOT create new options or variations
+- If a player asks for options not in the rules, direct them to the provided options
+- Always reference the exact names from the rules
+
+**Example:**
+- ✅ CORRECT: "Available communities are: Highborne, Loreborne, Orderborne, Ridgeborne, Seaborne, Slyborne, Underborne, Wanderborne, Wildborne"
+- ❌ WRONG: "You can choose from Ancient Grove Seeker, Verdant Border Warden, Riverbend Mystic"
+
 ### Structured Data Output
 **CRITICAL: When character stats, inventory, or game state changes occur, you MUST include structured output tags for database synchronization.**
 

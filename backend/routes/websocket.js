@@ -187,24 +187,37 @@ class WebSocketHandler {
    */
   async handleCharacterCreation(socket, data) {
     try {
+      console.log('👤 Character creation request received');
       const { characterData } = data;
       const gameState = this.gameStateManager.getGameState(socket.id);
       
       if (!gameState) {
+        console.log('❌ No active game session for character creation');
         socket.emit('error', { message: 'No active game session' });
         return;
       }
 
+      console.log('📋 Character data received:', {
+        ancestry: characterData.ancestry,
+        class: characterData.class,
+        community: characterData.community,
+        name: characterData.name
+      });
+
       // Validate character data
+      console.log('🔍 Validating character data...');
       const validation = this.validateCharacterData(characterData);
       if (!validation.valid) {
+        console.log('❌ Character validation failed:', validation.message);
         socket.emit('character_creation_error', {
           message: validation.message
         });
         return;
       }
+      console.log('✅ Character data validation passed');
 
       // Create character through AI DM
+      console.log('🤖 Processing character creation through AI...');
       const result = await this.dungeonMaster.processCommand(
         'create_character',
         [JSON.stringify(characterData)],

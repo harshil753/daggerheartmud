@@ -1,50 +1,40 @@
-const RuleManager = require('../services/ruleManager');
-const EquipmentManager = require('../services/equipmentManager');
+const fs = require('fs');
+const path = require('path');
 
-// Initialize managers
-const ruleManager = new RuleManager();
-const equipmentManager = new EquipmentManager();
-
-/**
- * Get context for specific game state and command
- */
-async function getContextForGameState(command, gameState) {
+function loadSRDContext() {
   try {
-    const rules = await ruleManager.loadRulesForContext(command, gameState);
-    const equipment = await equipmentManager.loadEquipmentForContext(gameState);
-    
-    return {
-      rules,
-      equipment,
-      fullContext: `${rules}\n\n## EQUIPMENT DATABASE\n\n${equipment}`
-    };
+    const srdPath = path.join(__dirname, '../../supporting_functions/Results/DH_SRD_Part_01_Pages_1-415.txt');
+    return fs.readFileSync(srdPath, 'utf8');
   } catch (error) {
-    console.error('Error loading dynamic context:', error);
-    // Fallback to basic context
-    return {
-      rules: 'Basic Daggerheart rules',
-      equipment: 'Equipment database unavailable',
-      fullContext: 'Daggerheart game rules and equipment'
-    };
+    console.error('Error loading SRD:', error);
+    return 'Daggerheart System Reference Document not found.';
   }
 }
 
-/**
- * Legacy function for backward compatibility
- * @deprecated Use getContextForGameState instead
- */
+function loadEquipmentContext() {
+  try {
+    const equipmentPath = path.join(__dirname, '../../supporting_functions/Results/equipment_data.json');
+    const equipmentData = JSON.parse(fs.readFileSync(equipmentPath, 'utf8'));
+    return JSON.stringify(equipmentData, null, 2);
+  } catch (error) {
+    console.error('Error loading equipment data:', error);
+    return 'Equipment database not found.';
+  }
+}
+
 function getFullContext() {
-  console.warn('getFullContext() is deprecated. Use getContextForGameState(command, gameState) instead.');
+  const srd = loadSRDContext();
+  const equipment = loadEquipmentContext();
   
-  // Return a basic context for legacy compatibility
   return {
-    srd: 'Legacy SRD context',
-    equipment: 'Legacy equipment context',
-    fullContext: 'Legacy Daggerheart context - please use getContextForGameState() for better performance'
+    srd,
+    equipment,
+    fullContext: `DAGGERHEART SYSTEM REFERENCE DOCUMENT:\n\n${srd}\n\nAVAILABLE EQUIPMENT:\n\n${equipment}`
   };
 }
 
 module.exports = {
-  getContextForGameState,
+  loadSRDContext,
+  loadEquipmentContext,
   getFullContext
 };
