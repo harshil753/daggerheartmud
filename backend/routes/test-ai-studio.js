@@ -15,6 +15,275 @@ const ConversationHistoryManager = require('../utils/conversationHistoryManager'
 // Initialize Gemini with the current package
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
+/**
+ * Extract save point data from AI response
+ */
+function extractSavePointData(responseText) {
+  const savePointData = {
+    type: 'manual',
+    description: 'Adventure save point',
+    worldState: {},
+    characterState: {},
+    storyProgress: {}
+  };
+
+  // Extract campaign data
+  const campaignMatch = responseText.match(/Campaign:\s*([^,]+),\s*Chapter:\s*(\d+)\/(\d+)/);
+  if (campaignMatch) {
+    savePointData.campaignTitle = campaignMatch[1].trim();
+    savePointData.currentChapter = parseInt(campaignMatch[2]);
+    savePointData.totalChapters = parseInt(campaignMatch[3]);
+  }
+
+  // Extract character data
+  const characterMatch = responseText.match(/Character:\s*([^,]+),\s*Level:\s*(\d+),\s*HP:\s*(\d+)\/(\d+),\s*Stress:\s*(\d+)\/(\d+),\s*Hope:\s*(\d+)/);
+  if (characterMatch) {
+    savePointData.characterName = characterMatch[1].trim();
+    savePointData.characterLevel = parseInt(characterMatch[2]);
+    savePointData.characterState.hp = parseInt(characterMatch[3]);
+    savePointData.characterState.maxHp = parseInt(characterMatch[4]);
+    savePointData.characterState.stress = parseInt(characterMatch[5]);
+    savePointData.characterState.maxStress = parseInt(characterMatch[6]);
+    savePointData.characterState.hope = parseInt(characterMatch[7]);
+  }
+
+  // Extract location
+  const locationMatch = responseText.match(/Location:\s*([^\n]+)/);
+  if (locationMatch) {
+    savePointData.currentLocation = locationMatch[1].trim();
+  }
+
+  // Extract inventory
+  const inventoryMatch = responseText.match(/Inventory:\s*([^\n]+)/);
+  if (inventoryMatch) {
+    savePointData.inventory = inventoryMatch[1].trim();
+  }
+
+  // Extract world state
+  const worldStateMatch = responseText.match(/World State:\s*([^\n]+)/);
+  if (worldStateMatch) {
+    savePointData.worldState = worldStateMatch[1].trim();
+  }
+
+  // Extract story progress
+  const storyProgressMatch = responseText.match(/Story Progress:\s*([^\n]+)/);
+  if (storyProgressMatch) {
+    savePointData.storyProgress = storyProgressMatch[1].trim();
+  }
+
+  return savePointData;
+}
+
+/**
+ * Extract stat changes from AI response
+ */
+function extractStatChanges(responseText) {
+  const statChanges = [];
+  
+  // Look for [STAT_CHANGE] tags
+  const statChangeMatch = responseText.match(/\[\*\*STAT_CHANGE\*\*\]\s*:?\s*([\s\S]*?)(?=\[\*\*|$)/i);
+  if (statChangeMatch) {
+    const statChangeText = statChangeMatch[1].trim();
+    const lines = statChangeText.split('\n').filter(line => line.trim());
+    
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith('-')) {
+        const characterMatch = trimmedLine.match(/-\s*([^:]+):\s*(.+)/);
+        if (characterMatch) {
+          const characterName = characterMatch[1].trim();
+          const statsText = characterMatch[2].trim();
+          
+          // Parse individual stats
+          const stats = {};
+          const statMatches = statsText.match(/(\w+):\s*([^,]+)/g);
+          if (statMatches) {
+            for (const statMatch of statMatches) {
+              const [statName, statValue] = statMatch.split(':').map(s => s.trim());
+              stats[statName.toLowerCase()] = statValue;
+            }
+          }
+          
+          statChanges.push({
+            character: characterName,
+            stats: stats,
+            timestamp: new Date().toISOString()
+          });
+        }
+      }
+    }
+  }
+  
+  return statChanges;
+}
+
+/**
+ * Create Phase 1 save point with all character and campaign data
+ */
+async function createPhase1SavePoint(sessionId) {
+  try {
+    console.log('💾 Creating Phase 1 save point for session:', sessionId);
+    
+    // Get campaign state to find campaign and character IDs
+    const campaignState = await supabaseStorage.getCampaignState(sessionId);
+    if (!campaignState || !campaignState.campaign_id || !campaignState.character_id) {
+      throw new Error('Campaign state not found for session');
+    }
+
+    const campaignId = campaignState.campaign_id;
+    const characterId = campaignState.character_id;
+
+    // Get all data from database
+    const campaignData = await supabaseStorage.getCampaign(campaignId);
+    const characterData = await supabaseStorage.getCharacter(characterId);
+    const conversationHistory = conversationManager.getConversationHistory(sessionId);
+    const seedData = sessionSeedData.get(sessionId);
+
+    // Create comprehensive save point data
+    const savePointData = {
+      type: 'phase1_completion',
+      description: 'Character creation and campaign setup completed',
+      campaignData: campaignData,
+      characterData: characterData,
+      conversationHistory: conversationHistory,
+      seedData: seedData,
+      phase: 'phase1_completion',
+      timestamp: new Date().toISOString()
+    };
+
+    // Create cached content with all Phase 1 data
+    const contextString = buildPhase1ContextString(campaignData, characterData, conversationHistory, seedData);
+    const cachedContent = await phase2CacheBuilder.createCachedContent(contextString, `phase1_${sessionId}`);
+
+    // Store save point in database
+    const savePointId = await supabaseStorage.createSavePoint({
+      campaign_id: campaignId,
+      character_id: characterId,
+      save_point_data: savePointData,
+      cached_content_name: cachedContent.name,
+      session_id: sessionId
+    });
+
+    console.log('✅ Phase 1 save point created with ID:', savePointId);
+    console.log('📚 Cached content name:', cachedContent.name);
+    console.log('📊 Context length:', contextString.length);
+
+    return {
+      success: true,
+      savePointId,
+      cachedContent,
+      savePointData
+    };
+  } catch (error) {
+    console.error('❌ Error creating Phase 1 save point:', error);
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+}
+
+/**
+ * Build context string for Phase 1 save point
+ */
+function buildPhase1ContextString(campaignData, characterData, conversationHistory, seedData) {
+  const context = [];
+
+  // Phase 1 Completion Header
+  context.push('# PHASE 1 COMPLETION SAVE POINT');
+  context.push(`Save Point Type: Character Creation & Campaign Setup Complete`);
+  context.push(`Timestamp: ${new Date().toISOString()}`);
+  context.push('');
+
+  // Campaign Overview
+  context.push('# CAMPAIGN OVERVIEW');
+  context.push(`Title: ${campaignData.title}`);
+  context.push(`Description: ${campaignData.description}`);
+  context.push(`Story Length: ${campaignData.story_length}`);
+  context.push(`Total Chapters: ${campaignData.total_chapters}`);
+  context.push(`Current Chapter: ${campaignData.current_chapter}`);
+  context.push('');
+
+  // Character Information
+  context.push('# CHARACTER INFORMATION');
+  context.push(`Name: ${characterData.name}`);
+  context.push(`Class: ${characterData.class}`);
+  context.push(`Ancestry: ${characterData.ancestry}`);
+  context.push(`Community: ${characterData.community}`);
+  context.push(`Level: ${characterData.level}`);
+  context.push('');
+
+  // Character Stats
+  context.push('## Character Stats');
+  context.push(`Agility: ${characterData.agility}`);
+  context.push(`Strength: ${characterData.strength}`);
+  context.push(`Finesse: ${characterData.finesse}`);
+  context.push(`Instinct: ${characterData.instinct}`);
+  context.push(`Presence: ${characterData.presence}`);
+  context.push(`Knowledge: ${characterData.knowledge}`);
+  context.push('');
+
+  // Character Resources
+  context.push('## Character Resources');
+  context.push(`Hit Points: ${characterData.hit_points_current}/${characterData.hit_points_max}`);
+  context.push(`Stress: ${characterData.stress_current}/${characterData.stress_max}`);
+  context.push(`Hope Tokens: ${characterData.hope_tokens}`);
+  context.push(`Fear Tokens: ${characterData.fear_tokens}`);
+  context.push('');
+
+  // Equipment and Inventory
+  if (characterData.character_inventory && characterData.character_inventory.length > 0) {
+    context.push('## Equipment and Inventory');
+    for (const item of characterData.character_inventory) {
+      if (item.items && item.items.name) {
+        if (item.is_equipped) {
+          context.push(`Equipped: ${item.items.name} (${item.items.type || 'Unknown'})`);
+        } else {
+          context.push(`Inventory: ${item.items.name} x${item.quantity || 1}`);
+        }
+      } else {
+        context.push(`Item: ${item.name || 'Unknown Item'} x${item.quantity || 1}`);
+      }
+    }
+    context.push('');
+  }
+
+  // Campaign State
+  if (campaignData && campaignData.campaign_data) {
+    context.push('# CAMPAIGN STATE');
+    context.push(`Setting: ${campaignData.campaign_data.setting || 'Unknown'}`);
+    context.push(`Conflict: ${campaignData.campaign_data.conflict || 'Unknown'}`);
+    context.push(`Goals: ${campaignData.campaign_data.goals || 'Unknown'}`);
+    context.push('');
+  }
+
+  // World State
+  if (campaignData && campaignData.world_state && Object.keys(campaignData.world_state).length > 0) {
+    context.push('# WORLD STATE');
+    for (const [key, value] of Object.entries(campaignData.world_state)) {
+      context.push(`${key}: ${JSON.stringify(value)}`);
+    }
+    context.push('');
+  }
+
+  // Key Conversation Moments
+  context.push('# KEY CONVERSATION MOMENTS');
+  const keyTypes = ['campaign_choice', 'ancestry_choice', 'community_choice', 'class_choice', 'character_creation_complete'];
+  const keyMoments = conversationHistory.filter(message => keyTypes.includes(message.type));
+  for (const moment of keyMoments) {
+    context.push(`- ${moment.type}: ${moment.content.substring(0, 100)}...`);
+  }
+  context.push('');
+
+  // Add seed data
+  if (seedData) {
+    context.push('# DAGGERHEART RULEBOOK DATA');
+    context.push(seedData);
+  }
+
+  return context.join('\n');
+}
+
 // Store active chat sessions and cached content
 const chatSessions = new Map();
 const cachedContentSessions = new Map();
@@ -93,12 +362,20 @@ router.post('/send-message', async (req, res) => {
       const sessionPhase = sessionPhases.get(sessionId);
       console.log('🔍 Session phase check:', { sessionId, sessionPhase, currentPhase });
       
-      // Force new Phase 1 session if session ID contains 'phase2' or is in Phase 2
-      if (sessionId.includes('phase2') || sessionPhase === 'phase2_adventure') {
-        console.log('🔄 Phase 2 session detected - creating new Phase 1 session');
-        // Force creation of new Phase 1 session for any Phase 1 operation
+      // Only force new Phase 1 session if this is a large message (seed data) being sent to a Phase 2 session
+      if ((sessionId.includes('phase2') || sessionPhase === 'phase2_adventure') && message.length > 100000) {
+        console.log('🔄 Phase 2 session detected with large message - creating new Phase 1 session for seed data');
+        // Store seed data from old session if available
+        const oldSeedData = sessionSeedData.get(sessionId);
+        if (oldSeedData && message.length > 100000) {
+          console.log('📊 Transferring seed data to new session');
+        }
+        // Force creation of new Phase 1 session for seed data upload
         sessionId = null;
         chat = null; // Clear the chat session
+      } else if (sessionId.includes('phase2') || sessionPhase === 'phase2_adventure') {
+        console.log('🔄 Using existing Phase 2 session for regular message');
+        // Use the existing Phase 2 session for regular messages
       }
     }
     
@@ -109,8 +386,6 @@ router.post('/send-message', async (req, res) => {
       const isSeedData = message.length > 100000;
       
       if (isSeedData) {
-        console.log('📊 Large message detected - treating as seed data');
-        console.log('🌱 Seeding AI with rulebook and equipment data');
         
           // Create chat with system instructions (no caching in Phase 1)
         const chatConfig = {
@@ -125,7 +400,6 @@ router.post('/send-message', async (req, res) => {
         
         chat = ai.chats.create(chatConfig);
         
-        console.log('🌱 AI seeded with rulebook data and system instructions');
           currentPhase = 'phase1_setup';
       } else {
         // Regular message - create normal session
@@ -180,7 +454,6 @@ router.post('/send-message', async (req, res) => {
     while (retryCount < maxRetries) {
       try {
         if (isSeedData) {
-          console.log('🌱 Processing seed data - AI should respond with acknowledgment');
           console.log('✅ Using chat session with rulebook context');
           const response = await chat.sendMessage({
             message: message // Send the actual seed data, not a generic message
@@ -218,24 +491,75 @@ router.post('/send-message', async (req, res) => {
     }
     
     // Check for character creation completion
+    console.log('🔍 Checking character creation completion:', {
+      currentPhase,
+      sessionId,
+      isComplete: conversationManager.isCharacterCreationComplete(sessionId)
+    });
+    
     if (currentPhase === 'phase1_setup' && conversationManager.isCharacterCreationComplete(sessionId)) {
       console.log('🎯 Character creation complete - initiating Phase 2 transition');
       
+      // Debug logging for character completion response (only if not seed data)
+      if (!isSeedData) {
+        console.log('🔍 CHARACTER COMPLETION DEBUG:');
+        console.log('--- START CHARACTER RESPONSE ---');
+        console.log(responseText);
+        console.log('--- END CHARACTER RESPONSE ---');
+      }
+      
+    // Additional debug for message type detection
+    const messageType = conversationManager.detectAIMessageType(responseText);
+    console.log('🔍 DETECTED MESSAGE TYPE:', messageType);
+    
+    // Debug character creation completion detection
+    const isCharacterComplete = conversationManager.isCharacterCreationComplete(sessionId);
+    console.log('🔍 CHARACTER CREATION COMPLETE:', isCharacterComplete);
+    console.log('🔍 CURRENT PHASE:', currentPhase);
+      
       try {
+        // Create Phase 1 save point before transitioning
+        console.log('💾 Creating Phase 1 save point...');
+        try {
+          const phase1SavePoint = await createPhase1SavePoint(sessionId);
+          if (phase1SavePoint.success) {
+            console.log('✅ Phase 1 save point created:', phase1SavePoint.savePointId);
+          }
+        } catch (savePointError) {
+          console.error('❌ Phase 1 save point creation error:', savePointError);
+          console.warn('⚠️ Continuing with Phase 2 transition despite save point error');
+        }
+
         // Auto-trigger Phase 2 transition
         const transitionResult = await transitionToPhase2(sessionId);
         
         if (transitionResult.success) {
           console.log('✅ Successfully transitioned to Phase 2');
-          return res.json({
-            success: true,
-            response: responseText,
-            messageLength: message.length,
-            sessionId: transitionResult.newSessionId,
-            conversationSession: true,
-            phaseTransition: true,
-            newPhase: 'phase2_adventure'
-          });
+          
+          // If adventure was started, return the adventure response
+          if (transitionResult.adventureStarted) {
+            console.log('🎬 Returning automated adventure response to user');
+            return res.json({
+              success: true,
+              response: transitionResult.adventureResponse,
+              messageLength: message.length,
+              sessionId: transitionResult.newSessionId,
+              conversationSession: true,
+              phaseTransition: true,
+              newPhase: 'phase2_adventure',
+              adventureStarted: true
+            });
+          } else {
+            return res.json({
+              success: true,
+              response: responseText,
+              messageLength: message.length,
+              sessionId: transitionResult.newSessionId,
+              conversationSession: true,
+              phaseTransition: true,
+              newPhase: 'phase2_adventure'
+            });
+          }
         } else {
           console.warn('⚠️ Phase 2 transition failed, continuing with Phase 1');
         }
@@ -245,10 +569,83 @@ router.post('/send-message', async (req, res) => {
       }
     }
 
-    console.log('🤖 AI STUDIO RESPONSE:');
-    console.log('--- START RESPONSE ---');
-    console.log(responseText);
-    console.log('--- END RESPONSE ---');
+    // Check for stat changes during combat
+    if (responseText.includes('[STAT_CHANGE]')) {
+      console.log('📊 Stat changes detected - processing combat stat updates');
+      
+      try {
+        // Extract stat changes from response
+        const statChanges = extractStatChanges(responseText);
+        
+        if (statChanges.length > 0) {
+          console.log('📈 Stat Changes Found:', statChanges.length);
+          for (const change of statChanges) {
+            console.log(`  - ${change.character}:`, change.stats);
+          }
+          
+          // Store stat changes in database
+          const campaignState = await supabaseStorage.getCampaignState(sessionId);
+          if (campaignState && campaignState.character_id) {
+            // Update character stats in database
+            await supabaseStorage.updateCharacterStats(campaignState.character_id, statChanges);
+            console.log('✅ Character stats updated in database');
+          }
+        }
+      } catch (statError) {
+        console.error('❌ Stat change processing error:', statError);
+        console.warn('⚠️ Continuing with normal response despite stat error');
+      }
+    }
+
+    // Check for save point creation
+    if (responseText.includes('[SAVE_POINT_CREATED]')) {
+      console.log('💾 Save point detected - processing save point creation');
+      
+      try {
+        // Extract save point data from response
+        const savePointData = extractSavePointData(responseText);
+        
+        // Get current campaign and character IDs from session
+        const campaignState = await supabaseStorage.getCampaignState(sessionId);
+        if (campaignState && campaignState.campaign_id && campaignState.character_id) {
+          // Create save point and new session
+          const savePointResult = await phase2CacheBuilder.createSavePointAndNewSession(
+            sessionId,
+            campaignState.campaign_id,
+            campaignState.character_id,
+            savePointData,
+            conversationManager.getConversationHistory(sessionId),
+            sessionSeedData.get(sessionId)
+          );
+          
+          if (savePointResult.success) {
+            console.log('✅ Save point created and new session started');
+            return res.json({
+              success: true,
+              response: responseText,
+              messageLength: message.length,
+              sessionId: savePointResult.newSession.id,
+              conversationSession: true,
+              savePointCreated: true,
+              savePointId: savePointResult.savePointId
+            });
+          }
+        }
+      } catch (savePointError) {
+        console.error('❌ Save point creation error:', savePointError);
+        console.warn('⚠️ Continuing with normal response despite save point error');
+      }
+    }
+
+    // Only show AI response if it's not seed data
+    if (!isSeedData) {
+      console.log('🤖 AI STUDIO RESPONSE:');
+      console.log('--- START RESPONSE ---');
+      console.log(responseText);
+      console.log('--- END RESPONSE ---');
+    } else {
+      console.log('📚 Seed data processed - response hidden from terminal');
+    }
 
     res.json({
       success: true,
@@ -281,6 +678,9 @@ function getPhase1SystemInstructions() {
         <directive id="output_protocol">Your output must be a precise blend of narrative and structured data. Tag all game state changes. An ASCII map is MANDATORY for any complex location or combat scene.</directive>
         <directive id="game_flow">Combat is strictly turn-based; only one actor acts at a time. New game sessions must begin with campaign setup, then character creation.</directive>
         <directive id="ascii_map_limit">The ASCII Map will have a maximum of 600 characters If the location requires and ascii map of more than 600 characters either scale map down to fit within the limit or notify that the current location is too large for a map.</directive>
+        <directive id="no_thought_process_output">CRITICAL: NEVER include your internal thought process, reasoning, or analysis in your response to the user. The thought process section is for your internal use only and must be completely stripped from all user-facing output. Do not include HTML comments, thought process blocks, or any internal reasoning in your responses.</directive>
+        <directive id="unclear_input_handling">If you cannot understand or interpret the user's input clearly, respond with: "I couldn't understand that. Could you please try again or be more specific?"</directive>
+        <directive id="character_generation_flow">When a user requests character generation (e.g., "generate entire character", "create character", "yes generate character"), IMMEDIATELY proceed to generate a complete character with all required tags, stats, equipment, and inventory. Do not ask for confirmation or additional input.</directive>
 
     </critical_directives>
 
@@ -304,12 +704,12 @@ function getPhase1SystemInstructions() {
 
     <session_flow>
         <phase name="start_game">
-            1.  **Prompt Length**: Ask the user to choose a campaign length: Short (3-5 chapters), Medium (6-10), or Long (11-15).
+            1.  **Campaign Length**: Ask the user to choose a campaign length: Short (4 chapters), Medium (8 chapters), or Long (12 chapters).
             2.  **Generate Campaign**: Create a campaign overview based on their choice.
             3.  **Campaign Setup Completion**: Present Complete Campaign Sheet with proper tags including campaign name, length, and description to the user and ask if they are ready to start the game or if they want to make any changes.
             4.  **Set Starting Level**: Use this table. Short Campaign: Start Level 1. Medium Campaign: Start Level 2. Long Campaign: Start Level 4.
-            5.  **Create Characters**: Guide players through Daggerheart character creation.
-            6.  **Character Creation Completion**: Present Complete Character Sheet with proper tags including inventory and stats to the user and ask if they are ready to start the game or if they want to make any changes.
+            5.  **Create Characters**: IMMEDIATELY proceed to character creation after campaign setup. Guide users through the character creation process, if the user requests character generation, generate a complete character with all stats, equipment, and tags.
+            6.  **Character Creation Completion**: CRITICAL: Include [CHARACTER_CREATION_COMPLETE] tag in your response. You MUST show the Character Sheet with proper tags including all items and stats to the user in your response.
         </phase>
         <phase name="gameplay">
             Describe the situation, prompt for action, adjudicate according to Daggerheart rules, and resolve the outcome with narrative and structured data.
@@ -369,6 +769,22 @@ function getPhase1SystemInstructions() {
             **[CHARACTER_DOMAIN_CARDS]**: Starting domain cards
         </character_sheet_tags>
         
+        <equipment_reporting_tags>
+            When presenting character equipment and inventory, use these tags:
+            **[CHARACTER_EQUIPMENT]**
+            **[PRIMARY_WEAPON]**: Weapon Name
+            **[WEAPON_STATS]**: Stat, Range, Damage, Properties
+            **[SECONDARY_WEAPON]**: Weapon Name (if applicable)
+            **[SECONDARY_WEAPON_STATS]**: Stat, Range, Damage, Properties
+            **[ARMOR]**: Armor Name
+            **[ARMOR_STATS]**: Thresholds, Score
+            **[SHIELD]**: Shield Name (if applicable)
+            **[SHIELD_STATS]**: Defense bonus
+            **[ACCESSORIES]**: Torch, rope, supplies, potions, etc.
+            **[SPECIAL_ITEMS]**: Unique items, trophies, totems
+            **[CURRENCY]**: Gold pieces, gems, etc.
+        </equipment_reporting_tags>
+        
         <campaign_setup_tags>
             When campaign setup is complete, use:
             **[CAMPAIGN_SETUP_COMPLETE]**
@@ -421,54 +837,113 @@ async function transitionToPhase2(phase1SessionId) {
   try {
     console.log('🔄 Starting Phase 2 transition for session:', phase1SessionId);
     
-    // 1. Get full conversation history and seed data
-    const fullConversationHistory = conversationManager.getHistory(phase1SessionId);
-    const seedData = sessionSeedData.get(phase1SessionId);
-    console.log('📝 Retrieved conversation history, messages:', fullConversationHistory.length);
-    console.log('📊 Seed data available:', !!seedData);
+    // 1. Get the most recent Phase 1 save point
+    const campaignState = await supabaseStorage.getCampaignState(phase1SessionId);
+    if (!campaignState || !campaignState.campaign_id || !campaignState.character_id) {
+      throw new Error('Campaign state not found for Phase 2 transition');
+    }
+
+    const campaignId = campaignState.campaign_id;
+    const characterId = campaignState.character_id;
+    console.log('📊 Using campaign ID:', campaignId, 'character ID:', characterId);
+
+    // 2. Get Phase 1 save point data
+    const savePoints = await supabaseStorage.getCampaignSavePoints(campaignId);
+    const phase1SavePoint = savePoints.find(sp => sp.save_point_data?.phase === 'phase1_completion');
     
-    // 2. Parse and store campaign data
-    const campaignData = supabaseStorage.parseCampaignData({ message: fullConversationHistory.find(m => m.type === 'campaign_setup_complete')?.content || '' });
-    const campaignId = await supabaseStorage.storeCampaign(phase1SessionId, campaignData);
-    console.log('✅ Campaign stored with ID:', campaignId);
+    if (!phase1SavePoint) {
+      throw new Error('Phase 1 save point not found');
+    }
+
+    console.log('💾 Found Phase 1 save point:', phase1SavePoint.id);
+    console.log('📚 Using cached content:', phase1SavePoint.cached_content_name);
+
+    // 3. Get data from save point instead of individual database queries
+    const savePointData = phase1SavePoint.save_point_data;
+    const campaignData = savePointData.campaignData;
+    const characterData = savePointData.characterData;
+    const fullConversationHistory = savePointData.conversationHistory;
+    const seedData = savePointData.seedData;
+
+    console.log('📝 Retrieved data from Phase 1 save point');
+    console.log('📊 Campaign:', campaignData.title);
+    console.log('👤 Character:', characterData.name);
+    console.log('💬 Conversation history messages:', fullConversationHistory.length);
     
-    // 3. Parse and store character data
-    const characterData = supabaseStorage.parseCharacterData({ message: fullConversationHistory.find(m => m.type === 'character_creation_complete')?.content || '' });
-    const characterId = await supabaseStorage.storeCharacter(phase1SessionId, characterData, campaignId);
-    console.log('✅ Character stored with ID:', characterId);
+    // 4. Use the cached content from Phase 1 save point
+    const cachedContent = {
+      name: phase1SavePoint.cached_content_name
+    };
+    console.log('✅ Using Phase 1 cached content:', cachedContent.name);
     
-    // 4. Store conversation history
-    await supabaseStorage.storeConversationHistory(phase1SessionId, fullConversationHistory, campaignId);
-    console.log('✅ Conversation history stored');
-    
-    // 5. Build Phase 2 cached content (INCLUDING seed data)
-    const cachedContent = await phase2CacheBuilder.buildPhase2Cache(phase1SessionId, campaignId, characterId, fullConversationHistory, seedData);
-    console.log('✅ Phase 2 cached content created:', cachedContent.name);
-    
-    // 6. Create Phase 2 chat session with conversation history from after seeding
+    // 5. Create Phase 2 chat session with conversation history from after seeding
+    console.log('🆕 Creating Phase 2 chat session');
     const phase2SessionId = `phase2_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const phase2Chat = await phase2CacheBuilder.createPhase2Session(cachedContent, fullConversationHistory);
+    console.log('✅ Phase 2 chat session created');
     
-    // 7. Store Phase 2 session
+    // 6. Store Phase 2 session
     chatSessions.set(phase2SessionId, phase2Chat);
     sessionPhases.set(phase2SessionId, 'phase2_adventure');
+    console.log('📤 Transferred conversation history from Phase 1 save point');
     
-    // 8. Transfer conversation history (from after seeding to character creation)
+    // 7. Transfer conversation history (from after seeding to character creation)
     conversationManager.transferHistory(phase1SessionId, phase2SessionId, ['seed_data']);
     
-    // 9. Store campaign state with phase tracking
+    // 8. Store campaign state with phase tracking
     await supabaseStorage.storeCampaignState(phase1SessionId, campaignId, 'phase2_adventure', phase1SessionId, phase2SessionId, cachedContent.name);
+    console.log('🗄️ Storing campaign state for phase: phase2_adventure');
+    console.log('✅ Campaign state stored');
     
     console.log('✅ Phase 2 transition completed successfully');
     console.log('🆕 New Phase 2 session ID:', phase2SessionId);
     
-    return {
-      success: true,
-      newSessionId: phase2SessionId,
-      campaignId,
-      characterId,
-      cachedContentName: cachedContent.name
-    };
+    // 10. Send automated adventure start prompt
+    console.log('🎬 Sending automated adventure start prompt...');
+    try {
+      const adventurePrompt = `I've provided you with concise guides on adventuring for reference. Use the campaign data, character information, and conversation history to continue where this adventure left off. Begin the adventure with an engaging opening scene that draws the player into the story.
+
+**Adventure Rules Reference:**
+- @inventory_rules.md - For inventory management and equipment handling
+- @equipment_rules.md - For weapon and armor mechanics  
+- @combat_rules.md - For combat mechanics and action resolution
+
+Use these rules to ensure consistent gameplay mechanics throughout the adventure.`;
+      
+      console.log('📤 Sending adventure prompt to Phase 2 session:', phase2SessionId);
+      console.log('📝 Adventure prompt length:', adventurePrompt.length);
+      
+      const adventureResponse = await phase2Chat.sendMessage({
+        message: adventurePrompt
+      });
+      console.log('✅ Adventure response received, length:', adventureResponse.text.length);
+      console.log('🎭 Adventure response preview:', adventureResponse.text.substring(0, 200) + '...');
+      
+      // Store the adventure response for the frontend
+      conversationManager.addMessage(phase2SessionId, 'user', adventurePrompt, 'adventure_start');
+      conversationManager.addMessage(phase2SessionId, 'ai', adventureResponse.text, 'adventure_response');
+      
+      return {
+        success: true,
+        newSessionId: phase2SessionId,
+        campaignId,
+        characterId,
+        cachedContentName: cachedContent.name,
+        adventureStarted: true,
+        adventureResponse: adventureResponse.text
+      };
+    } catch (adventureError) {
+      console.error('❌ Automated adventure start failed:', adventureError);
+      return {
+        success: true,
+        newSessionId: phase2SessionId,
+        campaignId,
+        characterId,
+        cachedContentName: cachedContent.name,
+        adventureStarted: false,
+        adventureError: adventureError.message
+      };
+    }
   } catch (error) {
     console.error('❌ Phase 2 transition failed:', error);
     return {

@@ -270,3 +270,31 @@ BEGIN
     WHERE session_id = session_id_param;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Save points table
+CREATE TABLE IF NOT EXISTS save_points (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    campaign_id UUID REFERENCES campaigns(id) ON DELETE CASCADE,
+    character_id UUID REFERENCES characters(id) ON DELETE CASCADE,
+    save_point_data JSONB NOT NULL,
+    cached_content_name TEXT,
+    session_id TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Index for save points
+CREATE INDEX IF NOT EXISTS idx_save_points_campaign_id ON save_points(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_save_points_character_id ON save_points(character_id);
+CREATE INDEX IF NOT EXISTS idx_save_points_created_at ON save_points(created_at);
+
+-- Combat logs table
+CREATE TABLE IF NOT EXISTS combat_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    character_id UUID REFERENCES characters(id) ON DELETE CASCADE,
+    stat_changes JSONB NOT NULL,
+    timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Index for combat logs
+CREATE INDEX IF NOT EXISTS idx_combat_logs_character_id ON combat_logs(character_id);
+CREATE INDEX IF NOT EXISTS idx_combat_logs_timestamp ON combat_logs(timestamp);

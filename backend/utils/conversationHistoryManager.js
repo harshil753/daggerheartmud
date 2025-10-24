@@ -151,19 +151,11 @@ class ConversationHistoryManager {
     }
 
     // Character creation completion (check this FIRST)
-    // Only trigger on explicit completion tags or complete character sheets
+    // Look for various completion indicators
     if (lowerContent.includes('[character_creation_complete]') ||
         lowerContent.includes('character_creation_complete') ||
-        (lowerContent.includes('[character_sheet]') && 
-         (lowerContent.includes('[character_name]') || lowerContent.includes('character_name')) &&
-         (lowerContent.includes('[character_class]') || lowerContent.includes('character_class')) &&
-         (lowerContent.includes('[character_ancestry]') || lowerContent.includes('character_ancestry'))) ||
-        (lowerContent.includes('character is now ready') && 
-         (lowerContent.includes('subclass:') || lowerContent.includes('level:') || lowerContent.includes('traits:'))) ||
-        (lowerContent.includes('are you happy with') && 
-         (lowerContent.includes('character') || lowerContent.includes('subclass:') || lowerContent.includes('level:'))) ||
-        (lowerContent.includes('would you like to make any changes') && 
-         (lowerContent.includes('character') || lowerContent.includes('subclass:') || lowerContent.includes('level:')))) {
+        (lowerContent.includes('character complete')) ||
+        (lowerContent.includes('character finished'))) {
       return 'character_creation_complete';
     }
 
