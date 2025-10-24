@@ -121,6 +121,12 @@ CREATE TABLE campaign_state (
   ai_conversation_history JSONB, -- Last N messages for context continuity
   world_state JSONB, -- NPC relationships, completed quests, world changes
   
+  -- Phase Management
+  session_phase TEXT DEFAULT 'phase1_setup', -- 'phase1_setup' or 'phase2_adventure'
+  phase1_session_id TEXT, -- Original session ID
+  phase2_session_id TEXT, -- Phase 2 session ID
+  cached_content_name TEXT, -- Name of cached content for Phase 2
+  
   updated_at TIMESTAMP DEFAULT NOW()
 );
 

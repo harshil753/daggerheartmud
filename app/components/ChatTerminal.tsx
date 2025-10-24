@@ -23,6 +23,8 @@ export default function ChatTerminal({
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [fileContent, setFileContent] = useState<string>('');
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [currentPhase, setCurrentPhase] = useState<string>('phase1_setup');
+  const [phaseTransition, setPhaseTransition] = useState<boolean>(false);
 
   // Ref for auto-scrolling to bottom
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -74,6 +76,26 @@ export default function ChatTerminal({
           setSessionId(data.sessionId);
         }
         
+        // Handle phase transition
+        if (data.phaseTransition && data.newPhase) {
+          setCurrentPhase(data.newPhase);
+          setPhaseTransition(true);
+          console.log('🔄 Phase transition detected:', data.newPhase);
+          
+          // Show transition notification
+          const transitionMessage = {
+            type: 'system' as const,
+            content: `🎯 Character creation complete! Transitioning to adventure phase...`,
+            timestamp: new Date().toLocaleTimeString()
+          };
+          setMessages(prev => [...prev, transitionMessage]);
+        }
+        
+        // Update current phase if provided
+        if (data.currentPhase) {
+          setCurrentPhase(data.currentPhase);
+        }
+        
         // Immediate scroll when AI responds
         setTimeout(() => scrollToBottom(), 100);
       } else {
@@ -116,6 +138,20 @@ export default function ChatTerminal({
     setInput('');
   };
 
+  // Get phase display info
+  const getPhaseInfo = () => {
+    switch (currentPhase) {
+      case 'phase1_setup':
+        return { name: 'Setup Phase', description: 'Campaign & Character Creation', color: 'blue' };
+      case 'phase2_adventure':
+        return { name: 'Adventure Phase', description: 'Gameplay & Exploration', color: 'green' };
+      default:
+        return { name: 'Unknown Phase', description: '', color: 'gray' };
+    }
+  };
+
+  const phaseInfo = getPhaseInfo();
+
   const resetSession = () => {
     setSessionId(null);
     setMessages([]);
@@ -127,6 +163,21 @@ export default function ChatTerminal({
   return (
     <div className="terminal-container">
       <div className="terminal">
+        {/* Phase Indicator */}
+        <div className="mb-4 p-3 bg-gray-800 rounded-lg border-l-4" style={{ borderLeftColor: phaseInfo.color === 'blue' ? '#3b82f6' : phaseInfo.color === 'green' ? '#10b981' : '#6b7280' }}>
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-semibold text-white">{phaseInfo.name}</h3>
+              <p className="text-xs text-gray-300">{phaseInfo.description}</p>
+            </div>
+            {phaseTransition && (
+              <div className="text-green-400 text-sm">
+                ✨ Transitioning...
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* File Upload Section */}
         <div className="mb-4 p-4 bg-gray-800 rounded-lg">
           <h2 className="text-lg font-semibold mb-3">📁 File Upload</h2>
@@ -176,10 +227,16 @@ export default function ChatTerminal({
             </div>
           ) : (
             messages.map((msg, index) => (
-              <div key={index} className={`mb-3 ${msg.type === 'user' ? 'text-blue-400' : 'text-green-400'}`}>
+              <div key={index} className={`mb-3 ${
+                msg.type === 'user' ? 'text-blue-400' : 
+                msg.type === 'system' ? 'text-yellow-400' : 
+                'text-green-400'
+              }`}>
                 <div className="flex justify-between items-center mb-1">
                   <span className="font-semibold">
-                    {msg.type === 'user' ? '👤 You' : '🤖 AI'}
+                    {msg.type === 'user' ? '👤 You' : 
+                     msg.type === 'system' ? '⚡ System' : 
+                     '🤖 AI'}
                   </span>
                   <span className="text-xs text-gray-500">{msg.timestamp}</span>
                 </div>
