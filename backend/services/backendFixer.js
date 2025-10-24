@@ -3,8 +3,11 @@
  * Automatically fixes low-score issues without requiring LLM intervention
  */
 
+const promptLoader = require('./promptLoader');
+
 class BackendFixer {
   constructor() {
+    this.promptLoader = promptLoader;
     this.fixLog = [];
     this.autoCorrections = new Map();
     
@@ -555,6 +558,192 @@ class BackendFixer {
       successRate: totalSessions > 0 ? (totalApplied / (totalApplied + totalSkipped)) : 0,
       recentSessions: this.fixLog.slice(-10)
     };
+  }
+
+  /**
+   * Get event-specific rules for targeted fixing
+   */
+  getEventSpecificRules(eventType) {
+    return this.promptLoader.getEventSpecificRules(eventType);
+  }
+
+  /**
+   * Fix issues with event-specific rules
+   */
+  fixWithEventRules(originalResponse, issues, gameContext, eventType) {
+    const eventRules = this.getEventSpecificRules(eventType);
+    if (!eventRules) {
+      console.warn(`No event-specific rules found for: ${eventType}`);
+      return this.fix(originalResponse, issues, gameContext);
+    }
+    
+    // Use event-specific rules for targeted fixing
+    return this.fixWithRules(originalResponse, issues, gameContext, eventRules);
+  }
+
+  /**
+   * Fix issues with specific rule set
+   */
+  fixWithRules(originalResponse, issues, gameContext, rules) {
+    let fixedResponse = originalResponse;
+    const appliedFixes = [];
+    
+    // Parse rules to extract fixing criteria
+    const ruleCriteria = this.parseRuleCriteria(rules);
+    
+    // Apply event-specific fixes
+    if (ruleCriteria.characterCreation) {
+      const result = this.fixCharacterCreation(fixedResponse, issues, ruleCriteria.characterCreation);
+      fixedResponse = result.response;
+      appliedFixes.push(...result.fixes);
+    }
+    
+    if (ruleCriteria.combat) {
+      const result = this.fixCombat(fixedResponse, issues, ruleCriteria.combat);
+      fixedResponse = result.response;
+      appliedFixes.push(...result.fixes);
+    }
+    
+    if (ruleCriteria.inventory) {
+      const result = this.fixInventory(fixedResponse, issues, ruleCriteria.inventory);
+      fixedResponse = result.response;
+      appliedFixes.push(...result.fixes);
+    }
+    
+    if (ruleCriteria.levelUp) {
+      const result = this.fixLevelUp(fixedResponse, issues, ruleCriteria.levelUp);
+      fixedResponse = result.response;
+      appliedFixes.push(...result.fixes);
+    }
+    
+    if (ruleCriteria.equipment) {
+      const result = this.fixEquipment(fixedResponse, issues, ruleCriteria.equipment);
+      fixedResponse = result.response;
+      appliedFixes.push(...result.fixes);
+    }
+    
+    return {
+      success: true,
+      fixedResponse: fixedResponse,
+      appliedFixes: appliedFixes,
+      processingTime: Date.now() - Date.now()
+    };
+  }
+
+  /**
+   * Parse rule criteria from rule text
+   */
+  parseRuleCriteria(rules) {
+    const criteria = {
+      characterCreation: null,
+      combat: null,
+      inventory: null,
+      levelUp: null,
+      equipment: null
+    };
+    
+    // Extract fixing criteria from rule text
+    // This would parse the markdown rules to extract specific fixing requirements
+    // For now, return basic structure
+    return criteria;
+  }
+
+  /**
+   * Fix character creation specific issues
+   */
+  fixCharacterCreation(response, issues, criteria) {
+    const fixes = [];
+    let fixedResponse = response;
+    
+    // Apply character creation specific fixes
+    issues.forEach(issue => {
+      if (issue.type === 'invalid_class') {
+        fixedResponse = this.fixInvalidClass(fixedResponse, issue);
+        fixes.push('Fixed invalid class');
+      }
+      if (issue.type === 'invalid_ancestry') {
+        fixedResponse = this.fixInvalidAncestry(fixedResponse, issue);
+        fixes.push('Fixed invalid ancestry');
+      }
+      if (issue.type === 'invalid_community') {
+        fixedResponse = this.fixInvalidCommunity(fixedResponse, issue);
+        fixes.push('Fixed invalid community');
+      }
+    });
+    
+    return { response: fixedResponse, fixes: fixes };
+  }
+
+  /**
+   * Fix combat specific issues
+   */
+  fixCombat(response, issues, criteria) {
+    const fixes = [];
+    let fixedResponse = response;
+    
+    // Apply combat specific fixes
+    issues.forEach(issue => {
+      if (issue.type === 'missing_turn_management') {
+        fixedResponse = this.fixTurnManagement(fixedResponse, issue);
+        fixes.push('Fixed turn management');
+      }
+    });
+    
+    return { response: fixedResponse, fixes: fixes };
+  }
+
+  /**
+   * Fix inventory specific issues
+   */
+  fixInventory(response, issues, criteria) {
+    const fixes = [];
+    let fixedResponse = response;
+    
+    // Apply inventory specific fixes
+    issues.forEach(issue => {
+      if (issue.type === 'missing_inventory_tags') {
+        fixedResponse = this.fixInventoryTags(fixedResponse, issue);
+        fixes.push('Fixed inventory tags');
+      }
+    });
+    
+    return { response: fixedResponse, fixes: fixes };
+  }
+
+  /**
+   * Fix level up specific issues
+   */
+  fixLevelUp(response, issues, criteria) {
+    const fixes = [];
+    let fixedResponse = response;
+    
+    // Apply level up specific fixes
+    issues.forEach(issue => {
+      if (issue.type === 'invalid_advancement') {
+        fixedResponse = this.fixInvalidAdvancement(fixedResponse, issue);
+        fixes.push('Fixed invalid advancement');
+      }
+    });
+    
+    return { response: fixedResponse, fixes: fixes };
+  }
+
+  /**
+   * Fix equipment specific issues
+   */
+  fixEquipment(response, issues, criteria) {
+    const fixes = [];
+    let fixedResponse = response;
+    
+    // Apply equipment specific fixes
+    issues.forEach(issue => {
+      if (issue.type === 'invalid_equipment') {
+        fixedResponse = this.fixInvalidEquipment(fixedResponse, issue);
+        fixes.push('Fixed invalid equipment');
+      }
+    });
+    
+    return { response: fixedResponse, fixes: fixes };
   }
 }
 

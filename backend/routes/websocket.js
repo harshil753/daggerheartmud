@@ -90,6 +90,14 @@ class WebSocketHandler {
         gameState
       });
 
+      // Seed AI with rulebook and equipment data (only once per session)
+      if (!gameState.aiSeeded) {
+        console.log('🌱 Seeding AI for new session...');
+        await this.dungeonMaster.seedAIWithRulebook();
+        gameState.aiSeeded = true;
+        // Skip saving for new sessions without campaign data
+      }
+
       // Send welcome message
       const welcomeMessage = gameState.character 
         ? `Welcome back, ${gameState.character.name}! Your adventure continues...`

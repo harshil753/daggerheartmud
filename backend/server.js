@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const KeepAliveService = require('./utils/keepAlive');
 const WebSocketHandler = require('./routes/websocket');
+const testAiStudioRouter = require('./routes/test-ai-studio');
 
 // Initialize Express app
 const app = express();
@@ -26,7 +27,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+// Test AI Studio route
+app.use('/api/test-ai-studio', testAiStudioRouter);
+
 
 // Configure Socket.IO
 const io = new Server(server, {

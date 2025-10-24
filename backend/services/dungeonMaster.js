@@ -4,6 +4,7 @@ const promptLoader = require('./promptLoader');
 const AIResponseParser = require('./aiResponseParser');
 const DatabaseSync = require('./databaseSync');
 const ResponseOrchestrator = require('./responseOrchestrator');
+const PythonGeminiWrapper = require('./pythonGeminiWrapper');
 
 /**
  * AI Dungeon Master service using Gemini
@@ -17,6 +18,7 @@ class DungeonMaster {
     this.responseParser = new AIResponseParser();
     this.databaseSync = new DatabaseSync();
     this.responseOrchestrator = new ResponseOrchestrator();
+    this.pythonGemini = new PythonGeminiWrapper();
   }
 
   static getInstance() {
@@ -68,16 +70,18 @@ class DungeonMaster {
     const prompt = this.buildGeneralPrompt(input, gameState);
     
     try {
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      // Use Python Gemini service instead of Node.js API (no seeding for regular interactions)
+      const text = await this.pythonGemini.generateResponse(input, this.buildGameStateContext(gameState), false);
 
-      const parsedResponse = this.parseAIResponse(text, 'general');
-      const processedResponse = await this.processTriggers(parsedResponse, gameState, gameState.sessionId);
-      this.updateConversationHistory(gameState, 'general', [input], processedResponse);
+      // DEBUG: Show raw output from Python call
+      console.log('🐍 RAW PYTHON OUTPUT:');
+      console.log('--- START RAW OUTPUT ---');
+      console.log(text);
+      console.log('--- END RAW OUTPUT ---');
+      console.log('🐍 Raw output length:', text.length);
 
-      // Return just the message text for processPlayerInput
-      return processedResponse.message || processedResponse.text || text;
+      // Return raw response without any processing
+      return text;
     } catch (error) {
       console.error('AI processing error:', error);
       return 'The Dungeon Master seems distracted. Please try again.';
@@ -130,17 +134,22 @@ class DungeonMaster {
     const prompt = this.buildPrompt(command, args, gameState);
     
     try {
-      // Stage 1: Generate creative response with Gemini
+      // Stage 1: Generate creative response with Python Gemini service
       console.log('🎭 DungeonMaster: Generating creative response');
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const creativeResponse = response.text();
+      const creativeResponse = await this.pythonGemini.generateResponse(
+        this.buildUserInputForCommand(command, args), 
+        this.buildGameStateContext(gameState),
+        false // No seeding for regular commands
+      );
 
-      // Stage 2: Process through two-stage pipeline (temporarily disabled for debugging)
-      console.log('🔧 DungeonMaster: Processing through two-stage pipeline');
-      // const orchestrationResult = await this.responseOrchestrator.processAIResponse(creativeResponse, gameState);
+      // DEBUG: Show raw output from Python call
+      console.log('🐍 RAW PYTHON OUTPUT (processCommand):');
+      console.log('--- START RAW OUTPUT ---');
+      console.log(creativeResponse);
+      console.log('--- END RAW OUTPUT ---');
+      console.log('🐍 Raw output length:', creativeResponse.length);
 
-      // Use the processed response from the orchestrator
+      // Use the raw response directly
       const processedText = creativeResponse;
       
       // For now, just return the AI's response directly (two-stage pipeline disabled)
@@ -161,6 +170,35 @@ class DungeonMaster {
         message: 'The Dungeon Master seems distracted. Please try again.',
         type: 'error'
       };
+    }
+  }
+
+  /**
+   * Build user input string for commands
+   */
+  buildUserInputForCommand(command, args) {
+    if (args && args.length > 0) {
+      return `${command} ${args.join(' ')}`;
+    }
+    return command;
+  }
+
+  /**
+   * Seed the AI with rulebook and equipment data (only called once per session)
+   */
+  async seedAIWithRulebook() {
+    try {
+      console.log('🌱 Seeding AI with rulebook and equipment data...');
+      const seedResponse = await this.pythonGemini.generateResponse(
+        'Initialize the game with the provided rulebook and equipment data.',
+        '',
+        true // isSeeding = true
+      );
+      console.log('🌱 AI seeded successfully');
+      return seedResponse;
+    } catch (error) {
+      console.error('❌ Failed to seed AI:', error);
+      return null;
     }
   }
 
@@ -209,18 +247,93 @@ class DungeonMaster {
   }
 
   /**
-   * Build character creation prompt
+   * Build character creation prompt with targeted rules
    */
   buildCharacterCreationPrompt(gameState) {
-    const context = this.fullContext ? this.fullContext.fullContext : '';
+    const baseContext = this.fullContext ? this.fullContext.fullContext : '';
+    const characterCreationRules = this.promptLoader.getEventSpecificRules('character_creation');
     
-    return `${context}
+    return `${baseContext}
+
+${characterCreationRules}
 
 You are the Dungeon Master for a Daggerheart tabletop RPG game. A player wants to create a new character.
 
-Guide them through character creation naturally, helping them choose their ancestry, class, community, and traits. Be engaging and help them understand their options.
+Use the character creation rules above to guide them through the process naturally. Help them choose their ancestry, class, community, and traits. Be engaging and help them understand their options.
 
 Start the character creation process now.`;
+  }
+
+  /**
+   * Build combat prompt with targeted rules
+   */
+  buildCombatPrompt(gameState) {
+    const baseContext = this.fullContext ? this.fullContext.fullContext : '';
+    const combatRules = this.promptLoader.getEventSpecificRules('combat');
+    
+    return `${baseContext}
+
+${combatRules}
+
+You are the Dungeon Master for a Daggerheart tabletop RPG game. A combat encounter is beginning.
+
+Use the combat rules above to manage the encounter. Remember this is turn-based combat where only ONE unit acts at a time. Be engaging and help players understand their options.
+
+Begin the combat encounter.`;
+  }
+
+  /**
+   * Build inventory prompt with targeted rules
+   */
+  buildInventoryPrompt(gameState) {
+    const baseContext = this.fullContext ? this.fullContext.fullContext : '';
+    const inventoryRules = this.promptLoader.getEventSpecificRules('inventory');
+    
+    return `${baseContext}
+
+${inventoryRules}
+
+You are the Dungeon Master for a Daggerheart tabletop RPG game. A player is managing their inventory.
+
+Use the inventory rules above to help them with equipment, items, and storage. Be helpful and guide them through inventory management.
+
+Assist with inventory management.`;
+  }
+
+  /**
+   * Build level up prompt with targeted rules
+   */
+  buildLevelUpPrompt(gameState) {
+    const baseContext = this.fullContext ? this.fullContext.fullContext : '';
+    const levelUpRules = this.promptLoader.getEventSpecificRules('level_up');
+    
+    return `${baseContext}
+
+${levelUpRules}
+
+You are the Dungeon Master for a Daggerheart tabletop RPG game. A player is leveling up.
+
+Use the level up rules above to guide them through character advancement. Help them choose appropriate advancements and understand their options.
+
+Guide the level up process.`;
+  }
+
+  /**
+   * Build equipment prompt with targeted rules
+   */
+  buildEquipmentPrompt(gameState) {
+    const baseContext = this.fullContext ? this.fullContext.fullContext : '';
+    const equipmentRules = this.promptLoader.getEventSpecificRules('equipment');
+    
+    return `${baseContext}
+
+${equipmentRules}
+
+You are the Dungeon Master for a Daggerheart tabletop RPG game. A player is dealing with equipment.
+
+Use the equipment rules above to help them with weapons, armor, and items. Be helpful and guide them through equipment management.
+
+Assist with equipment management.`;
   }
 
   /**

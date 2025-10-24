@@ -37,18 +37,10 @@ class ModelAdapter {
    * Initialize Gemini model
    */
   initializeGemini() {
-    const { GoogleGenerativeAI } = require('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const { GoogleGenAI } = require('@google/genai');
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     
-    this.model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash",
-      generationConfig: {
-        temperature: 0.3,
-        topP: 0.8,
-        topK: 40,
-        maxOutputTokens: 2048,
-      }
-    });
+    this.model = ai.models.generateContent;
     
     this.config = {
       name: 'Gemini 1.5 Flash',
@@ -153,9 +145,11 @@ class ModelAdapter {
    * Generate with Gemini
    */
   async generateWithGemini(prompt, options) {
-    const result = await this.model.generateContent(prompt);
-    const response = await result.response;
-    return response.text();
+    const result = await this.model({
+      model: "gemini-2.5-flash",
+      contents: prompt
+    });
+    return result.text;
   }
 
   /**

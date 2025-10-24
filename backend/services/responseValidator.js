@@ -3,8 +3,12 @@
  * Validates AI responses for format compliance and rule adherence
  */
 
+const promptLoader = require('./promptLoader');
+
 class ResponseValidator {
   constructor() {
+    this.promptLoader = promptLoader;
+    
     // Valid game options loaded from rules
     this.validCommunities = [
       'Highborne', 'Loreborne', 'Orderborne', 'Ridgeborne', 
@@ -475,6 +479,212 @@ class ResponseValidator {
     return issues.reduce((score, issue) => {
       return score + (severityWeights[issue.severity] || 1);
     }, 0);
+  }
+
+  /**
+   * Get event-specific validation rules
+   */
+  getEventSpecificRules(eventType) {
+    return this.promptLoader.getEventSpecificRules(eventType);
+  }
+
+  /**
+   * Validate response with event-specific rules
+   */
+  validateWithEventRules(aiResponse, gameState, eventType) {
+    const eventRules = this.getEventSpecificRules(eventType);
+    if (!eventRules) {
+      console.warn(`No event-specific rules found for: ${eventType}`);
+      return this.validate(aiResponse, gameState);
+    }
+    
+    // Use event-specific rules for targeted validation
+    return this.validateResponseWithRules(aiResponse, gameState, eventRules);
+  }
+
+  /**
+   * Validate response with specific rule set
+   */
+  validateResponseWithRules(aiResponse, gameState, rules) {
+    const issues = [];
+    
+    // Parse rules to extract validation criteria
+    const ruleCriteria = this.parseRuleCriteria(rules);
+    
+    // Apply event-specific validation
+    if (ruleCriteria.characterCreation) {
+      issues.push(...this.validateCharacterCreation(aiResponse, ruleCriteria.characterCreation));
+    }
+    
+    if (ruleCriteria.combat) {
+      issues.push(...this.validateCombat(aiResponse, ruleCriteria.combat));
+    }
+    
+    if (ruleCriteria.inventory) {
+      issues.push(...this.validateInventory(aiResponse, ruleCriteria.inventory));
+    }
+    
+    if (ruleCriteria.levelUp) {
+      issues.push(...this.validateLevelUp(aiResponse, ruleCriteria.levelUp));
+    }
+    
+    if (ruleCriteria.equipment) {
+      issues.push(...this.validateEquipment(aiResponse, ruleCriteria.equipment));
+    }
+    
+    return {
+      isValid: issues.length === 0,
+      issues: issues,
+      score: this.calculateValidationScore(issues)
+    };
+  }
+
+  /**
+   * Parse rule criteria from rule text
+   */
+  parseRuleCriteria(rules) {
+    const criteria = {
+      characterCreation: null,
+      combat: null,
+      inventory: null,
+      levelUp: null,
+      equipment: null
+    };
+    
+    // Extract validation criteria from rule text
+    // This would parse the markdown rules to extract specific validation requirements
+    // For now, return basic structure
+    return criteria;
+  }
+
+  /**
+   * Validate character creation specific rules
+   */
+  validateCharacterCreation(aiResponse, criteria) {
+    const issues = [];
+    
+    // Check for required character creation elements
+    if (!this.hasCharacterCreationElements(aiResponse)) {
+      issues.push({
+        type: 'missing_character_creation',
+        severity: 'high',
+        message: 'Character creation response missing required elements'
+      });
+    }
+    
+    return issues;
+  }
+
+  /**
+   * Validate combat specific rules
+   */
+  validateCombat(aiResponse, criteria) {
+    const issues = [];
+    
+    // Check for turn-based combat elements
+    if (!this.hasCombatElements(aiResponse)) {
+      issues.push({
+        type: 'missing_combat_elements',
+        severity: 'medium',
+        message: 'Combat response missing required elements'
+      });
+    }
+    
+    return issues;
+  }
+
+  /**
+   * Validate inventory specific rules
+   */
+  validateInventory(aiResponse, criteria) {
+    const issues = [];
+    
+    // Check for inventory management elements
+    if (!this.hasInventoryElements(aiResponse)) {
+      issues.push({
+        type: 'missing_inventory_elements',
+        severity: 'low',
+        message: 'Inventory response missing required elements'
+      });
+    }
+    
+    return issues;
+  }
+
+  /**
+   * Validate level up specific rules
+   */
+  validateLevelUp(aiResponse, criteria) {
+    const issues = [];
+    
+    // Check for level up elements
+    if (!this.hasLevelUpElements(aiResponse)) {
+      issues.push({
+        type: 'missing_level_up_elements',
+        severity: 'medium',
+        message: 'Level up response missing required elements'
+      });
+    }
+    
+    return issues;
+  }
+
+  /**
+   * Validate equipment specific rules
+   */
+  validateEquipment(aiResponse, criteria) {
+    const issues = [];
+    
+    // Check for equipment elements
+    if (!this.hasEquipmentElements(aiResponse)) {
+      issues.push({
+        type: 'missing_equipment_elements',
+        severity: 'low',
+        message: 'Equipment response missing required elements'
+      });
+    }
+    
+    return issues;
+  }
+
+  /**
+   * Check for character creation elements
+   */
+  hasCharacterCreationElements(aiResponse) {
+    const message = aiResponse.message || aiResponse;
+    return message.includes('character') || message.includes('class') || message.includes('ancestry');
+  }
+
+  /**
+   * Check for combat elements
+   */
+  hasCombatElements(aiResponse) {
+    const message = aiResponse.message || aiResponse;
+    return message.includes('combat') || message.includes('attack') || message.includes('turn');
+  }
+
+  /**
+   * Check for inventory elements
+   */
+  hasInventoryElements(aiResponse) {
+    const message = aiResponse.message || aiResponse;
+    return message.includes('inventory') || message.includes('equipment') || message.includes('item');
+  }
+
+  /**
+   * Check for level up elements
+   */
+  hasLevelUpElements(aiResponse) {
+    const message = aiResponse.message || aiResponse;
+    return message.includes('level') || message.includes('advancement') || message.includes('experience');
+  }
+
+  /**
+   * Check for equipment elements
+   */
+  hasEquipmentElements(aiResponse) {
+    const message = aiResponse.message || aiResponse;
+    return message.includes('weapon') || message.includes('armor') || message.includes('equipment');
   }
 }
 

@@ -3,7 +3,7 @@ const path = require('path');
 
 function loadSRDContext() {
   try {
-    const srdPath = path.join(__dirname, '../../supporting_functions/Results/DH_SRD_Part_01_Pages_1-415.txt');
+    const srdPath = path.join(__dirname, '../../supporting_functions/Results/daggerheart rulebook.md');
     return fs.readFileSync(srdPath, 'utf8');
   } catch (error) {
     console.error('Error loading SRD:', error);

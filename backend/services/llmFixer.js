@@ -3,21 +3,13 @@
  * Uses specialized LLM to fix high-score issues that require AI intervention
  */
 
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { GoogleGenAI } = require('@google/genai');
 const promptLoader = require('./promptLoader');
 
 class LLMFixer {
   constructor() {
-    this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    this.model = this.genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash",
-      generationConfig: {
-        temperature: 0.3, // Lower temperature for deterministic corrections
-        topP: 0.8,
-        topK: 40,
-        maxOutputTokens: 2048,
-      }
-    });
+    this.ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    this.model = this.ai.models.generateContent;
     
     this.promptLoader = promptLoader;
     this.correctionLog = [];
@@ -52,10 +44,13 @@ class LLMFixer {
       
       // Generate correction
       const startTime = Date.now();
-      const result = await this.model.generateContent(correctionPrompt);
+      const result = await this.model({
+        model: "gemini-2.5-flash",
+        contents: correctionPrompt
+      });
       const processingTime = Date.now() - startTime;
       
-      const correctedResponse = result.response.text();
+      const correctedResponse = result.text;
       
       // Parse the corrected response
       const parsedResponse = this.parseCorrectedResponse(correctedResponse);
