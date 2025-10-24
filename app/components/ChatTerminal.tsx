@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import ImageDisplay from './ImageDisplay';
+import { processResponseContent, ImageTrigger } from '../utils/imageProcessor';
 
 interface ChatTerminalProps {
   onGameStateChange?: (gameState: any) => void;
@@ -17,7 +19,7 @@ export default function ChatTerminal({
   onConnectionChange,
   onMapUpdate
 }: ChatTerminalProps) {
-  const [messages, setMessages] = useState<Array<{type: 'user' | 'ai', content: string, timestamp: string}>>([]);
+  const [messages, setMessages] = useState<Array<{type: 'user' | 'ai' | 'system', content: string, timestamp: string, images?: Array<{success: boolean, imageData?: string, mimeType?: string, trigger?: ImageTrigger, error?: string}>}>>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -64,10 +66,40 @@ export default function ChatTerminal({
       const data = await response.json();
       
       if (data.success) {
+        // Process response for image triggers
+        const { displayContent, triggers } = processResponseContent(data.response);
+        
+        // Generate images if triggers are found
+        let images: Array<{success: boolean, imageData?: string, mimeType?: string, trigger?: ImageTrigger, error?: string}> = [];
+        
+        if (triggers.length > 0) {
+          console.log(`🎨 Found ${triggers.length} image generation triggers`);
+          
+          // Call backend to generate images
+          try {
+            const imageResponse = await fetch('/api/test-ai-studio/generate-images', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ 
+                triggers: triggers,
+                sessionId: sessionId 
+              })
+            });
+            
+            const imageData = await imageResponse.json();
+            if (imageData.success) {
+              images = imageData.images;
+            }
+          } catch (error) {
+            console.error('Error generating images:', error);
+          }
+        }
+        
         const aiMessage = { 
           type: 'ai' as const, 
-          content: data.response, 
-          timestamp: new Date().toLocaleTimeString() 
+          content: displayContent, 
+          timestamp: new Date().toLocaleTimeString(),
+          images: images
         };
         setMessages(prev => [...prev, aiMessage]);
         
@@ -241,6 +273,27 @@ export default function ChatTerminal({
                   <span className="text-xs text-gray-500">{msg.timestamp}</span>
                 </div>
                 <div className="whitespace-pre-wrap">{msg.content}</div>
+                
+                {/* Display images if present */}
+                {msg.images && msg.images.length > 0 && (
+                  <div className="mt-3 space-y-2">
+                    {msg.images.map((image, imageIndex) => (
+                      image.success && image.imageData && image.mimeType && image.trigger ? (
+                        <ImageDisplay
+                          key={imageIndex}
+                          imageData={image.imageData}
+                          mimeType={image.mimeType}
+                          trigger={image.trigger}
+                          className="max-w-md"
+                        />
+                      ) : (
+                        <div key={imageIndex} className="bg-gray-800 border border-red-600 rounded p-2 text-red-400 text-sm">
+                          ❌ Failed to generate image: {image.error || 'Unknown error'}
+                        </div>
+                      )
+                    ))}
+                  </div>
+                )}
               </div>
             ))
           )}

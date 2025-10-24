@@ -208,9 +208,9 @@ class ConversationHistoryManager {
    */
   isCharacterCreationComplete(sessionId) {
     const history = this.getHistory(sessionId);
-    const lastMessage = history[history.length - 1];
     
-    return lastMessage && lastMessage.type === 'character_creation_complete';
+    // Check if any message in the history is character_creation_complete
+    return history.some(message => message.type === 'character_creation_complete');
   }
 
   /**

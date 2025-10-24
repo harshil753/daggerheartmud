@@ -11,6 +11,7 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const SupabaseStorage = require('../services/supabaseStorage');
 const Phase2CacheBuilder = require('../services/phase2CacheBuilder');
 const ConversationHistoryManager = require('../utils/conversationHistoryManager');
+const ImageGenerator = require('../services/imageGenerator');
 
 // Initialize Gemini with the current package
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
@@ -338,6 +339,9 @@ router.get('/test', (req, res) => {
 
 // Main endpoint that uses conversation sessions like Google AI Studio
 router.post('/send-message', async (req, res) => {
+  console.log('🚀 ROUTE HIT: /api/test-ai-studio/send-message');
+  console.log('📨 Request body:', JSON.stringify(req.body, null, 2));
+  
   try {
     const { message, sessionId: requestSessionId } = req.body;
     let sessionId = requestSessionId;
@@ -516,6 +520,11 @@ router.post('/send-message', async (req, res) => {
     const isCharacterComplete = conversationManager.isCharacterCreationComplete(sessionId);
     console.log('🔍 CHARACTER CREATION COMPLETE:', isCharacterComplete);
     console.log('🔍 CURRENT PHASE:', currentPhase);
+    
+    // Debug conversation history
+    const history = conversationManager.getHistory(sessionId);
+    console.log('🔍 CONVERSATION HISTORY LENGTH:', history.length);
+    console.log('🔍 LAST MESSAGE TYPE:', history[history.length - 1]?.type);
       
       try {
         // Create Phase 1 save point before transitioning
@@ -984,6 +993,60 @@ router.post('/transition-to-phase2', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error during transition',
+      error: error.message
+    });
+  }
+});
+
+/**
+ * Generate images for IMAGE_GENERATION_TRIGGER tags
+ */
+router.post('/generate-images', async (req, res) => {
+  try {
+    const { triggers, sessionId } = req.body;
+    
+    if (!triggers || !Array.isArray(triggers) || triggers.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No image triggers provided'
+      });
+    }
+
+    console.log(`🎨 Generating images for ${triggers.length} triggers`);
+    
+    const imageGenerator = new ImageGenerator();
+    const imageResults = [];
+
+    // Generate images for each trigger
+    for (const trigger of triggers) {
+      try {
+        console.log(`🎨 Processing trigger: ${trigger.type} - ${trigger.description}`);
+        const imageResult = await imageGenerator.generateImage(trigger);
+        imageResults.push(imageResult);
+      } catch (error) {
+        console.error('❌ Error processing image trigger:', error);
+        imageResults.push({
+          success: false,
+          error: error.message,
+          trigger: trigger
+        });
+      }
+    }
+
+    console.log(`🎨 Generated ${imageResults.filter(r => r.success).length}/${imageResults.length} images successfully`);
+
+    res.json({
+      success: true,
+      images: imageResults,
+      generated: imageResults.filter(r => r.success).length,
+      total: imageResults.length
+    });
+
+  } catch (error) {
+    console.error('❌ Image generation error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error generating images',
       error: error.message
     });
   }

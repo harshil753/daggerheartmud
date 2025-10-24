@@ -738,7 +738,7 @@ class SupabaseStorage {
       const { data, error } = await this.supabase
         .from('campaign_state')
         .select('*')
-        .eq('session_id', sessionId)
+        .or(`phase1_session_id.eq.${sessionId},phase2_session_id.eq.${sessionId}`)
         .single();
 
       if (error) {
