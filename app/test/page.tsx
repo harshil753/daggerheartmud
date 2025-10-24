@@ -1,223 +1,148 @@
 'use client';
 
 import { useState } from 'react';
+import ChatTerminal from '../components/ChatTerminal';
+import SimplifiedInventoryPanel from '../components/SimplifiedInventoryPanel';
+import SimplifiedStatsPanel from '../components/SimplifiedStatsPanel';
 
 export default function Test() {
-  const [messages, setMessages] = useState<Array<{type: 'user' | 'ai', content: string, timestamp: string}>>([]);
-  const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [fileContent, setFileContent] = useState<string>('');
-  const [sessionId, setSessionId] = useState<string | null>(null);
+  // Game state management
+  const [gameState, setGameState] = useState<any>(null);
+  const [activePanel, setActivePanel] = useState<'inventory' | 'stats' | null>(null);
+  const [isConnected, setIsConnected] = useState(true);
+  const [currentMap, setCurrentMap] = useState<any>(null);
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
-
-    const userMessage = { type: 'user' as const, content: input, timestamp: new Date().toLocaleTimeString() };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setLoading(true);
-
-    try {
-      console.log('Sending message with sessionId:', sessionId);
-      const response = await fetch('/api/test-ai-studio/send-message', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          message: input,
-          sessionId: sessionId 
-        })
-      });
-
-      const data = await response.json();
-      
-      if (data.success) {
-        const aiMessage = { 
-          type: 'ai' as const, 
-          content: data.response, 
-          timestamp: new Date().toLocaleTimeString() 
-        };
-        setMessages(prev => [...prev, aiMessage]);
-        
-        // Store session ID for future requests
-        if (data.sessionId) {
-          setSessionId(data.sessionId);
-        }
-      } else {
-        alert('Error: ' + data.message);
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      alert('Error sending message');
-    } finally {
-      setLoading(false);
-    }
+  const handleGameStateChange = (newGameState: any) => {
+    setGameState(newGameState);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
+  const handleConnectionChange = (connected: boolean) => {
+    setIsConnected(connected);
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setUploadedFile(file);
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const content = event.target?.result as string;
-        setFileContent(content);
-        setInput(content);
-      };
-      reader.readAsText(file);
-    }
+  const handleMapUpdate = (mapData: any) => {
+    setCurrentMap(mapData);
   };
 
-  const clearFile = () => {
-    setUploadedFile(null);
-    setFileContent('');
-    setInput('');
-  };
-
-  const resetSession = () => {
-    setSessionId(null);
-    setMessages([]);
-    setInput('');
-    setUploadedFile(null);
-    setFileContent('');
+  const handleLogout = () => {
+    // Reset to login state if needed
+    console.log('Logout requested');
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-center">🧪 AI Studio Test Terminal</h1>
+    <div className="game-session">
+      {/* Game Header */}
+      <div className="game-header">
+        {/* Game Title Section */}
+        <div className="game-title">
+          <h1>Daggerheart MUD - Test Mode</h1>
+          <div className="game-status">
+            <span className="guest-badge">Test Mode</span>
+            <span className={`connection-status ${isConnected ? 'connected' : 'disconnected'}`}>
+              {isConnected ? 'Connected' : 'Disconnected'}
+            </span>
+          </div>
+        </div>
+
+        {/* Test Info Header */}
+        <div className="guest-info-header">
+          <h2>AI Studio Test Interface</h2>
+          <p>Testing conversation sessions with @google/genai package. Upload seed data and interact with the AI.</p>
+        </div>
         
-        <div className="mb-4 p-4 bg-gray-800 rounded-lg">
-          <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-semibold">Test Instructions</h2>
-            {sessionId && (
-              <button
-                onClick={resetSession}
-                className="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-sm"
-              >
-                Reset Session
-              </button>
-            )}
-          </div>
-          <p className="text-sm text-gray-300">
-            This test uses conversation sessions like Google AI Studio.
-            <br />
-            Upload your seed data files and type "start" to begin the campaign setup process.
-          </p>
-          {sessionId && (
-            <p className="text-xs text-green-400 mt-2">
-              ✅ Active session: {sessionId.substring(0, 20)}...
-            </p>
-          )}
+        {/* Game Controls */}
+        <div className="game-controls">
+          <button 
+            className="panel-button active"
+          >
+            Terminal
+          </button>
+          <button 
+            onClick={() => setActivePanel(activePanel === 'inventory' ? null : 'inventory')}
+            className={`panel-button ${activePanel === 'inventory' ? 'active' : ''}`}
+          >
+            Inventory
+          </button>
+          <button 
+            onClick={() => setActivePanel(activePanel === 'stats' ? null : 'stats')}
+            className={`panel-button ${activePanel === 'stats' ? 'active' : ''}`}
+          >
+            Stats
+          </button>
+          <button 
+            onClick={handleLogout}
+            className="logout-button"
+          >
+            Reset
+          </button>
         </div>
+      </div>
 
-        {/* File Upload Section */}
-        <div className="mb-4 p-4 bg-gray-800 rounded-lg">
-          <h2 className="text-lg font-semibold mb-3">📁 File Upload</h2>
-          <div className="flex items-center space-x-4">
-            <input
-              type="file"
-              accept=".txt,.md,.json"
-              onChange={handleFileUpload}
-              className="hidden"
-              id="file-upload"
-            />
-            <label
-              htmlFor="file-upload"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded cursor-pointer transition-colors"
-            >
-              Choose File
-            </label>
-            {uploadedFile && (
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-300">
-                  📄 {uploadedFile.name} ({uploadedFile.size} bytes)
-                </span>
-                <button
-                  onClick={clearFile}
-                  className="px-2 py-1 bg-red-600 hover:bg-red-700 rounded text-sm"
-                >
-                  Clear
-                </button>
-              </div>
-            )}
-          </div>
-          {fileContent && (
-            <div className="mt-3">
-              <h3 className="text-sm font-semibold mb-2">File Preview:</h3>
-              <div className="max-h-32 overflow-y-auto bg-gray-700 p-2 rounded text-xs">
-                <pre className="whitespace-pre-wrap">{fileContent.substring(0, 500)}{fileContent.length > 500 ? '...' : ''}</pre>
+      {/* Main Content Area */}
+      <div className="game-content">
+        <div className="game-main-layout">
+          {/* Left Section - 75% width */}
+          <div className="game-left-section" style={{ width: '75%' }}>
+            <div className="game-panels">
+              {/* Chat Terminal - Always visible */}
+              <div className="terminal-panel visible">
+                <ChatTerminal 
+                  onGameStateChange={handleGameStateChange}
+                  isGuest={true}
+                  onLogout={handleLogout}
+                  onConnectionChange={handleConnectionChange}
+                  onMapUpdate={handleMapUpdate}
+                />
               </div>
             </div>
-          )}
-        </div>
+          </div>
 
-        {/* Chat Terminal */}
-        <div className="bg-gray-800 rounded-lg p-4 mb-4">
-          <h2 className="text-lg font-semibold mb-3">💬 AI Studio Test Terminal</h2>
-          
-          {/* Messages */}
-          <div className="h-96 overflow-y-auto bg-gray-900 p-4 rounded mb-4 font-mono text-sm">
-            {messages.length === 0 ? (
-              <div className="text-gray-500 text-center py-8">
-                Type "start" to begin testing with the AI Studio approach...
+          {/* Right Sidebar - 25% width */}
+          <div className="game-sidebar" style={{ width: '25%' }}>
+            {activePanel === 'inventory' && (
+              <div className="inventory-panel">
+                <SimplifiedInventoryPanel 
+                  inventory={gameState?.inventory || []}
+                  equipped={{
+                    primary_weapon: gameState?.character?.primary_weapon,
+                    secondary_weapon: gameState?.character?.secondary_weapon,
+                    armor: gameState?.character?.armor
+                  }}
+                />
               </div>
-            ) : (
-              messages.map((msg, index) => (
-                <div key={index} className={`mb-3 ${msg.type === 'user' ? 'text-blue-400' : 'text-green-400'}`}>
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="font-semibold">
-                      {msg.type === 'user' ? '👤 You' : '🤖 AI'}
-                    </span>
-                    <span className="text-xs text-gray-500">{msg.timestamp}</span>
-                  </div>
-                  <div className="whitespace-pre-wrap">{msg.content}</div>
+            )}
+
+            {activePanel === 'stats' && (
+              <div className="stats-panel">
+                <SimplifiedStatsPanel 
+                  character={gameState?.character}
+                  campaign={gameState?.campaign}
+                  combat={gameState?.combat}
+                />
+              </div>
+            )}
+
+            {/* Default sidebar content when no panel is active */}
+            {!activePanel && (
+              <div className="sidebar-default">
+                <h3>Test Interface</h3>
+                <p>Click Inventory or Stats to view panels.</p>
+                <p>Use the chat terminal to interact with the AI.</p>
+                <div className="mt-4 text-xs text-gray-400">
+                  <p>🤖 Using @google/genai package</p>
+                  <p>💬 Session state maintained</p>
+                  <p>📝 System instructions loaded</p>
                 </div>
-              ))
-            )}
-            {loading && (
-              <div className="text-yellow-400">🤖 AI is thinking...</div>
+              </div>
             )}
           </div>
-
-          {/* Input */}
-          <div className="flex space-x-2">
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={fileContent ? "File content loaded - edit if needed..." : "Type your message here... (Press Enter to send)"}
-              className="flex-1 p-3 bg-gray-700 rounded border border-gray-600 resize-none"
-              rows={3}
-              disabled={loading}
-            />
-            <button
-              onClick={sendMessage}
-              disabled={loading || !input.trim()}
-              className="px-6 py-3 bg-blue-600 rounded hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Sending...' : 'Send'}
-            </button>
-          </div>
-          {fileContent && (
-            <div className="mt-2 text-xs text-gray-400">
-              💡 File content loaded. You can edit the text above before sending.
-            </div>
-          )}
         </div>
+      </div>
 
-        {/* Debug Info */}
-        <div className="text-xs text-gray-400 text-center">
-          <p>🤖 Using conversation sessions like Google AI Studio</p>
-          <p>💬 Session state maintained between requests</p>
-          <p>📝 System prompt and tools match Google AI Studio exactly</p>
+      <div className="game-footer">
+        <div className="game-info">
+          <span>Daggerheart MUD Test v1.0</span>
+          <span>AI Studio Integration</span>
         </div>
       </div>
     </div>

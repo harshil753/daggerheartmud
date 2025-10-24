@@ -10,41 +10,8 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
 // Initialize Gemini with the current package
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// Store active chat sessions and cached content
+// Store active chat sessions
 const chatSessions = new Map();
-const cachedContentSessions = new Map();
-
-// Function to create cached content for rulebook data
-async function createCachedContent(rulebookData, sessionId) {
-  try {
-    console.log('🗄️ Creating cached content for rulebook data');
-    console.log('📊 Rulebook data length:', rulebookData.length);
-    
-    // Use the actual rulebook data directly for caching
-    const baseContent = rulebookData;
-
-    console.log('📊 Total content length:', baseContent.length);
-    
-    // Create cached content using the correct API structure per official docs
-    console.log('🗄️ Creating cached content with correct API structure...');
-    const cachedContent = await ai.caches.create({
-      model: 'gemini-2.0-flash-001',
-      config: {
-        display_name: 'Daggerheart Rulebook Cache',
-        system_instruction: 'You are an expert Daggerheart Game Master with access to the complete rulebook. Use this cached content to provide accurate responses about game rules, character creation, equipment, spells, and all gameplay mechanics.',
-        contents: [{ role: 'user', parts: [{ text: baseContent }] }],
-        ttl: '3600s' // 1 hour cache
-      }
-    });
-    
-    console.log('✅ Cached content created:', cachedContent.name);
-    return cachedContent;
-  } catch (error) {
-    console.error('❌ Error creating cached content:', error);
-    console.error('📊 Rulebook data length was:', rulebookData.length);
-    throw error;
-  }
-}
 
 // Test endpoint
 router.get('/test', (req, res) => {
@@ -81,18 +48,9 @@ router.post('/send-message', async (req, res) => {
         console.log('📊 Large message detected - treating as seed data');
         console.log('🌱 Seeding AI with rulebook and equipment data');
         
-        let cachedContent = null;
-        try {
-          // Create cached content for the rulebook data
-          cachedContent = await createCachedContent(message, sessionId || 'new');
-        } catch (cacheError) {
-          console.warn('⚠️ Cached content creation failed, falling back to regular chat session');
-          console.warn('Cache error:', cacheError.message);
-        }
-        
-        // Create chat with system instructions and cached content (if available)
-        const chatConfig = {
-          model: "gemini-2.0-flash-001",
+        // Create chat with system instructions
+        chat = ai.chats.create({
+          model: "gemini-2.5-flash",
           config: {
             temperature: 0.8,
             maxOutputTokens: 2048,
@@ -206,25 +164,13 @@ router.post('/send-message', async (req, res) => {
 </system>`
           },
           history: []
-        };
-        
-        // Add cached content if available (using correct parameter name)
-        if (cachedContent) {
-          chatConfig.cached_content = cachedContent.name;
-        }
-        
-        chat = ai.chats.create(chatConfig);
+        });
         
         console.log('🌱 AI seeded with rulebook data and system instructions');
-        
-        // Cached content is automatically used by the chat session
-        if (cachedContent) {
-          console.log('✅ Chat session created with cached content:', cachedContent.name);
-        }
       } else {
         // Regular message - create normal session
         chat = ai.chats.create({
-          model: "gemini-2.0-flash-001",
+          model: "gemini-2.5-flash",
           config: {
             temperature: 0.8,
             maxOutputTokens: 2048,
@@ -363,17 +309,20 @@ router.post('/send-message', async (req, res) => {
     
     if (isSeedData) {
       console.log('🌱 Processing seed data - AI should respond with acknowledgment');
+      // For seed data, create the seed message and send it
+      const seedMessage = `DAGGERHEART RULEBOOK AND EQUIPMENT DATA:
+
+${message}
+
+Now you have access to the complete Daggerheart rulebook and equipment database. You can reference this information to answer questions about rules, character creation, equipment, and gameplay mechanics.`;
       
-      // If chat session was created with cached_content, it will automatically use it
-      // No need to check for cached content - the session handles it automatically
-      console.log('✅ Using chat session with cached content (if available)');
       const response = await chat.sendMessage({
-        message: "I have received and cached the Daggerheart rulebook data. I'm ready to begin the campaign setup process."
+        message: seedMessage
       });
       responseText = response.text;
     } else {
       console.log('💬 Sending regular message to chat session');
-      // Regular message to existing session - cached content is automatically included
+      // Regular message to existing session
       const response = await chat.sendMessage({
         message: message
       });
